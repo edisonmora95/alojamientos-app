@@ -7,13 +7,15 @@ const routes = [
       {
         path: "/localizacion",
         component: () => import("pages/form/Localizacion.vue"),
+        name: "localizacion",
         meta: {
           title: "1. Localización"
         }
       },
       {
-        path: "/generales",
+        path: "/datos-generales",
         component: () => import("pages/form/DatosGenerales.vue"),
+        name: "generales",
         meta: {
           title: "2. Datos Generales"
         }
@@ -21,6 +23,7 @@ const routes = [
       {
         path: "/datos-infraestructura",
         component: () => import("pages/form/DatosInfraestructura.vue"),
+        name: "infraestructura",
         meta: {
           title: "2. Datos Infraestructura"
         }

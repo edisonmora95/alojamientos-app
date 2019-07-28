@@ -45,10 +45,19 @@
       <footer class="col-xs-12">
         <q-btn
           flat
+          class="btnRegresar"
+          color="blue-grey"
+          icon="keyboard_arrow_left"
+          label="Regresar"
+          :to="prevPage"
+        />
+        <q-btn
+          flat
           class="btnContinuar"
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
+          :to="nextPage"
         />
       </footer>
     </q-form>
@@ -67,14 +76,14 @@ export default {
     return {
       nombreInfraestructura: "",
       fechaInspeccion: "",
-      horaInspeccion: ""
+      horaInspeccion: "",
+      nextPage: {
+        name: "infraestructura"
+      },
+      prevPage: {
+        name: "localizacion"
+      }
     };
   }
 };
 </script>
-
-<style scoped>
-.btnContinuar {
-  float: right;
-}
-</style>

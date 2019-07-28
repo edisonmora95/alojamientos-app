@@ -52,6 +52,7 @@
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
+          :to="nextPage"
         />
       </footer>
     </q-form>
@@ -69,7 +70,10 @@ export default {
       sector: "",
       referencia: "",
       principal: "",
-      secundaria: ""
+      secundaria: "",
+      nextPage: {
+        name: "generales"
+      }
     };
   },
   computed: {
@@ -112,9 +116,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.btnContinuar {
-  float: right;
-}
-</style>
