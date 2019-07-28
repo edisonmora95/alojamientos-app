@@ -13,10 +13,8 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
+          {{ routeName }}
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -120,6 +118,11 @@ export default {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
     };
+  },
+  computed: {
+    routeName() {
+      return this.$route.meta.title;
+    }
   },
   methods: {
     openURL
