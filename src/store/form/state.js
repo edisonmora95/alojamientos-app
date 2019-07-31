@@ -15,5 +15,9 @@ export default {
   institucion: "",
   nombreRepresentante: "Edison Mora",
   celularRepresentante: "+593992556793",
-  convencionalRepresentante: "042348515"
+  convencionalRepresentante: "042348515",
+
+  recomendaciones: "",
+  puntaje: 0,
+  calificacion: "NO APTA"
 };

@@ -68,10 +68,10 @@
 import DateTimeUtils from "../../utils/date.js";
 export default {
   mounted() {
+    this.copyFormValues();
     const now = new Date();
     this.localForm.fechaInspeccion = now.toISOString();
     this.localForm.horaInspeccion = DateTimeUtils.getTime(now);
-    this.copyFormValues();
   },
   data() {
     return {
