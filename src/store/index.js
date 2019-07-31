@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import form from "./form";
+import app from "./app";
 
 Vue.use(Vuex);
 
@@ -13,8 +14,9 @@ Vue.use(Vuex);
 export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      form
-    },
+      form,
+      app
+    }
 
     // enable strict mode (adds overhead!)
     // for dev mode only
