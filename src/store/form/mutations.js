@@ -3,4 +3,3 @@ export function updateForm(state, payload) {
     state[key] = payload[key];
   }
 }
-
