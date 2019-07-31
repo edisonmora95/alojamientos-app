@@ -8,7 +8,10 @@
 
         <q-toolbar-title>
           {{ routeName }}
+          <br>
+          <span class="text-caption">{{ routeSubtitle }}</span>
         </q-toolbar-title>
+
       </q-toolbar>
     </q-header>
     <q-drawer v-model="drawer" bordered content-class="bg-grey-2">
@@ -35,6 +38,9 @@ export default {
   computed: {
     routeName() {
       return this.$route.meta.title;
+    },
+    routeSubtitle() {
+      return this.$route.meta.subtitle;
     }
   },
   methods: {
