@@ -3,22 +3,25 @@
     <q-form class="row q-col-gutter-md" ref="localizacion-form">
       <section class="col-xs-12">
         <q-select
-          v-model="tipoServicio"
+          v-model="localForm.tipoServicio"
           :options="tiposServicio"
           label="Tipo de servicio de la infraestructura"
           outlined
         ></q-select>
       </section>
-      <section class="col-xs-12 col-md-6" v-if="tipoServicio == 'Otros'">
+      <section
+        class="col-xs-12 col-md-6"
+        v-if="localForm.tipoServicio == 'Otros'"
+      >
         <q-input
           outlined
           label="Especificar tipo de servicio"
-          v-model="otroTipoServicio"
+          v-model="localForm.otroTipoServicio"
         ></q-input>
       </section>
       <section class="col-xs-12 col-md-6">
         <q-select
-          v-model="institucion"
+          v-model="localForm.institucion"
           :options="instituciones"
           label="Institución propietaria de la infraestructura"
           outlined
@@ -26,18 +29,18 @@
           emit-value
         ></q-select>
       </section>
-      <section v-if="institucion == '1'" class="row">
+      <section v-if="localForm.institucion == '1'" class="row">
         <section class="col-xs-12 col-md-6">
           <q-input
             label="Nombres representante"
-            v-model="nombreRepresentante"
+            v-model="form.nombreRepresentante"
             disable
           ></q-input>
         </section>
         <section class="col-xs-12 col-md-6">
           <q-input
             label="Celular"
-            v-model="celularRepresentante"
+            v-model="form.celularRepresentante"
             disable
             mask="(+###) ### ### ###"
           ></q-input>
@@ -45,7 +48,7 @@
         <section class="col-xs-12 col-md-6">
           <q-input
             label="Telf. Convencional"
-            v-model="convencionalRepresentante"
+            v-model="form.convencionalRepresentante"
             disable
             mask="(##)# ### ###"
           ></q-input>
@@ -58,7 +61,7 @@
           color="blue-grey"
           icon="keyboard_arrow_left"
           label="Regresar"
-          :to="prevPage"
+          @click="prevStep"
         />
       </footer>
     </q-form>
@@ -67,20 +70,25 @@
 
 <script>
 export default {
+  mounted() {
+    this.copyFormValues();
+  },
   data() {
     return {
-      tipoServicio: "",
-      institucion: "",
-      otroTipoServicio: "",
-      nombreRepresentante: "Edison Mora",
-      celularRepresentante: "+593992556793",
-      convencionalRepresentante: "042348515",
       prevPage: {
         name: "generales"
+      },
+      localForm: {
+        tipoServicio: "",
+        otroTipoServicio: "",
+        institucion: ""
       }
     };
   },
   computed: {
+    form() {
+      return this.$store.getters["form/form"];
+    },
     tiposServicio() {
       return ["Otros", "Escuela", "Colegio", "Universidad", "Hospital"];
     },
@@ -90,6 +98,21 @@ export default {
         { value: "2", label: "UCSG" },
         { value: "3", label: "USM" }
       ];
+    }
+  },
+  methods: {
+    copyFormValues() {
+      for (let key in this.localForm) {
+        this.localForm[key] = this.form[key];
+      }
+    },
+    prevStep() {
+      this.updateForm();
+      this.$router.push(this.prevPage);
+    },
+    updateForm() {
+      const payload = this.localForm;
+      this.$store.commit("form/updateForm", payload);
     }
   }
 };

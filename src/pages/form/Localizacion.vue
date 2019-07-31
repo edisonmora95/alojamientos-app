@@ -3,47 +3,67 @@
     <q-form class="row q-col-gutter-md" ref="localizacion-form">
       <section class="col-xs-6">
         <q-select
-          v-model="zona"
+          v-model="localForm.zona"
           :options="zonas"
           label="Zona"
           outlined
+          map-options
+          emit-value
         ></q-select>
       </section>
       <section class="col-xs-6">
         <q-select
-          v-model="provincia"
+          v-model="localForm.provincia"
           :options="provincias"
           label="Provincia"
           outlined
+          map-options
+          emit-value
         ></q-select>
       </section>
       <section class="col-xs-6">
         <q-select
-          v-model="canton"
+          v-model="localForm.canton"
           :options="cantones"
           label="Canton"
           outlined
+          map-options
+          emit-value
         ></q-select>
       </section>
       <section class="col-xs-6">
         <q-select
-          v-model="parroquia"
+          v-model="localForm.parroquia"
           :options="parroquias"
           label="Parroquia"
           outlined
+          map-options
+          emit-value
         ></q-select>
       </section>
       <section class="col-xs-12">
-        <q-input outlined v-model="sector" label="Sector/Comunidad" />
+        <q-input outlined v-model="localForm.sector" label="Sector/Comunidad" />
       </section>
       <section class="col-xs-12">
-        <q-input outlined v-model="referencia" label="Punto de Referencia" />
+        <q-input
+          outlined
+          v-model="localForm.referencia"
+          label="Punto de Referencia"
+        />
       </section>
       <section class="col-xs-12">
-        <q-input outlined v-model="principal" label="Calle principal" />
+        <q-input
+          outlined
+          v-model="localForm.principal"
+          label="Calle principal"
+        />
       </section>
       <section class="col-xs-12">
-        <q-input outlined v-model="secundaria" label="Calle secundaria" />
+        <q-input
+          outlined
+          v-model="localForm.secundaria"
+          label="Calle secundaria"
+        />
       </section>
       <footer class="col-xs-12">
         <q-btn
@@ -52,7 +72,7 @@
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
-          :to="nextPage"
+          @click="nextStep"
         />
       </footer>
     </q-form>
@@ -61,57 +81,56 @@
 
 <script>
 export default {
+  mounted() {
+    this.copyFormValues();
+  },
   data() {
     return {
-      zona: "",
-      provincia: "",
-      canton: "",
-      parroquia: "",
-      sector: "",
-      referencia: "",
-      principal: "",
-      secundaria: "",
       nextPage: {
         name: "generales"
+      },
+      localForm: {
+        zona: "",
+        provincia: "",
+        canton: "",
+        parroquia: "",
+        sector: "",
+        referencia: "",
+        principal: "",
+        secundaria: ""
       }
     };
   },
   computed: {
+    form() {
+      return this.$store.getters["form/form"];
+    },
     zonas() {
-      return [
-        { value: "1", label: "Zona 1" },
-        { value: "2", label: "Zona 2" },
-        { value: "3", label: "Zona 3" },
-        { value: "4", label: "Zona 4" },
-        { value: "5", label: "Zona 5-8" },
-        { value: "6", label: "Zona 6" },
-        { value: "7", label: "Zona 7" },
-        { value: "9", label: "Zona 9" }
-      ];
+      return this.$store.getters["app/zonas"];
     },
     provincias() {
-      return [
-        { value: "1", label: "Esmeraldas" },
-        { value: "2", label: "Imbabura" },
-        { value: "3", label: "Sucumbios" },
-        { value: "4", label: "Orellana" },
-        { value: "5", label: "Napo" },
-        { value: "6", label: "Cotopaxi" },
-        { value: "7", label: "Chimborazo" },
-        { value: "8", label: "Tungurahua" },
-        { value: "9", label: "Pastaza" },
-        { value: "10", label: "Manabi" }
-      ];
+      return this.$store.getters["app/provincias"];
     },
     cantones() {
-      return [{ value: "1", label: "Cuenca" }];
+      return this.$store.getters["app/cantones"];
     },
     parroquias() {
-      return [
-        { values: "1", label: "Banos" },
-        { values: "2", label: "San Joaquin" },
-        { values: "3", label: "Sayausi" }
-      ];
+      return this.$store.getters["app/parroquias"];
+    }
+  },
+  methods: {
+    copyFormValues() {
+      for (let key in this.localForm) {
+        this.localForm[key] = this.form[key];
+      }
+    },
+    nextStep() {
+      this.updateForm();
+      this.$router.push(this.nextPage);
+    },
+    updateForm() {
+      const payload = this.localForm;
+      this.$store.commit("form/updateForm", payload);
     }
   }
 };

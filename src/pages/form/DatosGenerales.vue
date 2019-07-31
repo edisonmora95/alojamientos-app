@@ -4,12 +4,12 @@
       <section class="col-xs-12">
         <q-input
           outlined
-          v-model="nombreInfraestructura"
+          v-model="localForm.nombreInfraestructura"
           label="Nombre de la infraestructura"
         />
       </section>
       <section class="col-xs-12 col-md-6">
-        <q-input outlined v-model="fechaInspeccion" mask="date">
+        <q-input outlined v-model="localForm.fechaInspeccion" mask="date">
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
@@ -18,7 +18,7 @@
                 transition-hide="scale"
               >
                 <q-date
-                  v-model="fechaInspeccion"
+                  v-model="localForm.fechaInspeccion"
                   @input="() => $refs.qDateProxy.hide()"
                 />
               </q-popup-proxy>
@@ -29,14 +29,14 @@
       <section class="col-xs-12 col-md-6">
         <q-input
           outlined
-          v-model="horaInspeccion"
+          v-model="localForm.horaInspeccion"
           mask="time"
           :rules="['time']"
         >
           <template v-slot:append>
             <q-icon name="access_time" class="cursor-pointer">
               <q-popup-proxy transition-show="scale" transition-hide="scale">
-                <q-time v-model="horaInspeccion" />
+                <q-time v-model="localForm.horaInspeccion" />
               </q-popup-proxy>
             </q-icon>
           </template>
@@ -49,7 +49,7 @@
           color="blue-grey"
           icon="keyboard_arrow_left"
           label="Regresar"
-          :to="prevPage"
+          @click="prevStep"
         />
         <q-btn
           flat
@@ -57,7 +57,7 @@
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
-          :to="nextPage"
+          @click="nextStep"
         />
       </footer>
     </q-form>
@@ -69,21 +69,48 @@ import DateTimeUtils from "../../utils/date.js";
 export default {
   mounted() {
     const now = new Date();
-    this.fechaInspeccion = now.toISOString();
-    this.horaInspeccion = DateTimeUtils.getTime(now);
+    this.localForm.fechaInspeccion = now.toISOString();
+    this.localForm.horaInspeccion = DateTimeUtils.getTime(now);
+    this.copyFormValues();
   },
   data() {
     return {
-      nombreInfraestructura: "",
-      fechaInspeccion: "",
-      horaInspeccion: "",
       nextPage: {
         name: "infraestructura"
       },
       prevPage: {
         name: "localizacion"
+      },
+      localForm: {
+        nombreInfraestructura: "",
+        fechaInspeccion: "",
+        horaInspeccion: ""
       }
     };
+  },
+  computed: {
+    form() {
+      return this.$store.getters["form/form"];
+    }
+  },
+  methods: {
+    copyFormValues() {
+      for (let key in this.localForm) {
+        this.localForm[key] = this.form[key];
+      }
+    },
+    updateForm() {
+      const payload = this.localForm;
+      this.$store.commit("form/updateForm", payload);
+    },
+    nextStep() {
+      this.updateForm();
+      this.$router.push(this.nextPage);
+    },
+    prevStep() {
+      this.updateForm();
+      this.$router.push(this.prevPage);
+    }
   }
 };
 </script>

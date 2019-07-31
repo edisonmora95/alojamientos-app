@@ -25,7 +25,7 @@ const routes = [
         component: () => import("pages/form/DatosInfraestructura.vue"),
         name: "infraestructura",
         meta: {
-          title: "2. Datos Infraestructura"
+          title: "3. Datos Infraestructura"
         }
       }
     ]
