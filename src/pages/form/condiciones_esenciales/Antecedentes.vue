@@ -22,7 +22,11 @@
           v-on:addEvent="onAddEvent"
         ></Evento>
       </section>
-      <p class="text-positive cursor-pointer" @click="showNewEvent">
+      <p
+        class="text-positive cursor-pointer"
+        @click="showNewEvent"
+        v-if="!newEvent"
+      >
         <q-icon name="add" />Anadir otro
       </p>
       <section class="col-xs-12">
@@ -42,6 +46,9 @@
           v-model="localForm.anioUso"
           mask="####"
         ></q-input>
+      </section>
+      <section class="col-xs-12">
+        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
       </section>
       <footer class="col-xs-12">
         <q-btn
@@ -66,7 +73,8 @@
 </template>
 
 <script>
-  import Evento from "../../../components/Form/Evento";
+import Evento from "../../../components/Form/Evento";
+import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
@@ -96,6 +104,13 @@ export default {
         { value: true, label: "Si" },
         { value: false, label: "No" },
       ]
+    },
+    puntaje() {
+      const danos = this.localForm.eventos.find((evento) => evento.danos && evento.tipoDanos != "");
+      if (danos) {
+        return 0;
+      }
+      return 10;
     }
   },
   methods: {
@@ -125,7 +140,8 @@ export default {
     }
   },
   components: {
-    Evento
+    Evento,
+    PuntajeSeccion
   }
 };
 </script>
