@@ -1,26 +1,30 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="antecetendes-eventos-form">
-      <section class="row q-col-gutter-md" v-if="localForm.eventos.length > 0">
-        <header class="col-xs-12">
-          <label>Eventos registrados</label>
-        </header>
-        <Evento
-          v-for="(evento, index) in localForm.eventos"
-          :key="'evento-' + index"
-          :evento="evento"
-          class="col-xs-12"
-        ></Evento>
+      <section class="col-xs-12" v-if="localForm.eventos.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Eventos registrados</label>
+          </header>
+          <Evento
+            v-for="(evento, index) in localForm.eventos"
+            :key="'evento-' + index"
+            :evento="evento"
+            class="col-xs-12"
+          ></Evento>
+        </section>
       </section>
-      <section class="row q-col-gutter-md" v-if="newEvent">
-        <header class="col-xs-12">
-          <label>Nuevo evento</label>
-        </header>
-        <Evento
-          class="col-xs-12"
-          :showAddBtn="true"
-          v-on:addEvent="onAddEvent"
-        ></Evento>
+      <section class="col-xs-12" v-if="newEvent">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Nuevo evento</label>
+          </header>
+          <Evento
+            class="col-xs-12"
+            :showAddBtn="true"
+            v-on:addEvent="onAddEvent"
+          ></Evento>
+        </section>
       </section>
       <p
         class="text-positive cursor-pointer"

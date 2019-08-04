@@ -1,7 +1,7 @@
 <template>
   <div>
-    <main class="row q-col-gutter-md">
-      <section class="col-xs-12">
+    <main class="row ">
+      <section class="col-xs-12 q-my-sm q-px-sm">
         <q-select
           label="Tipo de evento"
           v-model="tipoEvento"
@@ -11,8 +11,8 @@
         ></q-select>
       </section>
       <section v-if="tipoEvento != 'Ninguno'" class="col-xs-12">
-        <main class="row q-col-gutter-md">
-          <section class="col-xs-12">
+        <main class="row">
+          <section class="col-xs-12 q-my-sm q-px-sm">
             <q-select
               label="Infraestructura expuesta a danos"
               v-model="danos"
@@ -23,7 +23,7 @@
               map-options
             ></q-select>
           </section>
-          <section v-if="danos == true" class="col-xs-12">
+          <section v-if="danos == true" class="col-xs-12 q-my-sm q-px-sm">
             <q-select
               label="Tipo de dano"
               v-model="tipoDano"
