@@ -48,6 +48,15 @@ const routes = [
         }
       },
       {
+        path: "/vias-acceso",
+        component: () => import("pages/form/condiciones_esenciales/ViasAcceso.vue"),
+        name: "viasAcceso",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.3 Vias de acceso a la infraestructura"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",

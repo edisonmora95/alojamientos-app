@@ -1,35 +1,35 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-amenazas-form">
-      <section class="col-xs-12"  v-if="localForm.amenazas.length > 0">
+    <q-form class="row q-col-gutter-md" ref="antecetendes-vias-form">
+      <section class="col-xs-12"  v-if="localForm.vias.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Amenazas registrados</label>
+            <label>Vias de acceso registrados</label>
           </header>
-          <Amenaza
-            v-for="(amenaza, index) in localForm.amenazas"
-            :key="'amenaza-' + index"
-            :amenaza="amenaza"
+          <ViaAcceso
+            v-for="(via, index) in localForm.vias"
+            :key="'via-' + index"
+            :via="via"
             class="col-xs-12"
-          ></Amenaza>
+          ></ViaAcceso>
         </section>
       </section>
-      <section class="col-xs-12" v-if="newAmenaza">
+      <section class="col-xs-12" v-if="newVia">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nueva amenaza</label>
+            <label>Nueva via de acceso</label>
           </header>
-          <Amenaza
+          <ViaAcceso
             class="col-xs-12"
-            :isNewAmenaza="true"
-            v-on:addAmenaza="onAddAmenaza"
-          ></Amenaza>
+            :isNewVia="true"
+            v-on:addVia="onAddVia"
+          ></ViaAcceso>
         </section>
       </section>
       <p
         class="text-positive cursor-pointer"
-        @click="showNewAmenaza"
-        v-if="!newAmenaza"
+        @click="showNewVia"
+        v-if="!newVia"
       >
         <q-icon name="add" />Anadir otra
       </p>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import Amenaza from "../../../components/Form/Amenaza";
+import ViaAcceso from "../../../components/Form/ViaAcceso";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
@@ -68,14 +68,14 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "viasAcceso"
+        name: ""
       },
       prevPage: {
-        name: "antecedentesEventos"
+        name: "riesgo"
       },
-      newAmenaza: true, // Controls the New Amenaza input
+      newVia: true, // Controls the New ViaAcceso input
       localForm: {
-        amenazas: [],
+        vias: [],
       }
     };
   },
@@ -84,8 +84,8 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const recurrenciaAlta = this.localForm.amenazas.find((amenaza) => amenaza.nivelRecurrencia == "Alto");
-      if (recurrenciaAlta) {
+      const hayViasDisponibles = (this.localForm.vias.length > 0);
+      if (!hayViasDisponibles) {
         return 0;
       }
       return 10;
@@ -109,16 +109,16 @@ export default {
       this.updateForm();
       this.$router.push(this.prevPage);
     },
-    showNewAmenaza() {
-      this.newAmenaza = true;
+    showNewVia() {
+      this.newVia = true;
     },
-    onAddAmenaza(payload) {
-      this.localForm.amenazas.push(payload);
-      this.newAmenaza = false;
+    onAddVia(payload) {
+      this.localForm.vias.push(payload);
+      this.newVia = false;
     }
   },
   components: {
-    Amenaza,
+    ViaAcceso,
     PuntajeSeccion
   }
 };
