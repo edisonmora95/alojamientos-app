@@ -23,6 +23,8 @@ export default {
   previoUso: false,
   anioUso: 0,
 
+  amenazas: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

@@ -82,7 +82,7 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "anexos"
+        name: "riesgo"
       },
       prevPage: {
         name: "infraestructura"

@@ -39,6 +39,15 @@ const routes = [
         }
       },
       {
+        path: "/riesgo",
+        component: () => import("pages/form/condiciones_esenciales/AnalisisRiesgo.vue"),
+        name: "riesgo",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.2 Analisis de riesgo de la infraestructura"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
