@@ -7,15 +7,21 @@ export default {
   referencia: "",
   principal: "",
   secundaria: "",
+
   nombreInfraestructura: "",
   fechaInspeccion: "",
   horaInspeccion: "",
+
   tipoServicio: "",
   otroTipoServicio: "",
   institucion: "",
   nombreRepresentante: "Edison Mora",
   celularRepresentante: "+593992556793",
   convencionalRepresentante: "042348515",
+
+  eventos: [],
+  previoUso: false,
+  anioUso: 0,
 
   recomendaciones: "",
   puntaje: 0,

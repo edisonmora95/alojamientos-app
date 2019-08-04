@@ -63,6 +63,14 @@
           label="Regresar"
           @click="prevStep"
         />
+        <q-btn
+          flat
+          class="btnContinuar"
+          color="secondary"
+          icon-right="keyboard_arrow_right"
+          label="Continuar"
+          @click="nextStep"
+        />
       </footer>
     </q-form>
   </q-page>
@@ -77,6 +85,9 @@ export default {
     return {
       prevPage: {
         name: "generales"
+      },
+      nextPage: {
+        name: "antecedentesEventos"
       },
       localForm: {
         tipoServicio: "",
@@ -109,6 +120,10 @@ export default {
     prevStep() {
       this.updateForm();
       this.$router.push(this.prevPage);
+    },
+    nextStep() {
+      this.updateForm();
+      this.$router.push(this.nextPage);
     },
     updateForm() {
       const payload = this.localForm;

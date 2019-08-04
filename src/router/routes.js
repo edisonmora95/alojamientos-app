@@ -25,7 +25,17 @@ const routes = [
         component: () => import("pages/form/DatosInfraestructura.vue"),
         name: "infraestructura",
         meta: {
-          title: "3. Datos Infraestructura"
+          title: "2. Datos Generales",
+          subtitle: "2.1 Datos Infraestructura"
+        }
+      },
+      {
+        path: "/antecedentes",
+        component: () => import("pages/form/condiciones_esenciales/Antecedentes.vue"),
+        name: "antecedentesEventos",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.1 Antecedentes de eventos"
         }
       },
       {
