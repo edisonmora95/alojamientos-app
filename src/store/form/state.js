@@ -29,6 +29,8 @@ export default {
 
   servicios: [],
 
+  dormitorios: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

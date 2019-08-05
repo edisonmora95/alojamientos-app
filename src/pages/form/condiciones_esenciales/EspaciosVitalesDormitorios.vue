@@ -1,37 +1,37 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-servicios-form">
-      <section class="col-xs-12" v-if="localForm.servicios.length > 0">
+    <q-form class="row q-col-gutter-md" ref="antecetendes-espacios-vitales-form">
+      <section class="col-xs-12"  v-if="localForm.dormitorios.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Servicios basicos registrados</label>
+            <label>Dormitorios registrados</label>
           </header>
-          <ServicioBasico
-            v-for="(servicio, index) in localForm.servicios"
-            :key="'servicio-' + index"
-            :servicio="servicio"
+          <Dormitorio
+            v-for="(dormitorio, index) in localForm.dormitorios"
+            :key="'dormitorio-' + index"
+            :dormitorio="dormitorio"
             class="col-xs-12"
-          ></ServicioBasico>
+          ></Dormitorio>
         </section>
       </section>
-      <section class="col-xs-12" v-if="newServicio">
+      <section class="col-xs-12" v-if="newDormitorio">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nuevo servicio basico</label>
+            <label>Nuevo dormitorio</label>
           </header>
-          <ServicioBasico
+          <Dormitorio
             class="col-xs-12"
-            :isNewServicio="true"
-            v-on:addServicio="onAddServicio"
-          ></ServicioBasico>
+            :isNewDormitorio="true"
+            v-on:addDormitorio="onAddDormitorio"
+          ></Dormitorio>
         </section>
       </section>
       <p
         class="text-positive cursor-pointer"
-        @click="showNewServicio"
-        v-if="!newServicio"
+        @click="showNewDormitorio"
+        v-if="!newDormitorio"
       >
-        <q-icon name="add" />Anadir otro
+        <q-icon name="add" />Anadir otro dormitorio
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import ServicioBasico from "../../../components/Form/ServicioBasico";
+import Dormitorio from "../../../components/Form/Dormitorio";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
@@ -68,14 +68,14 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "espaciosVitalesDormitorios"
+        name: "espaciosVitalesBanos"
       },
       prevPage: {
-        name: "viasAcceso"
+        name: "serviciosBasicos"
       },
-      newServicio: true, // Controls the New ServicioBasico input
+      newDormitorio: true, // Controls the New Dormitorio input
       localForm: {
-        servicios: [],
+        dormitorios: [],
       }
     };
   },
@@ -84,8 +84,8 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const serviciosDisponibles = (this.localForm.servicios.length > 0);
-      if (!serviciosDisponibles) {
+      const hayDormitoriosDisponibles = (this.localForm.dormitorios.length > 0);
+      if (!hayDormitoriosDisponibles) {
         return 0;
       }
       return 10;
@@ -109,16 +109,16 @@ export default {
       this.updateForm();
       this.$router.push(this.prevPage);
     },
-    showNewServicio() {
-      this.newServicio = true;
+    showNewDormitorio() {
+      this.newDormitorio = true;
     },
-    onAddServicio(payload) {
-      this.localForm.servicios.push(payload);
-      this.newServicio = false;
+    onAddDormitorio(payload) {
+      this.localForm.dormitorios.push(payload);
+      this.newDormitorio = false;
     }
   },
   components: {
-    ServicioBasico,
+    Dormitorio,
     PuntajeSeccion
   }
 };

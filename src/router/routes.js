@@ -66,6 +66,15 @@ const routes = [
         }
       },
       {
+        path: "/espacios-vitales-dormitorios",
+        component: () => import("pages/form/condiciones_esenciales/EspaciosVitalesDormitorios.vue"),
+        name: "espaciosVitalesDormitorios",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.5.1 Espacios Vitales (Dormitorios)"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
