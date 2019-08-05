@@ -57,6 +57,15 @@ const routes = [
         }
       },
       {
+        path: "/servicios-basicos",
+        component: () => import("pages/form/condiciones_esenciales/ServiciosBasicos.vue"),
+        name: "serviciosBasicos",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.4 Servicios Basicos"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",

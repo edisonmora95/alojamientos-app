@@ -27,6 +27,8 @@ export default {
 
   vias: [],
 
+  servicios: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

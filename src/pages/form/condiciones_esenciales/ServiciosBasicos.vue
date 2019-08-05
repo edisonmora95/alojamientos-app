@@ -1,37 +1,37 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-vias-form">
-      <section class="col-xs-12"  v-if="localForm.vias.length > 0">
+    <q-form class="row q-col-gutter-md" ref="antecetendes-servicios-form">
+      <section class="col-xs-12" v-if="localForm.servicios.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Vias de acceso registrados</label>
+            <label>Servicios basicos registrados</label>
           </header>
-          <ViaAcceso
-            v-for="(via, index) in localForm.vias"
-            :key="'via-' + index"
-            :via="via"
+          <ServicioBasico
+            v-for="(servicio, index) in localForm.servicios"
+            :key="'servicio-' + index"
+            :servicio="servicio"
             class="col-xs-12"
-          ></ViaAcceso>
+          ></ServicioBasico>
         </section>
       </section>
-      <section class="col-xs-12" v-if="newVia">
+      <section class="col-xs-12" v-if="newServicio">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nueva via de acceso</label>
+            <label>Nuevo servicio basico</label>
           </header>
-          <ViaAcceso
+          <ServicioBasico
             class="col-xs-12"
-            :isNewVia="true"
-            v-on:addVia="onAddVia"
-          ></ViaAcceso>
+            :isNewServicio="true"
+            v-on:addServicio="onAddServicio"
+          ></ServicioBasico>
         </section>
       </section>
       <p
         class="text-positive cursor-pointer"
-        @click="showNewVia"
-        v-if="!newVia"
+        @click="showNewServicio"
+        v-if="!newServicio"
       >
-        <q-icon name="add" />Anadir otra
+        <q-icon name="add" />Anadir otro
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import ViaAcceso from "../../../components/Form/ViaAcceso";
+import ServicioBasico from "../../../components/Form/ServicioBasico";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
@@ -68,14 +68,14 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "serviciosBasicos"
+        name: ""
       },
       prevPage: {
-        name: "riesgo"
+        name: "viasAcceso"
       },
-      newVia: true, // Controls the New ViaAcceso input
+      newServicio: true, // Controls the New ServicioBasico input
       localForm: {
-        vias: [],
+        servicios: [],
       }
     };
   },
@@ -84,8 +84,8 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayViasDisponibles = (this.localForm.vias.length > 0);
-      if (!hayViasDisponibles) {
+      const serviciosDisponibles = (this.localForm.servicios.length > 0);
+      if (!serviciosDisponibles) {
         return 0;
       }
       return 10;
@@ -109,16 +109,16 @@ export default {
       this.updateForm();
       this.$router.push(this.prevPage);
     },
-    showNewVia() {
-      this.newVia = true;
+    showNewServicio() {
+      this.newServicio = true;
     },
-    onAddVia(payload) {
-      this.localForm.vias.push(payload);
-      this.newVia = false;
+    onAddServicio(payload) {
+      this.localForm.servicios.push(payload);
+      this.newServicio = false;
     }
   },
   components: {
-    ViaAcceso,
+    ServicioBasico,
     PuntajeSeccion
   }
 };
