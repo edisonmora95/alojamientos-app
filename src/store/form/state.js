@@ -31,6 +31,8 @@ export default {
 
   dormitorios: [],
 
+  banos: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

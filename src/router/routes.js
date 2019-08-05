@@ -75,6 +75,15 @@ const routes = [
         }
       },
       {
+        path: "/espacios-vitales-banos",
+        component: () => import("pages/form/condiciones_esenciales/EspaciosVitalesBanos.vue"),
+        name: "espaciosVitalesBanos",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.5.2 Espacios Vitales (Banos)"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
