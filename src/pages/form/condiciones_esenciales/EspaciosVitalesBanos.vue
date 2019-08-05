@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       nextPage: {
-        name: ""
+        name: "medidasSeguridad"
       },
       prevPage: {
         name: "espaciosVitalesDormitorios"

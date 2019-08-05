@@ -33,9 +33,6 @@
       >
         <q-icon name="add" />Anadir otro dormitorio
       </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
       <footer class="col-xs-12">
         <q-btn
           flat
@@ -60,7 +57,6 @@
 
 <script>
 import Dormitorio from "../../../components/Form/Dormitorio";
-import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
@@ -119,7 +115,6 @@ export default {
   },
   components: {
     Dormitorio,
-    PuntajeSeccion
   }
 };
 </script>

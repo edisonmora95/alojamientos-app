@@ -33,6 +33,9 @@ export default {
 
   banos: [],
 
+  recursos: [],
+  instituciones: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"
