@@ -95,9 +95,9 @@
 </template>
 
 <script>
-import RecursoInterno from "../../../components/Form/RecursoInterno";
-import InstitucionEmergencia from "../../../components/Form/InstitucionEmergencia";
-import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
+import RecursoInterno from "../../components/Form/RecursoInterno";
+import InstitucionEmergencia from "../../components/Form/InstitucionEmergencia";
+import PuntajeSeccion from "../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();

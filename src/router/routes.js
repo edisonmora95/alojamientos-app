@@ -85,7 +85,7 @@ const routes = [
       },
       {
         path: "/medidas-seguridad",
-        component: () => import("pages/form/condiciones_esenciales/MedidasSeguridad.vue"),
+        component: () => import("pages/form/MedidasSeguridad.vue"),
         name: "medidasSeguridad",
         meta: {
           title: "4. Medidas de Seguridad",
