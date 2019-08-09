@@ -42,6 +42,11 @@ export default {
   ingresosSalidas: [],
   otrosEspacios: [],
 
+  zonaArriboVehicular: "",
+  areaCirculacion: "",
+  comunicacion: false,
+  caracteristicas: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

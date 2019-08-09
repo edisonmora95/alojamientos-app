@@ -137,6 +137,14 @@ const routes = [
         }
       },
       {
+        path: "/accesibilidad",
+        component: () => import("pages/form/Accesibilidad.vue"),
+        name: "accesibilidad",
+        meta: {
+          title: "6. Accesibilidad"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",

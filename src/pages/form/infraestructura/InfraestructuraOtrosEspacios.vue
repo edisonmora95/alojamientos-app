@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "infraestructuraTechos"
+        name: "accesibilidad"
       },
       prevPage: {
         name: "infraestructuraIngresosSalidas"
