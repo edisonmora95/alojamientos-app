@@ -31,7 +31,8 @@ const routes = [
       },
       {
         path: "/antecedentes",
-        component: () => import("pages/form/condiciones_esenciales/Antecedentes.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/Antecedentes.vue"),
         name: "antecedentesEventos",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -40,7 +41,8 @@ const routes = [
       },
       {
         path: "/riesgo",
-        component: () => import("pages/form/condiciones_esenciales/AnalisisRiesgo.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/AnalisisRiesgo.vue"),
         name: "riesgo",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -49,7 +51,8 @@ const routes = [
       },
       {
         path: "/vias-acceso",
-        component: () => import("pages/form/condiciones_esenciales/ViasAcceso.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/ViasAcceso.vue"),
         name: "viasAcceso",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -58,7 +61,8 @@ const routes = [
       },
       {
         path: "/servicios-basicos",
-        component: () => import("pages/form/condiciones_esenciales/ServiciosBasicos.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/ServiciosBasicos.vue"),
         name: "serviciosBasicos",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -67,7 +71,8 @@ const routes = [
       },
       {
         path: "/espacios-vitales-dormitorios",
-        component: () => import("pages/form/condiciones_esenciales/EspaciosVitalesDormitorios.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/EspaciosVitalesDormitorios.vue"),
         name: "espaciosVitalesDormitorios",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -76,7 +81,8 @@ const routes = [
       },
       {
         path: "/espacios-vitales-banos",
-        component: () => import("pages/form/condiciones_esenciales/EspaciosVitalesBanos.vue"),
+        component: () =>
+          import("pages/form/condiciones_esenciales/EspaciosVitalesBanos.vue"),
         name: "espaciosVitalesBanos",
         meta: {
           title: "3. Condiciones Esenciales",
@@ -88,12 +94,13 @@ const routes = [
         component: () => import("pages/form/MedidasSeguridad.vue"),
         name: "medidasSeguridad",
         meta: {
-          title: "4. Medidas de Seguridad",
+          title: "4. Medidas de Seguridad"
         }
       },
       {
         path: "/infrarestructura-paredes",
-        component: () => import("pages/form/infraestructura/InfraestructuraParedes.vue"),
+        component: () =>
+          import("pages/form/infraestructura/InfraestructuraParedes.vue"),
         name: "infraestructuraParedes",
         meta: {
           title: "5. Infraestructura",
@@ -102,7 +109,8 @@ const routes = [
       },
       {
         path: "/infrarestructura-pisos",
-        component: () => import("pages/form/infraestructura/InfraestructuraPisos.vue"),
+        component: () =>
+          import("pages/form/infraestructura/InfraestructuraPisos.vue"),
         name: "infraestructuraPisos",
         meta: {
           title: "5. Infraestructura",
@@ -111,7 +119,8 @@ const routes = [
       },
       {
         path: "/infrarestructura-techos",
-        component: () => import("pages/form/infraestructura/InfraestructuraTechos.vue"),
+        component: () =>
+          import("pages/form/infraestructura/InfraestructuraTechos.vue"),
         name: "infraestructuraTechos",
         meta: {
           title: "5. Infraestructura",
@@ -120,7 +129,8 @@ const routes = [
       },
       {
         path: "/infrarestructura-ingresos-salidas",
-        component: () => import("pages/form/infraestructura/InfraestructuraIngresosSalidas.vue"),
+        component: () =>
+          import("pages/form/infraestructura/InfraestructuraIngresosSalidas.vue"),
         name: "infraestructuraIngresosSalidas",
         meta: {
           title: "5. Infraestructura",
@@ -129,7 +139,8 @@ const routes = [
       },
       {
         path: "/infrarestructura-otros-espacios",
-        component: () => import("pages/form/infraestructura/InfraestructuraOtrosEspacios.vue"),
+        component: () =>
+          import("pages/form/infraestructura/InfraestructuraOtrosEspacios.vue"),
         name: "infraestructuraOtrosEspacios",
         meta: {
           title: "5. Infraestructura",

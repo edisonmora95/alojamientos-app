@@ -104,13 +104,12 @@ export default {
       return this.$store.getters["form/form"];
     },
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
     puntaje() {
-      const danos = this.localForm.eventos.find((evento) => evento.danos && evento.tipoDanos != "");
+      const danos = this.localForm.eventos.find(
+        evento => evento.danos && evento.tipoDanos != ""
+      );
       if (danos) {
         return 0;
       }
@@ -149,5 +148,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

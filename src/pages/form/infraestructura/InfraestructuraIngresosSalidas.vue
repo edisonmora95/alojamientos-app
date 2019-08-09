@@ -1,7 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="infraestructura-ingresosSalidas-form">
-      <section class="col-xs-12"  v-if="localForm.ingresosSalidas.length > 0">
+    <q-form
+      class="row q-col-gutter-md"
+      ref="infraestructura-ingresosSalidas-form"
+    >
+      <section class="col-xs-12" v-if="localForm.ingresosSalidas.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Ingresos/Salidas registrados</label>
@@ -71,7 +74,7 @@ export default {
       },
       newIngresoSalida: true, // Controls the New IngresoSalida input
       localForm: {
-        ingresosSalidas: [],
+        ingresosSalidas: []
       }
     };
   },
@@ -107,9 +110,8 @@ export default {
     }
   },
   components: {
-    IngresoSalida,
+    IngresoSalida
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

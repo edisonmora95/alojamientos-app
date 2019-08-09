@@ -3,11 +3,13 @@
     <q-form class="row q-col-gutter-md" ref="localizacion-form">
       <section class="col-xs-12">
         <q-input
-          outlined autogrow
+          outlined
+          autogrow
           v-model="localForm.recomendaciones"
           label="Recomendaciones"
           type="textarea"
-          counter maxlength="300"
+          counter
+          maxlength="300"
         />
       </section>
       <section class="col-xs-12 q-mt-lg q-px-lg">
@@ -24,10 +26,9 @@
             <label>Calificacion</label>
           </article>
           <article class="col-xs-6">
-            <p
-              class="text-right"
-              :class="calificacionClass"
-            >{{ form.calificacion }}</p>
+            <p class="text-right" :class="calificacionClass">
+              {{ form.calificacion }}
+            </p>
           </article>
         </section>
       </section>
@@ -67,7 +68,7 @@ export default {
         name: "accesibilidad"
       },
       localForm: {
-        recomendaciones: "",
+        recomendaciones: ""
       }
     };
   },
@@ -81,7 +82,7 @@ export default {
       } else if (this.form.puntaje > 60) {
         return "text-warning";
       } else {
-        return "text-negative"
+        return "text-negative";
       }
     }
   },
@@ -107,11 +108,11 @@ export default {
 };
 </script>
 <style scoped>
-  label {
-    font-size: large !important;
-    font-weight: 500;
-  }
-  p {
-    font-size: large !important;
-  }
+label {
+  font-size: large !important;
+  font-weight: 500;
+}
+p {
+  font-size: large !important;
+}
 </style>

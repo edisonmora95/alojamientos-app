@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewVia">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addVia"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addVia"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,14 +36,15 @@ export default {
     isNewVia: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar una nueva via de acceso o para mostrar una via ya ingresada"
+      description:
+        "Indica si el componente se esta usando para ingresar una nueva via de acceso o para mostrar una via ya ingresada"
     },
     via: {
       required: false,
       default: function() {
         return {
           viaAcceso: "",
-          distancia: 0.00
+          distancia: 0.0
         };
       }
     }
@@ -56,20 +55,14 @@ export default {
   data() {
     return {
       viaAcceso: "",
-      distancia: 0.00,
+      distancia: 0.0,
 
-      viasAcceso: [
-        "Terrestre",
-        "Fluvial",
-        "Aerea"
-      ]
+      viasAcceso: ["Terrestre", "Fluvial", "Aerea"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.viaAcceso == ""
-      );
+      return this.viaAcceso == "";
     }
   },
   methods: {
@@ -83,7 +76,7 @@ export default {
     },
     clearForm() {
       this.viaAcceso = "";
-      this.distancia = ""
+      this.distancia = "";
     },
     copyPropValues() {
       this.viaAcceso = this.via.viaAcceso;

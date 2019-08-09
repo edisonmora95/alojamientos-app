@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="infraestructura-paredes-form">
-      <section class="col-xs-12"  v-if="localForm.paredes.length > 0">
+      <section class="col-xs-12" v-if="localForm.paredes.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Paredes registradas</label>
@@ -71,7 +71,7 @@ export default {
       },
       newPared: true, // Controls the New Pared input
       localForm: {
-        paredes: [],
+        paredes: []
       }
     };
   },
@@ -107,9 +107,8 @@ export default {
     }
   },
   components: {
-    Pared,
+    Pared
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

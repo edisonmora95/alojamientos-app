@@ -42,11 +42,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewEspacio">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addIngresoSalida"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addIngresoSalida"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -58,7 +56,8 @@ export default {
     isNewEspacio: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
     },
     otroEspacio: {
       required: false,
@@ -67,7 +66,7 @@ export default {
           espacio: "",
           estado: "",
           cantidad: 0,
-          accesible: false,
+          accesible: false
         };
       }
     }
@@ -82,31 +81,16 @@ export default {
       cantidad: 0,
       accesible: false,
 
-      tiposEspacios: [
-        "Tapial",
-        "Adobe",
-        "Caña",
-        "Otros"
-      ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      tiposEspacios: ["Tapial", "Adobe", "Caña", "Otros"],
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.espacio == "" ||
-        this.estado == "" ||
-        this.cantidad == 0
-      );
+      return this.espacio == "" || this.estado == "" || this.cantidad == 0;
     },
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     }
   },
   methods: {

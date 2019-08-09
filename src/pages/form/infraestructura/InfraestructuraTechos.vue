@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="infraestructura-techos-form">
-      <section class="col-xs-12"  v-if="localForm.techos.length > 0">
+      <section class="col-xs-12" v-if="localForm.techos.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Techos registrados</label>
@@ -71,7 +71,7 @@ export default {
       },
       newTecho: true, // Controls the New Techo input
       localForm: {
-        techos: [],
+        techos: []
       }
     };
   },
@@ -107,9 +107,8 @@ export default {
     }
   },
   components: {
-    Techo,
+    Techo
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

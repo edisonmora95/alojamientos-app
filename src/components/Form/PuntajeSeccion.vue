@@ -16,10 +16,7 @@
         <label>Calificacion</label>
       </article>
       <article class="col-xs-6">
-        <p
-          class="text-right"
-          :class="calificacionClass"
-        >{{ calificacion }}</p>
+        <p class="text-right" :class="calificacionClass">{{ calificacion }}</p>
       </article>
     </section>
   </main>
@@ -40,15 +37,16 @@ export default {
       default: 10,
       min: 0,
       max: 100,
-      description: "Puntaje maximo que puede tener la seccion o el formulario completo"
+      description:
+        "Puntaje maximo que puede tener la seccion o el formulario completo"
     }
   },
   computed: {
     calificacion() {
-      return (this.puntaje == 0) ? "NO APTO" : "APTO";
+      return this.puntaje == 0 ? "NO APTO" : "APTO";
     },
     calificacionClass() {
-      return (this.puntaje == 0) ? "text-negative" : "text-positive";
+      return this.puntaje == 0 ? "text-negative" : "text-positive";
     }
   }
 };

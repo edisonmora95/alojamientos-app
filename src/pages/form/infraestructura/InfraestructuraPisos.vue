@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="infraestructura-pisos-form">
-      <section class="col-xs-12"  v-if="localForm.pisos.length > 0">
+      <section class="col-xs-12" v-if="localForm.pisos.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Pisos registradas</label>
@@ -71,7 +71,7 @@ export default {
       },
       newPiso: true, // Controls the New Piso input
       localForm: {
-        pisos: [],
+        pisos: []
       }
     };
   },
@@ -107,9 +107,8 @@ export default {
     }
   },
   components: {
-    Piso,
+    Piso
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

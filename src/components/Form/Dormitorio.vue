@@ -69,11 +69,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewDormitorio">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addDormitorio"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addDormitorio"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -85,7 +83,8 @@ export default {
     isNewDormitorio: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo dormitorio o para mostrar un dormitorio ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo dormitorio o para mostrar un dormitorio ingresado"
     },
     dormitorio: {
       required: false,
@@ -95,8 +94,8 @@ export default {
           cantidad: 0,
           estado: "",
           accesible: false,
-          ancho: 0.00,
-          largo: 0.00,
+          ancho: 0.0,
+          largo: 0.0
         };
       }
     }
@@ -110,8 +109,8 @@ export default {
       cantidad: 0,
       estado: "",
       accesible: false,
-      ancho: 0.00,
-      largo: 0.00,
+      ancho: 0.0,
+      largo: 0.0,
 
       tiposEspacio: [
         "Aula",
@@ -120,10 +119,7 @@ export default {
         "Cancha cubierta",
         "Otro"
       ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
@@ -140,11 +136,8 @@ export default {
       return this.ancho * this.largo;
     },
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
-    },
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
+    }
   },
   methods: {
     addDormitorio() {
@@ -165,8 +158,8 @@ export default {
       this.cantidad = "";
       this.estado = "";
       this.accesible = false;
-      this.ancho = 0.00;
-      this.largo = 0.00;
+      this.ancho = 0.0;
+      this.largo = 0.0;
     },
     copyPropValues() {
       this.tipoEspacio = this.dormitorio.tipoEspacio;
@@ -174,7 +167,7 @@ export default {
       this.estado = this.dormitorio.estado;
       this.accesible = this.dormitorio.accesible;
       this.ancho = this.dormitorio.ancho;
-      this.largo = this.dormitorio.largo
+      this.largo = this.dormitorio.largo;
     }
   }
 };

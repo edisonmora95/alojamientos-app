@@ -75,7 +75,7 @@ export default {
       },
       newServicio: true, // Controls the New ServicioBasico input
       localForm: {
-        servicios: [],
+        servicios: []
       }
     };
   },
@@ -84,7 +84,7 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const serviciosDisponibles = (this.localForm.servicios.length > 0);
+      const serviciosDisponibles = this.localForm.servicios.length > 0;
       if (!serviciosDisponibles) {
         return 0;
       }
@@ -123,5 +123,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

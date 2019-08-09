@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="antecetendes-vias-form">
-      <section class="col-xs-12"  v-if="localForm.vias.length > 0">
+      <section class="col-xs-12" v-if="localForm.vias.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Vias de acceso registrados</label>
@@ -75,7 +75,7 @@ export default {
       },
       newVia: true, // Controls the New ViaAcceso input
       localForm: {
-        vias: [],
+        vias: []
       }
     };
   },
@@ -84,7 +84,7 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayViasDisponibles = (this.localForm.vias.length > 0);
+      const hayViasDisponibles = this.localForm.vias.length > 0;
       if (!hayViasDisponibles) {
         return 0;
       }
@@ -123,5 +123,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

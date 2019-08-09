@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewRecurso">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addRecurso"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addRecurso"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,7 +36,8 @@ export default {
     isNewRecurso: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo recurso o para mostrar un recurso ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo recurso o para mostrar un recurso ya ingresado"
     },
     recurso: {
       required: false,
@@ -64,18 +63,12 @@ export default {
         "Detector de humo",
         "Hidrantes"
       ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.tipoRecurso == "" ||
-        this.estado == ""
-      );
+      return this.tipoRecurso == "" || this.estado == "";
     }
   },
   methods: {
@@ -89,7 +82,7 @@ export default {
     },
     clearForm() {
       this.tipoRecurso = "";
-      this.estado = ""
+      this.estado = "";
     },
     copyPropValues() {
       this.tipoRecurso = this.recurso.tipoRecurso;

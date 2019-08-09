@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewTecho">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addTecho"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addTecho"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,7 +36,8 @@ export default {
     isNewTecho: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo techo o para mostrar un techo ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo techo o para mostrar un techo ya ingresado"
     },
     techo: {
       required: false,
@@ -58,24 +57,13 @@ export default {
       materialTecho: "",
       estado: "",
 
-      materiales: [
-        "Tapial",
-        "Adobe",
-        "Caña",
-        "Otros"
-      ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      materiales: ["Tapial", "Adobe", "Caña", "Otros"],
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.materialTecho == "" ||
-        this.estado == ""
-      );
+      return this.materialTecho == "" || this.estado == "";
     }
   },
   methods: {
@@ -89,7 +77,7 @@ export default {
     },
     clearForm() {
       this.materialTecho = "";
-      this.estado = ""
+      this.estado = "";
     },
     copyPropValues() {
       this.materialTecho = this.techo.materialTecho;

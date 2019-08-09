@@ -42,11 +42,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewBano">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addBano"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addBano"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -58,7 +56,8 @@ export default {
     isNewBano: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo bano o para mostrar un bano ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo bano o para mostrar un bano ingresado"
     },
     bano: {
       required: false,
@@ -67,7 +66,7 @@ export default {
           areaBano: "",
           cantidad: 0,
           estado: "",
-          accesible: false,
+          accesible: false
         };
       }
     }
@@ -89,26 +88,16 @@ export default {
         "Cancha cubierta",
         "Otro"
       ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.areaBano == "" ||
-        this.cantidad == 0 ||
-        this.estado == ""
-      );
+      return this.areaBano == "" || this.cantidad == 0 || this.estado == "";
     },
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
-    },
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
+    }
   },
   methods: {
     addBano() {

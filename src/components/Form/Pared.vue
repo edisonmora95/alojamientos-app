@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewPared">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addPared"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addPared"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,7 +36,8 @@ export default {
     isNewPared: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar una nueva pared o para mostrar una pared ya ingresada"
+      description:
+        "Indica si el componente se esta usando para ingresar una nueva pared o para mostrar una pared ya ingresada"
     },
     pared: {
       required: false,
@@ -58,24 +57,13 @@ export default {
       materialPared: "",
       estado: "",
 
-      materiales: [
-        "Tapial",
-        "Adobe",
-        "Caña",
-        "Otros"
-      ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      materiales: ["Tapial", "Adobe", "Caña", "Otros"],
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.materialPared == "" ||
-        this.estado == ""
-      );
+      return this.materialPared == "" || this.estado == "";
     }
   },
   methods: {
@@ -89,7 +77,7 @@ export default {
     },
     clearForm() {
       this.materialPared = "";
-      this.estado = ""
+      this.estado = "";
     },
     copyPropValues() {
       this.materialPared = this.pared.materialPared;

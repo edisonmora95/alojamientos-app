@@ -8,10 +8,9 @@
 
         <q-toolbar-title>
           {{ routeName }}
-          <br>
+          <br />
           <span class="text-caption">{{ routeSubtitle }}</span>
         </q-toolbar-title>
-
       </q-toolbar>
     </q-header>
     <q-drawer v-model="drawer" bordered content-class="bg-grey-2">

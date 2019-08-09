@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="antecetendes-amenazas-form">
-      <section class="col-xs-12"  v-if="localForm.amenazas.length > 0">
+      <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Amenazas registrados</label>
@@ -75,7 +75,7 @@ export default {
       },
       newAmenaza: true, // Controls the New Amenaza input
       localForm: {
-        amenazas: [],
+        amenazas: []
       }
     };
   },
@@ -84,7 +84,9 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const recurrenciaAlta = this.localForm.amenazas.find((amenaza) => amenaza.nivelRecurrencia == "Alto");
+      const recurrenciaAlta = this.localForm.amenazas.find(
+        amenaza => amenaza.nivelRecurrencia == "Alto"
+      );
       if (recurrenciaAlta) {
         return 0;
       }
@@ -123,5 +125,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

@@ -35,11 +35,9 @@
         </main>
       </section>
       <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addEvent"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addEvent"
+          >Aceptar</q-btn
+        >
       </footer>
     </main>
   </div>
@@ -78,24 +76,16 @@ export default {
         "Inundacion",
         "Terremoto"
       ],
-      tiposDano: [
-        "Humano",
-        "Infraestructura",
-        "Economico"
-      ]
+      tiposDano: ["Humano", "Infraestructura", "Economico"]
     };
   },
   computed: {
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
     btnDisabled() {
       return (
-        this.tipoEvento == "" ||
-        (this.danos == true && this.tipoDano == "")
+        this.tipoEvento == "" || (this.danos == true && this.tipoDano == "")
       );
     }
   },
@@ -112,7 +102,7 @@ export default {
     clearEvent() {
       this.tipoEvento = "";
       this.danos = false;
-      this.tipoDano = ""
+      this.tipoDano = "";
     },
     copyPropValues() {
       this.tipoEvento = this.evento.tipoEvento;

@@ -88,8 +88,7 @@ export default {
         zonaArriboVehicular: "",
         areaCirculacion: "",
         comunicacion: false,
-        caracteristicas: [],
-
+        caracteristicas: []
       }
     };
   },
@@ -104,10 +103,7 @@ export default {
       return ["Calle", "Acera", "Ambos"];
     },
     trueFalseOptions() {
-      return [
-        { value: true, label: "Si" },
-        { value: false, label: "No" },
-      ]
+      return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
     caracteristicas() {
       return [
@@ -116,7 +112,7 @@ export default {
         { value: 3, label: "Característica 3" },
         { value: 4, label: "Característica 4" },
         { value: 5, label: "Característica 5" }
-      ]
+      ];
     },
     puntaje() {
       return 0;

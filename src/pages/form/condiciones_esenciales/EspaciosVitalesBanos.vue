@@ -1,7 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-espacios-vitales-banos-form">
-      <section class="col-xs-12"  v-if="localForm.banos.length > 0">
+    <q-form
+      class="row q-col-gutter-md"
+      ref="antecetendes-espacios-vitales-banos-form"
+    >
+      <section class="col-xs-12" v-if="localForm.banos.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Banos registrados</label>
@@ -75,7 +78,7 @@ export default {
       },
       newBano: true, // Controls the New Bano input
       localForm: {
-        banos: [],
+        banos: []
       }
     };
   },
@@ -84,7 +87,7 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayBanosDisponibles = (this.localForm.banos.length > 0);
+      const hayBanosDisponibles = this.localForm.banos.length > 0;
       if (!hayBanosDisponibles) {
         return 0;
       }
@@ -123,5 +126,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

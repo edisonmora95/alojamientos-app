@@ -2,7 +2,7 @@
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" ref="antecetendes-seguridad-form">
       <!-- RECURSOS -->
-      <section class="col-xs-12"  v-if="localForm.recursos.length > 0">
+      <section class="col-xs-12" v-if="localForm.recursos.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Recursos Internos registrados</label>
@@ -36,7 +36,7 @@
       </p>
       <!-- ./RECURSOS -->
       <!-- INSTITUCIONES EMERGENCIA -->
-      <section class="col-xs-12"  v-if="localForm.instituciones.length > 0">
+      <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Instituciones de emergencia registrados</label>
@@ -123,7 +123,7 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayViasDisponibles = (this.localForm.recursos.length > 0);
+      const hayViasDisponibles = this.localForm.recursos.length > 0;
       if (!hayViasDisponibles) {
         return 0;
       }
@@ -170,5 +170,4 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

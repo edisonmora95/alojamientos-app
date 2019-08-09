@@ -1,7 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="infraestructura-otrosEspacios-form">
-      <section class="col-xs-12"  v-if="localForm.otrosEspacios.length > 0">
+    <q-form
+      class="row q-col-gutter-md"
+      ref="infraestructura-otrosEspacios-form"
+    >
+      <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Espacios registrados</label>
@@ -71,7 +74,7 @@ export default {
       },
       newOtroEspacio: true, // Controls the New OtroEspacio input
       localForm: {
-        otrosEspacios: [],
+        otrosEspacios: []
       }
     };
   },
@@ -107,9 +110,8 @@ export default {
     }
   },
   components: {
-    OtroEspacio,
+    OtroEspacio
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

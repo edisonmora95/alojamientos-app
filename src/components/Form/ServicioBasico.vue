@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewServicio">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addServicio"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addServicio"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,7 +36,8 @@ export default {
     isNewServicio: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo servicio o para mostrar un servicio ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo servicio o para mostrar un servicio ya ingresado"
     },
     servicio: {
       required: false,
@@ -70,18 +69,12 @@ export default {
         "Senal de celular",
         "Senal de radio"
       ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.tipoServicio == "" ||
-        this.estado == ""
-      );
+      return this.tipoServicio == "" || this.estado == "";
     }
   },
   methods: {
@@ -95,7 +88,7 @@ export default {
     },
     clearForm() {
       this.tipoServicio = "";
-      this.estado = ""
+      this.estado = "";
     },
     copyPropValues() {
       this.tipoServicio = this.servicio.tipoServicio;

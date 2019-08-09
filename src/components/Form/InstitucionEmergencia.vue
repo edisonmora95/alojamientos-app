@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewInstitucion">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addInstitucion"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addInstitucion"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,14 +36,15 @@ export default {
     isNewInstitucion: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar una nueva institucion o para mostrar una institucion ya ingresada"
+      description:
+        "Indica si el componente se esta usando para ingresar una nueva institucion o para mostrar una institucion ya ingresada"
     },
     institucionEmergencia: {
       required: false,
       default: function() {
         return {
           institucion: "",
-          distancia: 0.00
+          distancia: 0.0
         };
       }
     }
@@ -56,22 +55,14 @@ export default {
   data() {
     return {
       institucion: "",
-      distancia: 0.00,
+      distancia: 0.0,
 
-      tiposInsitucion: [
-        "Policia UPC",
-        "Cuerpo de bomberos",
-        "Hospital",
-        "Otro"
-      ]
+      tiposInsitucion: ["Policia UPC", "Cuerpo de bomberos", "Hospital", "Otro"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.institucion == "" ||
-        this.distancia == 0
-      );
+      return this.institucion == "" || this.distancia == 0;
     }
   },
   methods: {
@@ -85,7 +76,7 @@ export default {
     },
     clearForm() {
       this.institucion = "";
-      this.distancia = 0.00;
+      this.distancia = 0.0;
     },
     copyPropValues() {
       this.institucion = this.institucionEmergencia.institucion;

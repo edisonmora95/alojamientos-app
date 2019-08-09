@@ -22,11 +22,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewPiso">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addPiso"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addPiso"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -38,7 +36,8 @@ export default {
     isNewPiso: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo piso o para mostrar un piso ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo piso o para mostrar un piso ya ingresado"
     },
     piso: {
       required: false,
@@ -58,24 +57,13 @@ export default {
       materialPiso: "",
       estado: "",
 
-      materiales: [
-        "Tapial",
-        "Adobe",
-        "Caña",
-        "Otros"
-      ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      materiales: ["Tapial", "Adobe", "Caña", "Otros"],
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.materialPiso == "" ||
-        this.estado == ""
-      );
+      return this.materialPiso == "" || this.estado == "";
     }
   },
   methods: {
@@ -89,7 +77,7 @@ export default {
     },
     clearForm() {
       this.materialPiso = "";
-      this.estado = ""
+      this.estado = "";
     },
     copyPropValues() {
       this.materialPiso = this.piso.materialPiso;

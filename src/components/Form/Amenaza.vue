@@ -24,11 +24,9 @@
     </main>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewAmenaza">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addAmenaza"
-        >Aceptar</q-btn>
+        <q-btn color="primary" :disable="btnDisabled" @click="addAmenaza"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -40,7 +38,8 @@ export default {
     isNewAmenaza: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar una nueva amenaza o para mostrar una amenaza ya ingresada"
+      description:
+        "Indica si el componente se esta usando para ingresar una nueva amenaza o para mostrar una amenaza ya ingresada"
     },
     amenaza: {
       required: false,
@@ -72,19 +71,12 @@ export default {
         "Sequia",
         "Oleajes"
       ],
-      nivelesRecurrencia: [
-        "Alto",
-        "Medio",
-        "Bajo"
-      ]
+      nivelesRecurrencia: ["Alto", "Medio", "Bajo"]
     };
   },
   computed: {
     btnDisabled() {
-      return (
-        this.tipoAmenaza == "" ||
-        this.nivelRecurrencia == ""
-      );
+      return this.tipoAmenaza == "" || this.nivelRecurrencia == "";
     }
   },
   methods: {
@@ -98,7 +90,7 @@ export default {
     },
     clearEvent() {
       this.tipoAmenaza = "";
-      this.nivelRecurrencia = ""
+      this.nivelRecurrencia = "";
     },
     copyPropValues() {
       this.tipoAmenaza = this.amenaza.tipoAmenaza;

@@ -30,12 +30,13 @@
       </section>
     </main>
     <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewIngresoSalida">
-        <q-btn
-          color="primary"
-          :disable="btnDisabled"
-          @click="addIngresoSalida"
-        >Aceptar</q-btn>
+      <section
+        class="col-xs-4 offset-xs-4 text-center"
+        v-if="isNewIngresoSalida"
+      >
+        <q-btn color="primary" :disable="btnDisabled" @click="addIngresoSalida"
+          >Aceptar</q-btn
+        >
       </section>
     </footer>
   </div>
@@ -47,7 +48,8 @@ export default {
     isNewIngresoSalida: {
       type: Boolean,
       default: false,
-      description: "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
+      description:
+        "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
     },
     ingresoSalida: {
       required: false,
@@ -69,24 +71,14 @@ export default {
       estado: "",
       cantidad: 0,
 
-      tiposIngresosSalidas: [
-        "Tapial",
-        "Adobe",
-        "Caña",
-        "Otros"
-      ],
-      estados: [
-        "Bueno",
-        "Malo"
-      ]
+      tiposIngresosSalidas: ["Tapial", "Adobe", "Caña", "Otros"],
+      estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     btnDisabled() {
       return (
-        this.tipoIngresoSalida == "" ||
-        this.estado == "" ||
-        this.cantidad == 0
+        this.tipoIngresoSalida == "" || this.estado == "" || this.cantidad == 0
       );
     }
   },

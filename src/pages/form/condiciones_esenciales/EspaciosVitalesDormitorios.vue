@@ -1,7 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-espacios-vitales-form">
-      <section class="col-xs-12"  v-if="localForm.dormitorios.length > 0">
+    <q-form
+      class="row q-col-gutter-md"
+      ref="antecetendes-espacios-vitales-form"
+    >
+      <section class="col-xs-12" v-if="localForm.dormitorios.length > 0">
         <section class="row">
           <header class="col-xs-12">
             <label>Dormitorios registrados</label>
@@ -71,7 +74,7 @@ export default {
       },
       newDormitorio: true, // Controls the New Dormitorio input
       localForm: {
-        dormitorios: [],
+        dormitorios: []
       }
     };
   },
@@ -80,7 +83,7 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayDormitoriosDisponibles = (this.localForm.dormitorios.length > 0);
+      const hayDormitoriosDisponibles = this.localForm.dormitorios.length > 0;
       if (!hayDormitoriosDisponibles) {
         return 0;
       }
@@ -114,9 +117,8 @@ export default {
     }
   },
   components: {
-    Dormitorio,
+    Dormitorio
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>
