@@ -92,6 +92,51 @@ const routes = [
         }
       },
       {
+        path: "/infrarestructura-paredes",
+        component: () => import("pages/form/infraestructura/InfraestructuraParedes.vue"),
+        name: "infraestructuraParedes",
+        meta: {
+          title: "5. Infraestructura",
+          subtitle: "5.1 Paredes"
+        }
+      },
+      {
+        path: "/infrarestructura-pisos",
+        component: () => import("pages/form/infraestructura/InfraestructuraPisos.vue"),
+        name: "infraestructuraPisos",
+        meta: {
+          title: "5. Infraestructura",
+          subtitle: "5.2 Pisos"
+        }
+      },
+      {
+        path: "/infrarestructura-techos",
+        component: () => import("pages/form/infraestructura/InfraestructuraTechos.vue"),
+        name: "infraestructuraTechos",
+        meta: {
+          title: "5. Infraestructura",
+          subtitle: "5.3 Techos"
+        }
+      },
+      {
+        path: "/infrarestructura-ingresos-salidas",
+        component: () => import("pages/form/infraestructura/InfraestructuraIngresosSalidas.vue"),
+        name: "infraestructuraIngresosSalidas",
+        meta: {
+          title: "5. Infraestructura",
+          subtitle: "5.4 Ingresos/Salidas"
+        }
+      },
+      {
+        path: "/infrarestructura-otros-espacios",
+        component: () => import("pages/form/infraestructura/InfraestructuraOtrosEspacios.vue"),
+        name: "infraestructuraOtrosEspacios",
+        meta: {
+          title: "5. Infraestructura",
+          subtitle: "5.5 Otros Espacios"
+        }
+      },
+      {
         path: "/recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",

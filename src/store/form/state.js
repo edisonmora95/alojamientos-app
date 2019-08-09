@@ -36,6 +36,12 @@ export default {
   recursos: [],
   instituciones: [],
 
+  paredes: [],
+  pisos: [],
+  techos: [],
+  ingresosSalidas: [],
+  otrosEspacios: [],
+
   recomendaciones: "",
   puntaje: 0,
   calificacion: "NO APTA"

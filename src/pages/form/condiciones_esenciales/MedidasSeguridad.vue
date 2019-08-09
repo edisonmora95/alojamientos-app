@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       nextPage: {
-        name: ""
+        name: "infraestructuraParedes"
       },
       prevPage: {
         name: "espaciosVitalesBanos"
