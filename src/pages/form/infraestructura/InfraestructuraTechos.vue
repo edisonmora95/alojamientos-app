@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="infraestructura-techos-form">
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.techos.length > 0">
         <section class="row">
           <header class="col-xs-12">
@@ -31,7 +31,7 @@
         @click="showNewTecho"
         v-if="!newTecho"
       >
-        <q-icon name="add" />Anadir otro techo
+        <q-icon name="add" />Añadir otro techo
       </p>
       <footer class="col-xs-12">
         <q-btn
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Techo from "../../../components/Form/Techo";
 export default {
   mounted() {
@@ -63,6 +64,7 @@ export default {
   },
   data() {
     return {
+      refForm: "infraestructura-techos-form",
       nextPage: {
         name: "infraestructuraIngresosSalidas"
       },
@@ -81,22 +83,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewTecho() {
       this.newTecho = true;
@@ -106,6 +95,7 @@ export default {
       this.newTecho = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Techo
   }

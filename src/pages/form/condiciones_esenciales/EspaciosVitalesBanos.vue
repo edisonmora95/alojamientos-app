@@ -1,13 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form
-      class="row q-col-gutter-md"
-      ref="antecetendes-espacios-vitales-banos-form"
-    >
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.banos.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Banos registrados</label>
+            <label>Baños registrados</label>
           </header>
           <Bano
             v-for="(bano, index) in localForm.banos"
@@ -20,7 +17,7 @@
       <section class="col-xs-12" v-if="newBano">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nuevo Bano</label>
+            <label>Nuevo baño</label>
           </header>
           <Bano
             class="col-xs-12"
@@ -34,7 +31,7 @@
         @click="showNewBano"
         v-if="!newBano"
       >
-        <q-icon name="add" />Anadir otro bano
+        <q-icon name="add" />Añadir otro baño
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -62,6 +59,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Bano from "../../../components/Form/Bano";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
@@ -70,6 +68,7 @@ export default {
   },
   data() {
     return {
+      refForm: "espacios-vitales-banos-form",
       nextPage: {
         name: "medidasSeguridad"
       },
@@ -95,22 +94,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewBano() {
       this.newBano = true;
@@ -120,6 +106,7 @@ export default {
       this.newBano = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Bano,
     PuntajeSeccion

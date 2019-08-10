@@ -1,36 +1,37 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Tipo de recurso"
-          v-model="tipoRecurso"
+          v-model="localForm.tipoRecurso"
           :options="tiposRecurso"
           :disable="!isNewRecurso"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Estado del recurso"
-          v-model="estado"
+          v-model="localForm.estado"
           :options="estados"
           :disable="!isNewRecurso"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewRecurso">
-        <q-btn color="primary" :disable="btnDisabled" @click="addRecurso"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addRecurso">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewRecurso: {
@@ -41,7 +42,7 @@ export default {
     },
     recurso: {
       required: false,
-      default: function() {
+      default() {
         return {
           tipoRecurso: "",
           estado: ""
@@ -54,8 +55,11 @@ export default {
   },
   data() {
     return {
-      tipoRecurso: "",
-      estado: "",
+      refForm: "recurso-form",
+      localForm: {
+        tipoRecurso: "",
+        estado: ""
+      },
 
       tiposRecurso: [
         "Sistema de alarma",
@@ -67,27 +71,28 @@ export default {
     };
   },
   computed: {
-    btnDisabled() {
-      return this.tipoRecurso == "" || this.estado == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addRecurso() {
-      const payload = {
-        tipoRecurso: this.tipoRecurso,
-        estado: this.estado
-      };
-      this.$emit("addRecurso", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.tipoRecurso = "";
-      this.estado = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addRecurso al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addRecurso() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addRecurso", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.tipoRecurso = this.recurso.tipoRecurso;
-      this.estado = this.recurso.estado;
+      this.localForm = Object.assign({}, this.recurso);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

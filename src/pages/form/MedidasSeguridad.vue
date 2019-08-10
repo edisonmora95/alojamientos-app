@@ -1,11 +1,11 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-seguridad-form">
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <!-- RECURSOS -->
       <section class="col-xs-12" v-if="localForm.recursos.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Recursos Internos registrados</label>
+            <label>Recursos internos registrados</label>
           </header>
           <RecursoInterno
             v-for="(recurso, index) in localForm.recursos"
@@ -18,7 +18,7 @@
       <section class="col-xs-12" v-if="newRecurso">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nuevo recutso interno</label>
+            <label>Nuevo recurso interno</label>
           </header>
           <RecursoInterno
             class="col-xs-12"
@@ -32,7 +32,7 @@
         @click="showNewRecurso"
         v-if="!newRecurso"
       >
-        <q-icon name="add" />Anadir otro
+        <q-icon name="add" />Añadir otro
       </p>
       <!-- ./RECURSOS -->
       <!-- INSTITUCIONES EMERGENCIA -->
@@ -52,7 +52,7 @@
       <section class="col-xs-12" v-if="newInstitucion">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nueva institucion de emergencia</label>
+            <label>Nueva institución de emergencia</label>
           </header>
           <InstitucionEmergencia
             class="col-xs-12"
@@ -66,7 +66,7 @@
         @click="showNewInstitucion"
         v-if="!newInstitucion"
       >
-        <q-icon name="add" />Anadir otra
+        <q-icon name="add" />Añadir otra
       </p>
       <!-- ./INSTITUCIONES EMERGENCIA -->
       <section class="col-xs-12">
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 import RecursoInterno from "../../components/Form/RecursoInterno";
 import InstitucionEmergencia from "../../components/Form/InstitucionEmergencia";
 import PuntajeSeccion from "../../components/Form/PuntajeSeccion";
@@ -104,6 +105,7 @@ export default {
   },
   data() {
     return {
+      refForm: "medidas-seguridad-form",
       nextPage: {
         name: "infraestructuraParedes"
       },
@@ -131,22 +133,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewRecurso() {
       this.newRecurso = true;
@@ -163,6 +152,7 @@ export default {
       this.newInstitucion = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     RecursoInterno,
     InstitucionEmergencia,

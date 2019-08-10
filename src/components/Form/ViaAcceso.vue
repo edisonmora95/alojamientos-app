@@ -1,12 +1,13 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Via de acceso"
-          v-model="viaAcceso"
+          v-model="localForm.viaAcceso"
           :options="viasAcceso"
           :disable="!isNewVia"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
@@ -14,23 +15,23 @@
         <q-input
           label="Distancia a estacion de transporte"
           type="number"
-          v-model.number="distancia"
+          v-model.number="localForm.distancia"
           :disable="!isNewVia"
+          :rules="[validaciones.required]"
           outlined
         ></q-input>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewVia">
-        <q-btn color="primary" :disable="btnDisabled" @click="addVia"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addVia">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewVia: {
@@ -41,7 +42,7 @@ export default {
     },
     via: {
       required: false,
-      default: function() {
+      default() {
         return {
           viaAcceso: "",
           distancia: 0.0
@@ -54,34 +55,38 @@ export default {
   },
   data() {
     return {
-      viaAcceso: "",
-      distancia: 0.0,
+      refForm: "viaAcceso-form",
+      localForm: {
+        viaAcceso: "",
+        distancia: 0.0
+      },
 
-      viasAcceso: ["Terrestre", "Fluvial", "Aerea"]
+      viasAcceso: ["Terrestre", "Fluvial", "Aérea"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.viaAcceso == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addVia() {
-      const payload = {
-        viaAcceso: this.viaAcceso,
-        distancia: this.distancia
-      };
-      this.$emit("addVia", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.viaAcceso = "";
-      this.distancia = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addVia al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addVia() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addVia", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.viaAcceso = this.via.viaAcceso;
-      this.distancia = this.via.distancia;
+      this.localForm = Object.assign({}, this.via);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

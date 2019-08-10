@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="infraestructura-pisos-form">
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.pisos.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Pisos registradas</label>
+            <label>Pisos registrados</label>
           </header>
           <Piso
             v-for="(piso, index) in localForm.pisos"
@@ -31,7 +31,7 @@
         @click="showNewPiso"
         v-if="!newPiso"
       >
-        <q-icon name="add" />Anadir otro piso
+        <q-icon name="add" />Añadir otro piso
       </p>
       <footer class="col-xs-12">
         <q-btn
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Piso from "../../../components/Form/Piso";
 export default {
   mounted() {
@@ -63,6 +64,7 @@ export default {
   },
   data() {
     return {
+      refForm: "infraestructura-pisos-form",
       nextPage: {
         name: "infraestructuraTechos"
       },
@@ -81,22 +83,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewPiso() {
       this.newPiso = true;
@@ -106,6 +95,7 @@ export default {
       this.newPiso = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Piso
   }

@@ -13,3 +13,7 @@ export function cantones(state) {
 export function parroquias(state) {
   return state.parroquias;
 }
+
+export function validaciones(state) {
+  return state.validaciones;
+}

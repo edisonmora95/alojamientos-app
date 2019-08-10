@@ -1,9 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form
-      class="row q-col-gutter-md"
-      ref="antecetendes-espacios-vitales-form"
-    >
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.dormitorios.length > 0">
         <section class="row">
           <header class="col-xs-12">
@@ -34,7 +31,7 @@
         @click="showNewDormitorio"
         v-if="!newDormitorio"
       >
-        <q-icon name="add" />Anadir otro dormitorio
+        <q-icon name="add" />Añadir otro dormitorio
       </p>
       <footer class="col-xs-12">
         <q-btn
@@ -59,6 +56,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Dormitorio from "../../../components/Form/Dormitorio";
 export default {
   mounted() {
@@ -66,6 +64,7 @@ export default {
   },
   data() {
     return {
+      refForm: "espacios-vitales-dormitorios-form",
       nextPage: {
         name: "espaciosVitalesBanos"
       },
@@ -91,22 +90,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewDormitorio() {
       this.newDormitorio = true;
@@ -116,6 +102,7 @@ export default {
       this.newDormitorio = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Dormitorio
   }

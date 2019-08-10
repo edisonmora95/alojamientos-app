@@ -1,9 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form
-      class="row q-col-gutter-md"
-      ref="infraestructura-otrosEspacios-form"
-    >
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
         <section class="row">
           <header class="col-xs-12">
@@ -34,7 +31,7 @@
         @click="showNewOtroEspacio"
         v-if="!newOtroEspacio"
       >
-        <q-icon name="add" />Anadir otro espacio
+        <q-icon name="add" />Añadir otro espacio
       </p>
       <footer class="col-xs-12">
         <q-btn
@@ -59,6 +56,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import OtroEspacio from "../../../components/Form/OtroEspacio";
 export default {
   mounted() {
@@ -66,6 +64,7 @@ export default {
   },
   data() {
     return {
+      refForm: "infraestructura-otros-espacios-form",
       nextPage: {
         name: "accesibilidad"
       },
@@ -84,22 +83,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewOtroEspacio() {
       this.newOtroEspacio = true;
@@ -109,6 +95,7 @@ export default {
       this.newOtroEspacio = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     OtroEspacio
   }

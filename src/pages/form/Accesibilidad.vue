@@ -1,11 +1,12 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="accesibilidad-form">
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-12">
         <q-select
           label="Seleccione la zona de arribo vehicular"
           v-model="localForm.zonaArriboVehicular"
           :options="zonasArriboVehicular"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
@@ -14,6 +15,7 @@
           label="Seleccione el área de circulación desde la zona de arribo vehicular hasta la entrada principal"
           v-model="localForm.areaCirculacion"
           :options="areasCirculacion"
+          :rules="[validaciones.required]"
           outlined
           map-options
           emit-value
@@ -24,6 +26,7 @@
           label="¿Todos los espacios se comunican entre sí peatonalmente?"
           v-model="localForm.comunicacion"
           :options="trueFalseOptions"
+          :rules="[validaciones.required]"
           outlined
           emit-value
           map-options
@@ -34,6 +37,7 @@
           label="¿La superficie de circulación posee las siguientes características?"
           v-model="localForm.caracteristicas"
           :options="caracteristicas"
+          :rules="[validaciones.required]"
           outlined
           emit-value
           map-options
@@ -72,12 +76,14 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
   },
   data() {
     return {
+      refForm: "accesibilidad-form",
       prevPage: {
         name: "infraestructuraOtrosEspacios"
       },
@@ -116,26 +122,11 @@ export default {
     },
     puntaje() {
       return 0;
+    },
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
-  methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
-    },
-    nextStep() {
-      this.updateForm();
-      this.$router.push(this.nextPage);
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    }
-  }
+  mixins: [FormMixin]
 };
 </script>

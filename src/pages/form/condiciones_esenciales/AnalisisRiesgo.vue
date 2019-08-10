@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-amenazas-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Amenazas registrados</label>
+            <label>Amenazas registradas</label>
           </header>
           <Amenaza
             v-for="(amenaza, index) in localForm.amenazas"
@@ -31,7 +31,7 @@
         @click="showNewAmenaza"
         v-if="!newAmenaza"
       >
-        <q-icon name="add" />Anadir otra
+        <q-icon name="add" />Añadir otra
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Amenaza from "../../../components/Form/Amenaza";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
@@ -67,6 +68,7 @@ export default {
   },
   data() {
     return {
+      refForm: "antecetendes-amenazas-form",
       nextPage: {
         name: "viasAcceso"
       },
@@ -94,22 +96,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewAmenaza() {
       this.newAmenaza = true;
@@ -119,6 +108,7 @@ export default {
       this.newAmenaza = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Amenaza,
     PuntajeSeccion

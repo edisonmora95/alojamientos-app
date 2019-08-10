@@ -1,15 +1,21 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="localizacion-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12">
         <q-input
-          outlined
-          v-model="localForm.nombreInfraestructura"
           label="Nombre de la infraestructura"
+          v-model="localForm.nombreInfraestructura"
+          :rules="[validaciones.required]"
+          outlined
         />
       </section>
       <section class="col-xs-12 col-md-6">
-        <q-input outlined v-model="localForm.fechaInspeccion" mask="date">
+        <q-input
+          v-model="localForm.fechaInspeccion"
+          :rules="[validaciones.required]"
+          mask="date"
+          outlined
+        >
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
@@ -31,7 +37,7 @@
           outlined
           v-model="localForm.horaInspeccion"
           mask="time"
-          :rules="['time']"
+          :rules="['time', validaciones.required]"
         >
           <template v-slot:append>
             <q-icon name="access_time" class="cursor-pointer">
@@ -66,6 +72,7 @@
 
 <script>
 import DateTimeUtils from "../../utils/date.js";
+import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
@@ -75,6 +82,7 @@ export default {
   },
   data() {
     return {
+      refForm: "datos-generales-form",
       nextPage: {
         name: "infraestructura"
       },
@@ -91,26 +99,11 @@ export default {
   computed: {
     form() {
       return this.$store.getters["form/form"];
+    },
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
-  methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
-    nextStep() {
-      this.updateForm();
-      this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
-    }
-  }
+  mixins: [FormMixin]
 };
 </script>

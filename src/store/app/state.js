@@ -26,5 +26,16 @@ export default {
     { value: "1", label: "Banos" },
     { value: "2", label: "San Joaquin" },
     { value: "3", label: "Sayausi" }
-  ]
+  ],
+  validaciones: {
+    required(val) {
+      return !!val || "Este campo es obligatorio";
+    },
+    min3(val) {
+      return val.length >= 3 || "Debe ingresar mínimo 3 caracteres";
+    },
+    numberPositive(val) {
+      return val > 0 || "Valor debe ser positivo";
+    }
+  }
 };

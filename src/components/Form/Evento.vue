@@ -1,21 +1,22 @@
 <template>
   <div>
-    <main class="row ">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 q-my-sm q-px-sm">
         <q-select
           label="Tipo de evento"
-          v-model="tipoEvento"
+          v-model="localForm.tipoEvento"
           :options="tiposEventos"
           :disable="!showAddBtn"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
-      <section v-if="tipoEvento != 'Ninguno'" class="col-xs-12">
+      <section v-if="localForm.tipoEvento != 'Ninguno'" class="col-xs-12">
         <main class="row">
           <section class="col-xs-12 q-my-sm q-px-sm">
             <q-select
               label="Infraestructura expuesta a danos"
-              v-model="danos"
+              v-model="localForm.danos"
               :options="trueFalseOptions"
               :disable="!showAddBtn"
               outlined
@@ -23,10 +24,13 @@
               map-options
             ></q-select>
           </section>
-          <section v-if="danos == true" class="col-xs-12 q-my-sm q-px-sm">
+          <section
+            v-if="localForm.danos == true"
+            class="col-xs-12 q-my-sm q-px-sm"
+          >
             <q-select
               label="Tipo de dano"
-              v-model="tipoDano"
+              v-model="localForm.tipoDano"
               :options="tiposDano"
               :disable="!showAddBtn"
               outlined
@@ -35,15 +39,14 @@
         </main>
       </section>
       <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
-        <q-btn color="primary" :disable="btnDisabled" @click="addEvent"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addEvent">Aceptar</q-btn>
       </footer>
-    </main>
+    </q-form>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     showAddBtn: {
@@ -52,7 +55,7 @@ export default {
     },
     evento: {
       required: false,
-      default: function() {
+      default() {
         return {
           tipoEvento: "",
           danos: false,
@@ -66,49 +69,48 @@ export default {
   },
   data() {
     return {
-      tipoEvento: "",
-      danos: false,
-      tipoDano: "",
+      refForm: "evento-form",
+      localForm: {
+        tipoEvento: "",
+        danos: false,
+        tipoDano: ""
+      },
 
       tiposEventos: [
         "Ninguno",
         "Movimiento en masa",
-        "Inundacion",
+        "Inundación",
         "Terremoto"
       ],
-      tiposDano: ["Humano", "Infraestructura", "Economico"]
+      tiposDano: ["Humano", "Infraestructura", "Económico"]
     };
   },
   computed: {
     trueFalseOptions() {
       return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
-    btnDisabled() {
-      return (
-        this.tipoEvento == "" || (this.danos == true && this.tipoDano == "")
-      );
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addEvent() {
-      const payload = {
-        tipoEvento: this.tipoEvento,
-        danos: this.danos,
-        tipoDano: this.tipoDano
-      };
-      this.$emit("addEvent", payload);
-      this.clearEvent();
-    },
-    clearEvent() {
-      this.tipoEvento = "";
-      this.danos = false;
-      this.tipoDano = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addEvent al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addEvent() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addEvent", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.tipoEvento = this.evento.tipoEvento;
-      this.danos = this.evento.danos;
-      this.tipoDano = this.evento.tipoDano;
+      this.localForm = Object.assign({}, this.evento);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

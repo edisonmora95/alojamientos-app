@@ -1,10 +1,11 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Material"
-          v-model="materialPiso"
+          v-model="localForm.materialPiso"
+          :rules="[validaciones.required]"
           :options="materiales"
           :disable="!isNewPiso"
           outlined
@@ -13,24 +14,24 @@
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Estado del recurso"
-          v-model="estado"
+          v-model="localForm.estado"
+          :rules="[validaciones.required]"
           :options="estados"
           :disable="!isNewPiso"
           outlined
         ></q-select>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewPiso">
-        <q-btn color="primary" :disable="btnDisabled" @click="addPiso"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addPiso">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewPiso: {
@@ -41,7 +42,7 @@ export default {
     },
     piso: {
       required: false,
-      default: function() {
+      default() {
         return {
           materialPiso: "",
           estado: ""
@@ -54,35 +55,39 @@ export default {
   },
   data() {
     return {
-      materialPiso: "",
-      estado: "",
+      refForm: "piso-form",
+      localForm: {
+        materialPiso: "",
+        estado: ""
+      },
 
       materiales: ["Tapial", "Adobe", "Caña", "Otros"],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.materialPiso == "" || this.estado == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addPiso() {
-      const payload = {
-        materialPiso: this.materialPiso,
-        estado: this.estado
-      };
-      this.$emit("addPiso", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.materialPiso = "";
-      this.estado = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addPiso al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addPiso() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addPiso", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.materialPiso = this.piso.materialPiso;
-      this.estado = this.piso.estado;
+      this.localForm = Object.assign({}, this.piso);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

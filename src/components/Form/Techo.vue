@@ -1,10 +1,11 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Material"
-          v-model="materialTecho"
+          v-model="localForm.materialTecho"
+          :rules="[validaciones.required]"
           :options="materiales"
           :disable="!isNewTecho"
           outlined
@@ -13,24 +14,24 @@
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Estado del recurso"
-          v-model="estado"
+          v-model="localForm.estado"
+          :rules="[validaciones.required]"
           :options="estados"
           :disable="!isNewTecho"
           outlined
         ></q-select>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewTecho">
-        <q-btn color="primary" :disable="btnDisabled" @click="addTecho"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addTecho">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewTecho: {
@@ -41,7 +42,7 @@ export default {
     },
     techo: {
       required: false,
-      default: function() {
+      default() {
         return {
           materialTecho: "",
           estado: ""
@@ -54,35 +55,39 @@ export default {
   },
   data() {
     return {
-      materialTecho: "",
-      estado: "",
+      refForm: "techo-form",
+      localForm: {
+        materialTecho: "",
+        estado: ""
+      },
 
       materiales: ["Tapial", "Adobe", "Caña", "Otros"],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.materialTecho == "" || this.estado == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addTecho() {
-      const payload = {
-        materialTecho: this.materialTecho,
-        estado: this.estado
-      };
-      this.$emit("addTecho", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.materialTecho = "";
-      this.estado = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addTecho al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addTecho() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addTecho", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.materialTecho = this.techo.materialTecho;
-      this.estado = this.techo.estado;
+      this.localForm = Object.assign({}, this.techo);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

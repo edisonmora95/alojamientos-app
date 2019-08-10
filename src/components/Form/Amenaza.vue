@@ -1,38 +1,39 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Tipo de amenaza"
-          v-model="tipoAmenaza"
+          v-model="localForm.tipoAmenaza"
           :options="tiposAmenaza"
           :disable="!isNewAmenaza"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Nivel de recurrencia"
-          v-model="nivelRecurrencia"
+          v-model="localForm.nivelRecurrencia"
           :options="nivelesRecurrencia"
           :disable="!isNewAmenaza"
+          :rules="[validaciones.required]"
           outlined
           emit-value
           map-options
         ></q-select>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewAmenaza">
-        <q-btn color="primary" :disable="btnDisabled" @click="addAmenaza"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addAmenaza">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewAmenaza: {
@@ -43,7 +44,7 @@ export default {
     },
     amenaza: {
       required: false,
-      default: function() {
+      default() {
         return {
           tipoAmenaza: "",
           nivelRecurrencia: ""
@@ -56,46 +57,50 @@ export default {
   },
   data() {
     return {
-      tipoAmenaza: "",
-      nivelRecurrencia: "",
+      refForm: "amenaza-form",
+      localForm: {
+        tipoAmenaza: "",
+        nivelRecurrencia: ""
+      },
 
       tiposAmenaza: [
         "Ninguno",
         "Movimiento en masa",
-        "Inundacion",
+        "Inundación",
         "Incendio Forestal",
-        "Erupcion Volcanica",
+        "Erupción Volcánica",
         "Tsunami",
-        "Cambio Climatico",
-        "Deficit hidrico",
-        "Sequia",
+        "Cambio Climático",
+        "Déficit hídrico",
+        "Sequía",
         "Oleajes"
       ],
       nivelesRecurrencia: ["Alto", "Medio", "Bajo"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.tipoAmenaza == "" || this.nivelRecurrencia == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addAmenaza() {
-      const payload = {
-        tipoAmenaza: this.tipoAmenaza,
-        nivelRecurrencia: this.nivelRecurrencia
-      };
-      this.$emit("addAmenaza", payload);
-      this.clearEvent();
-    },
-    clearEvent() {
-      this.tipoAmenaza = "";
-      this.nivelRecurrencia = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addAmenaza al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addAmenaza() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addAmenaza", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.tipoAmenaza = this.amenaza.tipoAmenaza;
-      this.nivelRecurrencia = this.amenaza.nivelRecurrencia;
+      this.localForm = Object.assign({}, this.amenaza);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

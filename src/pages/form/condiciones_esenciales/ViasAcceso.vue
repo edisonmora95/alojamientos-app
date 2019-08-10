@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-vias-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.vias.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Vias de acceso registrados</label>
+            <label>Vías de acceso registrados</label>
           </header>
           <ViaAcceso
             v-for="(via, index) in localForm.vias"
@@ -17,7 +17,7 @@
       <section class="col-xs-12" v-if="newVia">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nueva via de acceso</label>
+            <label>Nueva vía de acceso</label>
           </header>
           <ViaAcceso
             class="col-xs-12"
@@ -31,7 +31,7 @@
         @click="showNewVia"
         v-if="!newVia"
       >
-        <q-icon name="add" />Anadir otra
+        <q-icon name="add" />Añadir otra
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import ViaAcceso from "../../../components/Form/ViaAcceso";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
@@ -67,6 +68,7 @@ export default {
   },
   data() {
     return {
+      refForm: "antecetendes-vias-form",
       nextPage: {
         name: "serviciosBasicos"
       },
@@ -92,22 +94,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewVia() {
       this.newVia = true;
@@ -117,6 +106,7 @@ export default {
       this.newVia = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     ViaAcceso,
     PuntajeSeccion

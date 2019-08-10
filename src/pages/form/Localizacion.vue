@@ -1,10 +1,11 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="localizacion-form">
+    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-6">
         <q-select
           v-model="localForm.zona"
           :options="zonas"
+          :rules="[validaciones.required]"
           label="Zona"
           outlined
           map-options
@@ -15,6 +16,7 @@
         <q-select
           v-model="localForm.provincia"
           :options="provincias"
+          :rules="[validaciones.required]"
           label="Provincia"
           outlined
           map-options
@@ -25,6 +27,7 @@
         <q-select
           v-model="localForm.canton"
           :options="cantones"
+          :rules="[validaciones.required]"
           label="Canton"
           outlined
           map-options
@@ -35,6 +38,7 @@
         <q-select
           v-model="localForm.parroquia"
           :options="parroquias"
+          :rules="[validaciones.required]"
           label="Parroquia"
           outlined
           map-options
@@ -42,13 +46,19 @@
         ></q-select>
       </section>
       <section class="col-xs-12">
-        <q-input outlined v-model="localForm.sector" label="Sector/Comunidad" />
+        <q-input
+          outlined
+          v-model="localForm.sector"
+          label="Sector/Comunidad"
+          :rules="[validaciones.required, validaciones.min3]"
+        />
       </section>
       <section class="col-xs-12">
         <q-input
           outlined
           v-model="localForm.referencia"
           label="Punto de Referencia"
+          :rules="[validaciones.required, validaciones.min3]"
         />
       </section>
       <section class="col-xs-12">
@@ -56,6 +66,7 @@
           outlined
           v-model="localForm.principal"
           label="Calle principal"
+          :rules="[validaciones.required, validaciones.min3]"
         />
       </section>
       <section class="col-xs-12">
@@ -80,12 +91,14 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
   },
   data() {
     return {
+      refForm: "localizacion-form",
       nextPage: {
         name: "generales"
       },
@@ -116,22 +129,11 @@ export default {
     },
     parroquias() {
       return this.$store.getters["app/parroquias"];
+    },
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
-  methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    nextStep() {
-      this.updateForm();
-      this.$router.push(this.nextPage);
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    }
-  }
+  mixins: [FormMixin]
 };
 </script>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Institucion"
-          v-model="institucion"
+          v-model="localForm.institucion"
+          :rules="[validaciones.required]"
           :options="tiposInsitucion"
           :disable="!isNewInstitucion"
           outlined
@@ -14,23 +15,23 @@
         <q-input
           label="Distancia"
           type="number"
-          v-model.number="distancia"
+          v-model.number="localForm.distancia"
+          :rules="[validaciones.required, validaciones.numberPositive]"
           :disable="!isNewInstitucion"
           outlined
         ></q-input>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewInstitucion">
-        <q-btn color="primary" :disable="btnDisabled" @click="addInstitucion"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addInstitucion">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewInstitucion: {
@@ -41,7 +42,7 @@ export default {
     },
     institucionEmergencia: {
       required: false,
-      default: function() {
+      default() {
         return {
           institucion: "",
           distancia: 0.0
@@ -54,34 +55,38 @@ export default {
   },
   data() {
     return {
-      institucion: "",
-      distancia: 0.0,
+      refForm: "institucion-form",
+      localForm: {
+        institucion: "",
+        distancia: 0.0
+      },
 
       tiposInsitucion: ["Policia UPC", "Cuerpo de bomberos", "Hospital", "Otro"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.institucion == "" || this.distancia == 0;
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addInstitucion() {
-      const payload = {
-        institucion: this.institucion,
-        distancia: this.distancia
-      };
-      this.$emit("addInstitucion", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.institucion = "";
-      this.distancia = 0.0;
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addInstitucion al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addInstitucion() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addInstitucion", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.institucion = this.institucionEmergencia.institucion;
-      this.distancia = this.institucionEmergencia.distancia;
+      this.localForm = Object.assign({}, this.institucionEmergencia);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-eventos-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.eventos.length > 0">
         <section class="row">
           <header class="col-xs-12">
@@ -46,7 +46,7 @@
       <section v-if="localForm.previoUso == true" class="col-xs-12">
         <q-input
           outlined
-          label="Anio de uso"
+          label="Año de uso"
           v-model="localForm.anioUso"
           mask="####"
         ></q-input>
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import Evento from "../../../components/Form/Evento";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
@@ -85,6 +86,7 @@ export default {
   },
   data() {
     return {
+      refForm: "antecetendes-eventos-form",
       nextPage: {
         name: "riesgo"
       },
@@ -117,22 +119,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewEvent() {
       this.newEvent = true;
@@ -142,6 +131,7 @@ export default {
       this.newEvent = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     Evento,
     PuntajeSeccion

@@ -1,36 +1,37 @@
 <template>
   <div>
-    <main class="row">
+    <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Tipo de servicio"
-          v-model="tipoServicio"
+          v-model="localForm.tipoServicio"
           :options="tiposServicio"
           :disable="!isNewServicio"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
           label="Estado"
-          v-model="estado"
+          v-model="localForm.estado"
           :options="estados"
           :disable="!isNewServicio"
+          :rules="[validaciones.required]"
           outlined
         ></q-select>
       </section>
-    </main>
+    </q-form>
     <footer class="row">
       <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewServicio">
-        <q-btn color="primary" :disable="btnDisabled" @click="addServicio"
-          >Aceptar</q-btn
-        >
+        <q-btn color="primary" @click="addServicio">Aceptar</q-btn>
       </section>
     </footer>
   </div>
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   props: {
     isNewServicio: {
@@ -41,7 +42,7 @@ export default {
     },
     servicio: {
       required: false,
-      default: function() {
+      default() {
         return {
           tipoServicio: "",
           estado: ""
@@ -54,46 +55,50 @@ export default {
   },
   data() {
     return {
-      tipoServicio: "",
-      estado: "",
+      refForm: "servicioBasico-form",
+      localForm: {
+        tipoServicio: "",
+        estado: ""
+      },
 
       tiposServicio: [
         "Abastecimiento de agua",
         "Tanques de agua",
         "Alcantarillado",
         "Drenaje de aguas lluvia",
-        "Manejo de residuos solidos",
-        "Energia electrica",
-        "Servicio telefonico",
-        "Senal de television",
-        "Senal de celular",
-        "Senal de radio"
+        "Manejo de residuos sólidos",
+        "Energía eléctrica",
+        "Servicio telefónico",
+        "Señal de televisión",
+        "Señal de celular",
+        "Señal de radio"
       ],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
-    btnDisabled() {
-      return this.tipoServicio == "" || this.estado == "";
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
   methods: {
-    addServicio() {
-      const payload = {
-        tipoServicio: this.tipoServicio,
-        estado: this.estado
-      };
-      this.$emit("addServicio", payload);
-      this.clearForm();
-    },
-    clearForm() {
-      this.tipoServicio = "";
-      this.estado = "";
+    /**
+     * Llama al mixin para que valide el formulario
+     * Si es válido emite el evento addServicio al padre
+     * Luego de emitir el evento, limpia el formulario local
+     */
+    async addServicio() {
+      const isFormValid = await this.beforeSubmit(this.refForm);
+      if (isFormValid) {
+        const payload = Object.assign({}, this.localForm);
+        this.$emit("addServicio", payload);
+        this.clearForm(this.localForm);
+      }
     },
     copyPropValues() {
-      this.tipoServicio = this.servicio.tipoServicio;
-      this.estado = this.servicio.estado;
+      this.localForm = Object.assign({}, this.servicio);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>

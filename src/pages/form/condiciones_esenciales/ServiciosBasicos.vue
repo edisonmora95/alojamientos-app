@@ -1,10 +1,10 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="antecetendes-servicios-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm">
       <section class="col-xs-12" v-if="localForm.servicios.length > 0">
         <section class="row">
           <header class="col-xs-12">
-            <label>Servicios basicos registrados</label>
+            <label>Servicios básicos registrados</label>
           </header>
           <ServicioBasico
             v-for="(servicio, index) in localForm.servicios"
@@ -17,7 +17,7 @@
       <section class="col-xs-12" v-if="newServicio">
         <section class="row">
           <header class="col-xs-12">
-            <label>Nuevo servicio basico</label>
+            <label>Nuevo servicio básico</label>
           </header>
           <ServicioBasico
             class="col-xs-12"
@@ -31,7 +31,7 @@
         @click="showNewServicio"
         v-if="!newServicio"
       >
-        <q-icon name="add" />Anadir otro
+        <q-icon name="add" />Añadir otro
       </p>
       <section class="col-xs-12">
         <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import FormMixin from "../../../mixins/FormMixin";
 import ServicioBasico from "../../../components/Form/ServicioBasico";
 import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
@@ -67,6 +68,7 @@ export default {
   },
   data() {
     return {
+      refForm: "antecetendes-serviciosBasicos-form",
       nextPage: {
         name: "espaciosVitalesDormitorios"
       },
@@ -92,22 +94,9 @@ export default {
     }
   },
   methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    },
     nextStep() {
       this.updateForm();
       this.$router.push(this.nextPage);
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
     },
     showNewServicio() {
       this.newServicio = true;
@@ -117,6 +106,7 @@ export default {
       this.newServicio = false;
     }
   },
+  mixins: [FormMixin],
   components: {
     ServicioBasico,
     PuntajeSeccion

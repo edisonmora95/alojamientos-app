@@ -1,10 +1,11 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" ref="localizacion-form">
+    <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12">
         <q-select
           v-model="localForm.tipoServicio"
           :options="tiposServicio"
+          :rules="[validaciones.required]"
           label="Tipo de servicio de la infraestructura"
           outlined
         ></q-select>
@@ -23,6 +24,7 @@
         <q-select
           v-model="localForm.institucion"
           :options="instituciones"
+          :rules="[validaciones.required]"
           label="Institución propietaria de la infraestructura"
           outlined
           map-options
@@ -77,12 +79,14 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
   },
   data() {
     return {
+      refForm: "datos-infraestructura-form",
       prevPage: {
         name: "generales"
       },
@@ -109,26 +113,11 @@ export default {
         { value: "2", label: "UCSG" },
         { value: "3", label: "USM" }
       ];
+    },
+    validaciones() {
+      return this.$store.getters["app/validaciones"];
     }
   },
-  methods: {
-    copyFormValues() {
-      for (let key in this.localForm) {
-        this.localForm[key] = this.form[key];
-      }
-    },
-    prevStep() {
-      this.updateForm();
-      this.$router.push(this.prevPage);
-    },
-    nextStep() {
-      this.updateForm();
-      this.$router.push(this.nextPage);
-    },
-    updateForm() {
-      const payload = this.localForm;
-      this.$store.commit("form/updateForm", payload);
-    }
-  }
+  mixins: [FormMixin]
 };
 </script>
