@@ -72,6 +72,13 @@ const FormMixin = {
           form[key] = "";
         }
       }
+    },
+    /**
+     * Setea el puntaje final de la sección actual
+     */
+    setPuntajeSeccion(seccion, puntaje) {
+      const payload = { seccion, puntaje };
+      this.$store.commit("form/setPuntajeSeccion", payload);
     }
   }
 };

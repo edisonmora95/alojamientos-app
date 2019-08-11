@@ -85,9 +85,13 @@ export default {
     form() {
       return this.$store.getters["form/form"];
     },
+    /**
+     * Puntaje 10 si hay al menos 1 baño disponible y 1 dormitorio disponible
+     */
     puntaje() {
       const hayBanosDisponibles = this.localForm.banos.length > 0;
-      if (!hayBanosDisponibles) {
+      const hayDormitoriosDisponibles = this.form.dormitorios.length > 0;
+      if (!hayBanosDisponibles || !hayDormitoriosDisponibles) {
         return 0;
       }
       return 10;
@@ -96,6 +100,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeEspacios", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewBano() {

@@ -18,7 +18,7 @@
             <label>Puntaje</label>
           </article>
           <article class="col-xs-6">
-            <p class="text-right">{{ form.puntaje }}/100</p>
+            <p class="text-right">{{ puntajeTotal }}/100</p>
           </article>
         </section>
         <section class="row">
@@ -27,7 +27,7 @@
           </article>
           <article class="col-xs-6">
             <p class="text-right" :class="calificacionClass">
-              {{ form.calificacion }}
+              {{ calificacionGeneral }}
             </p>
           </article>
         </section>
@@ -76,13 +76,25 @@ export default {
     form() {
       return this.$store.getters["form/form"];
     },
+    puntajeTotal() {
+      return this.$store.getters["form/puntajeTotal"];
+    },
     calificacionClass() {
-      if (this.form.puntaje > 90) {
+      if (this.puntajeTotal > 90) {
         return "text-positive";
-      } else if (this.form.puntaje > 60) {
+      } else if (this.puntajeTotal > 60) {
         return "text-warning";
       } else {
         return "text-negative";
+      }
+    },
+    calificacionGeneral() {
+      if (this.puntajeTotal > 90) {
+        return "APTO";
+      } else if (this.puntajeTotal > 60) {
+        return "SUJETO A CUMPLIR RECOMENDACIONES";
+      } else {
+        return "NO APTO";
       }
     }
   },

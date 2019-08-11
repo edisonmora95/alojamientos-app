@@ -33,6 +33,9 @@
       >
         <q-icon name="add" />Añadir otro espacio
       </p>
+      <section class="col-xs-12">
+        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat
@@ -58,6 +61,7 @@
 <script>
 import FormMixin from "../../../mixins/FormMixin";
 import OtroEspacio from "../../../components/Form/OtroEspacio";
+import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
@@ -80,11 +84,40 @@ export default {
   computed: {
     form() {
       return this.$store.getters["form/form"];
+    },
+    puntaje() {
+      const paredes = this.form.paredes.find(pared => pared.estado === "Bueno");
+      const puntajeParedes = paredes != null ? 2 : 0;
+
+      const techos = this.form.techos.find(techo => techo.estado === "Bueno");
+      const puntajeTechos = techos != null ? 2 : 0;
+
+      const pisos = this.form.pisos.find(piso => piso.estado === "Bueno");
+      const puntajePisos = pisos != null ? 2 : 0;
+
+      const ingresosSalidas = this.form.ingresosSalidas.reduce(
+        (a, b) => a + b.puntaje,
+        0
+      );
+
+      const otrosEspacios = this.localForm.otrosEspacios.filter(
+        espacio => espacio.estado == "Bueno"
+      );
+      const puntajeOtrosEspacios = otrosEspacios.length * 0.583;
+
+      const total =
+        puntajeParedes +
+        puntajeTechos +
+        puntajePisos +
+        ingresosSalidas +
+        puntajeOtrosEspacios;
+      return Math.round(total * 100) / 100;
     }
   },
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeInfraestructura", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewOtroEspacio() {
@@ -97,7 +130,8 @@ export default {
   },
   mixins: [FormMixin],
   components: {
-    OtroEspacio
+    OtroEspacio,
+    PuntajeSeccion
   }
 };
 </script>

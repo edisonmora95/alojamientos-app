@@ -85,6 +85,10 @@ export default {
     form() {
       return this.$store.getters["form/form"];
     },
+    /**
+     * Puntaje 0 si al menos una amenaza tiene un alto nivel de recurrencia
+     * Puntaje 10 si ninguna amenaza tiene un alto nivel de recurrencia
+     */
     puntaje() {
       const recurrenciaAlta = this.localForm.amenazas.find(
         amenaza => amenaza.nivelRecurrencia == "Alto"
@@ -98,6 +102,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeRiesgos", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewAmenaza() {

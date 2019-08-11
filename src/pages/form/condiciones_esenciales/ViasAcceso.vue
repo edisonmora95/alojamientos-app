@@ -85,6 +85,10 @@ export default {
     form() {
       return this.$store.getters["form/form"];
     },
+    /**
+     * Puntaje 0 si no existe una vía de acceso disponible
+     * Puntaje 10 si existe al menos una vía de acceso
+     */
     puntaje() {
       const hayViasDisponibles = this.localForm.vias.length > 0;
       if (!hayViasDisponibles) {
@@ -96,6 +100,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeViasAcceso", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewVia() {

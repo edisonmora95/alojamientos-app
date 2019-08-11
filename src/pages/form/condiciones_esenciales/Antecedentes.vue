@@ -108,6 +108,10 @@ export default {
     trueFalseOptions() {
       return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
+    /**
+     * Puntaje 0 si al menos 1 evento dejó daños
+     * Puntaje 10 si ningún evento dejó daños
+     */
     puntaje() {
       const danos = this.localForm.eventos.find(
         evento => evento.danos && evento.tipoDanos != ""
@@ -121,6 +125,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeAntecedentes", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewEvent() {

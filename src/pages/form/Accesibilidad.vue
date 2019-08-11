@@ -38,6 +38,7 @@
           v-model="localForm.caracteristicas"
           :options="caracteristicas"
           :rules="[validaciones.required]"
+          multiple
           outlined
           emit-value
           map-options
@@ -117,16 +118,48 @@ export default {
         { value: 2, label: "Característica 2" },
         { value: 3, label: "Característica 3" },
         { value: 4, label: "Característica 4" },
-        { value: 5, label: "Característica 5" }
+        { value: 5, label: "Característica 5" },
+        { value: 6, label: "Característica 6" }
       ];
     },
     puntaje() {
-      return 0;
+      const puntajeZonaArribo =
+        this.localForm.zonaArriboVehicular == this.zonasArriboVehicular[0]
+          ? 3
+          : 0;
+      let puntajeAreasCirculacion = 0;
+      if (
+        this.localForm.areaCirculacion === this.areasCirculacion[0] ||
+        this.localForm.areaCirculacion === this.areasCirculacion[1]
+      ) {
+        puntajeAreasCirculacion = 3;
+      } else if (this.localForm.areaCirculacion === this.areasCirculacion[2]) {
+        puntajeAreasCirculacion = 6;
+      }
+
+      const puntajeComunicacion = this.localForm.comunicacion ? 3 : 0;
+      const puntajeCaracteristicas = this.localForm.caracteristicas.length;
+      return (
+        puntajeZonaArribo +
+        puntajeAreasCirculacion +
+        puntajeComunicacion +
+        puntajeCaracteristicas
+      );
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin],
+  methods: {
+    async nextStep() {
+      const isFormValid = await this.beforeSubmit();
+      if (isFormValid) {
+        this.updateForm();
+        this.setPuntajeSeccion("puntajeAccesibilidad", this.puntaje);
+        this.$router.push(this.nextPage);
+      }
+    }
+  }
 };
 </script>

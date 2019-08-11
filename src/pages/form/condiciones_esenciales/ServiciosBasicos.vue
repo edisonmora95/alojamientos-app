@@ -85,6 +85,10 @@ export default {
     form() {
       return this.$store.getters["form/form"];
     },
+    /**
+     * Puntaje 0 si no existe ningún servicio básico disponible
+     * Puntaje 10 si existe al menos un servicio básico disponible
+     */
     puntaje() {
       const serviciosDisponibles = this.localForm.servicios.length > 0;
       if (!serviciosDisponibles) {
@@ -96,6 +100,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeServicios", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewServicio() {

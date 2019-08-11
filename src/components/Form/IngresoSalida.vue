@@ -83,6 +83,23 @@ export default {
   computed: {
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    },
+    puntaje() {
+      const tiposIngresosSalidasConPuntaje = [
+        "Puertas",
+        "Salida de emergencia",
+        "Ventanas"
+      ];
+      if (
+        tiposIngresosSalidasConPuntaje.includes(
+          this.localForm.tipoIngresoSalida
+        ) &&
+        this.localForm.estado == "Bueno"
+      ) {
+        return 1 / 3;
+      } else {
+        return 0;
+      }
     }
   },
   methods: {
@@ -95,6 +112,7 @@ export default {
       const isFormValid = await this.beforeSubmit(this.refForm);
       if (isFormValid) {
         const payload = Object.assign({}, this.localForm);
+        payload["puntaje"] = this.puntaje;
         this.$emit("addIngresoSalida", payload);
         this.clearForm(this.localForm);
       }

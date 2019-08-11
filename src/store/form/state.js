@@ -49,5 +49,15 @@ export default {
 
   recomendaciones: "",
   puntaje: 0,
-  calificacion: "NO APTA"
+  calificacion: "NO APTA",
+
+  // PUNTAJES DE SECCIONES
+  puntajeAntecedentes: 0,
+  puntajeRiesgos: 0,
+  puntajeViasAcceso: 0,
+  puntajeServicios: 0,
+  puntajeEspacios: 0,
+  puntajeMedidasSeguridad: 0,
+  puntajeInfraestructura: 0,
+  puntajeAccesibilidad: 0
 };

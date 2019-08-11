@@ -125,16 +125,15 @@ export default {
       return this.$store.getters["form/form"];
     },
     puntaje() {
-      const hayViasDisponibles = this.localForm.recursos.length > 0;
-      if (!hayViasDisponibles) {
-        return 0;
-      }
-      return 10;
+      const puntajeRecursos = this.localForm.recursos.length;
+      const puntajeInstituciones = this.localForm.instituciones.length * 3;
+      return puntajeRecursos + puntajeInstituciones;
     }
   },
   methods: {
     nextStep() {
       this.updateForm();
+      this.setPuntajeSeccion("puntajeMedidasSeguridad", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewRecurso() {
