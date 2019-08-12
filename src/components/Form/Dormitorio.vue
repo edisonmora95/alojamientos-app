@@ -47,6 +47,7 @@
         <q-input
           label="Ancho"
           type="number"
+          suffix="[m]"
           v-model.number="localForm.ancho"
           :disable="!isNewDormitorio"
           :rules="[validaciones.required, validaciones.numberPositive]"
@@ -57,6 +58,7 @@
         <q-input
           label="Largo"
           type="number"
+          suffix="[m]"
           v-model.number="localForm.largo"
           :disable="!isNewDormitorio"
           :rules="[validaciones.required, validaciones.numberPositive]"
@@ -67,6 +69,7 @@
         <q-input
           label="Total m2"
           type="number"
+          suffix="[m]"
           v-model.number="totalm2"
           disable
           outlined

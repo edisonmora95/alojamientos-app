@@ -3,7 +3,7 @@
     <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
-          label="Institucion"
+          label="Institución"
           v-model="localForm.institucion"
           :rules="[validaciones.required]"
           :options="tiposInsitucion"
@@ -15,6 +15,7 @@
         <q-input
           label="Distancia"
           type="number"
+          suffix="[m]"
           v-model.number="localForm.distancia"
           :rules="[validaciones.required, validaciones.numberPositive]"
           :disable="!isNewInstitucion"

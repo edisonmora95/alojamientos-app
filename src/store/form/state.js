@@ -49,7 +49,7 @@ export default {
 
   recomendaciones: "",
   puntaje: 0,
-  calificacion: "NO APTA",
+  calificacion: "",
 
   // PUNTAJES DE SECCIONES
   puntajeAntecedentes: 0,

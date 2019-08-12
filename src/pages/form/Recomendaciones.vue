@@ -23,7 +23,7 @@
         </section>
         <section class="row">
           <article class="col-xs-6">
-            <label>Calificacion</label>
+            <label>Calificación</label>
           </article>
           <article class="col-xs-6">
             <p class="text-right" :class="calificacionClass">
