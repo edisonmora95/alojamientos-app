@@ -22,5 +22,12 @@ npm run lint
 quasar build
 ```
 
+### Build for android
+Este script genera el apk y lo firma
+```bash
+./scripts/build_android.sh
+```
+
+
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
