@@ -111,7 +111,8 @@ export default {
         referencia: "",
         principal: "",
         secundaria: ""
-      }
+      },
+      imageSrc: ""
     };
   },
   computed: {
@@ -132,6 +133,21 @@ export default {
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    }
+  },
+  methods: {
+    captureImage () {
+      navigator.camera.getPicture(
+        data => { // on success
+          this.imageSrc = `data:image/jpeg;base64,${data}`
+        },
+        () => { // on fail
+          this.$q.notify('Could not access device camera.')
+        },
+        {
+          // camera options
+        }
+      )
     }
   },
   mixins: [FormMixin]

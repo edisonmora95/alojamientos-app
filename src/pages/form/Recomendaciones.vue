@@ -47,7 +47,7 @@
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
-          @click="nextStep"
+          @click="ingresarFormulario"
         />
       </footer>
     </q-form>
@@ -115,6 +115,10 @@ export default {
     prevStep() {
       this.updateForm();
       this.$router.push(this.prevPage);
+    },
+    ingresarFormulario() {
+      this.updateForm();
+      this.$store.dispatch("form/ingresarFormulario", this.form)
     }
   }
 };

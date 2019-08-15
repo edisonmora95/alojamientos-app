@@ -1,7 +1,7 @@
 /**
  * Uri completo del servidor. Ej: http://www.servidorecu911.com
  */
-export const BASE_URL = "";
+export const BASE_URL = "http://192.168.100.98:8000";
 
 /**
  * Array de endpoints del servidor
@@ -9,6 +9,6 @@ export const BASE_URL = "";
 export const routes = {
   LOGIN: "",
   LOGOUT: "",
-  INGRESAR_FORMULARIO: "",
+  INGRESAR_FORMULARIO: "/calificaciones/ingresarCalificacion",
   EDITAR_FORMULARIO: ""
 };
