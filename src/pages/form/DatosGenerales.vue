@@ -1,14 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-12">
-        <q-input
-          label="Nombre de la infraestructura"
-          v-model="localForm.nombreInfraestructura"
-          :rules="[validaciones.required]"
-          outlined
-        />
-      </section>
       <section class="col-xs-12 col-md-6">
         <q-input
           v-model="localForm.fechaInspeccion"
@@ -76,9 +68,14 @@ import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
-    const now = new Date();
-    this.localForm.fechaInspeccion = now.toISOString();
-    this.localForm.horaInspeccion = DateTimeUtils.getTime(now);
+    if (
+      this.localForm.fechaInspeccion === "" &&
+      this.localForm.horaInspeccion === ""
+    ) {
+      const now = new Date();
+      this.localForm.fechaInspeccion = now.toISOString();
+      this.localForm.horaInspeccion = DateTimeUtils.getTime(now);
+    }
   },
   data() {
     return {
@@ -90,7 +87,6 @@ export default {
         name: "localizacion"
       },
       localForm: {
-        nombreInfraestructura: "",
         fechaInspeccion: "",
         horaInspeccion: ""
       }

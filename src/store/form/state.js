@@ -8,16 +8,34 @@ export default {
   principal: "",
   secundaria: "",
 
-  nombreInfraestructura: "",
+  infraestructura: {
+    id: null,
+    nombre: "",
+    direccion: {
+      callePrincipal: "",
+      calleSecundaria: "",
+      sector: "",
+      puntoReferencia: ""
+    },
+    coordenadas: {
+      easting: 0,
+      northing: 0,
+      zoneLetter: "",
+      zoneNum: 0
+    },
+    tipoServicio: "",
+    otroTipoServicio: "",
+    institucion: {
+      id: null,
+      nombre: "",
+      nombreRepresentante: "",
+      celularRepresentante: "",
+      convencionalRepresentante: ""
+    }
+  },
+
   fechaInspeccion: "",
   horaInspeccion: "",
-
-  tipoServicio: "",
-  otroTipoServicio: "",
-  institucion: "",
-  nombreRepresentante: "Edison Mora",
-  celularRepresentante: "+593992556793",
-  convencionalRepresentante: "042348515",
 
   eventos: [],
   previoUso: false,

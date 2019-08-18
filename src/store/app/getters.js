@@ -17,3 +17,11 @@ export function parroquias(state) {
 export function validaciones(state) {
   return state.validaciones;
 }
+
+export function infraestructuras(state) {
+  return state.infraestructuras;
+}
+
+export function instituciones(state) {
+  return state.instituciones;
+}

@@ -3,7 +3,7 @@
     <q-form class="row" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-select
-          label="Via de acceso"
+          label="Vía de acceso"
           v-model="localForm.viaAcceso"
           :options="viasAcceso"
           :disable="!isNewVia"
@@ -13,8 +13,9 @@
       </section>
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
         <q-input
-          label="Distancia a estacion de transporte"
+          label="Distancia a estación de transporte"
           type="number"
+          suffix="[m]"
           v-model.number="localForm.distancia"
           :disable="!isNewVia"
           :rules="[validaciones.required]"

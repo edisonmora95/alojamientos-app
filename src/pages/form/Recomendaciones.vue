@@ -118,7 +118,7 @@ export default {
     },
     ingresarFormulario() {
       this.updateForm();
-      this.$store.dispatch("form/ingresarFormulario", this.form)
+      this.$store.dispatch("form/ingresarFormulario", this.form);
     }
   }
 };

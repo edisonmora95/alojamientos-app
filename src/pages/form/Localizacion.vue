@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-6">
+      <section class="col-xs-12 col-sm-6">
         <q-select
           v-model="localForm.zona"
           :options="zonas"
@@ -12,7 +12,7 @@
           emit-value
         ></q-select>
       </section>
-      <section class="col-xs-6">
+      <section class="col-xs-12 col-sm-6">
         <q-select
           v-model="localForm.provincia"
           :options="provincias"
@@ -23,7 +23,7 @@
           emit-value
         ></q-select>
       </section>
-      <section class="col-xs-6">
+      <section class="col-xs-12 col-sm-6">
         <q-select
           v-model="localForm.canton"
           :options="cantones"
@@ -34,7 +34,7 @@
           emit-value
         ></q-select>
       </section>
-      <section class="col-xs-6">
+      <section class="col-xs-12 col-sm-6">
         <q-select
           v-model="localForm.parroquia"
           :options="parroquias"
@@ -44,37 +44,6 @@
           map-options
           emit-value
         ></q-select>
-      </section>
-      <section class="col-xs-12">
-        <q-input
-          outlined
-          v-model="localForm.sector"
-          label="Sector/Comunidad"
-          :rules="[validaciones.required, validaciones.min3]"
-        />
-      </section>
-      <section class="col-xs-12">
-        <q-input
-          outlined
-          v-model="localForm.referencia"
-          label="Punto de Referencia"
-          :rules="[validaciones.required, validaciones.min3]"
-        />
-      </section>
-      <section class="col-xs-12">
-        <q-input
-          outlined
-          v-model="localForm.principal"
-          label="Calle principal"
-          :rules="[validaciones.required, validaciones.min3]"
-        />
-      </section>
-      <section class="col-xs-12">
-        <q-input
-          outlined
-          v-model="localForm.secundaria"
-          label="Calle secundaria"
-        />
       </section>
       <footer class="col-xs-12">
         <q-btn
@@ -107,10 +76,6 @@ export default {
         provincia: "",
         canton: "",
         parroquia: "",
-        sector: "",
-        referencia: "",
-        principal: "",
-        secundaria: ""
       },
       imageSrc: ""
     };
@@ -136,18 +101,27 @@ export default {
     }
   },
   methods: {
-    captureImage () {
+    captureImage() {
+      const options = {
+        // Some common settings are 20, 50, and 100
+        quality: 50,
+        destinationType: navigator.camera.DestinationType.DATA_URL,
+        // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+        encodingType: navigator.camera.EncodingType.JPEG,
+        mediaType: navigator.camera.MediaType.PICTURE,
+        correctOrientation: true //Corrects Android orientation quirks
+      };
       navigator.camera.getPicture(
-        data => { // on success
-          this.imageSrc = `data:image/jpeg;base64,${data}`
+        data => {
+          console.log("Image loaded");
+          this.imageSrc = `data:image/jpeg;base64,${data}`;
         },
-        () => { // on fail
-          this.$q.notify('Could not access device camera.')
+        () => {
+          this.$q.notify("Could not access device camera.");
         },
-        {
-          // camera options
-        }
-      )
+        options
+      );
     }
   },
   mixins: [FormMixin]

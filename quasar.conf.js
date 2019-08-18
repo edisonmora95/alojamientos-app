@@ -6,7 +6,8 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'axios'
+      'axios',
+      'vue2GoogleMaps'
     ],
 
     css: [
@@ -51,7 +52,9 @@ module.exports = function (ctx) {
         'QDate',
         'QPopupProxy',
         'QTime',
-        'QOptionGroup'
+        'QOptionGroup',
+        'QImg',
+        'QExpansionItem'
       ],
 
       directives: [
