@@ -36,7 +36,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Amenaza # {{ index+1 }}</label>
+                <label> Amenaza # {{ index + 1 }}</label>
               </template>
             </Amenaza>
           </section>

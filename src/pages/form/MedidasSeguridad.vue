@@ -37,7 +37,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Recurso # {{ index+1 }}</label>
+                <label> Recurso # {{ index + 1 }}</label>
               </template>
             </RecursoInterno>
           </section>
@@ -66,7 +66,9 @@
         <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
           <section class="row">
             <header class="col-xs-12">
-              <label class="text-bold">Instituciones de emergencia registrados</label>
+              <label class="text-bold"
+                >Instituciones de emergencia registrados</label
+              >
             </header>
             <InstitucionEmergencia
               v-for="(institucion, index) in localForm.instituciones"
@@ -75,7 +77,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Institución # {{ index+1 }}</label>
+                <label> Institución # {{ index + 1 }}</label>
               </template>
             </InstitucionEmergencia>
           </section>

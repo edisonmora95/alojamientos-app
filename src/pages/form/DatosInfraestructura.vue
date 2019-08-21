@@ -75,7 +75,10 @@
             outlined
           ></q-select>
         </section>
-        <section class="col-xs-12 col-sm-6" v-if="localForm.infraestructura.tipoServicio == 'Otros'">
+        <section
+          class="col-xs-12 col-sm-6"
+          v-if="localForm.infraestructura.tipoServicio == 'Otros'"
+        >
           <q-input
             outlined
             label="Especificar tipo de servicio"
@@ -227,7 +230,10 @@ export default {
       return this.$store.getters["app/validaciones"];
     },
     inputsInfraestructuraDisabled() {
-      return (this.localForm.infraestructura.id !== 0 && this.localForm.infraestructura.id != null);
+      return (
+        this.localForm.infraestructura.id !== 0 &&
+        this.localForm.infraestructura.id != null
+      );
     }
   },
   methods: {

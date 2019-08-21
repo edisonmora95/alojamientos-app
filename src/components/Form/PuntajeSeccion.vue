@@ -1,7 +1,9 @@
 <template>
   <main class="q-pa-md" style="box-shadow: 0px 3px 2px -2px grey;">
     <header class="row">
-      <label class="text-h6 text-center" style="width: 100%;">Calificación de sección</label>
+      <label class="text-h6 text-center" style="width: 100%;"
+        >Calificación de sección</label
+      >
     </header>
     <main class="q-mt-sm">
       <section class="row">
@@ -17,7 +19,9 @@
           <p class="q-my-none text-subtitle-2">Calificación</p>
         </article>
         <article class="col-xs-6">
-          <p class="text-right q-my-none text-bold" :class="calificacionClass">{{ calificacion }}</p>
+          <p class="text-right q-my-none text-bold" :class="calificacionClass">
+            {{ calificacion }}
+          </p>
         </article>
       </section>
     </main>

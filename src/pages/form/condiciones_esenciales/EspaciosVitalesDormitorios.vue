@@ -32,8 +32,8 @@
             class="col-xs-12"
           >
             <template slot="header">
-                <label> Dormitorio # {{ index+1 }}</label>
-              </template>
+              <label> Dormitorio # {{ index + 1 }}</label>
+            </template>
           </Dormitorio>
         </section>
       </section>

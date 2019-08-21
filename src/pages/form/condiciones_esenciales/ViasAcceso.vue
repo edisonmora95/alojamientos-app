@@ -36,7 +36,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Vía # {{ index+1 }}</label>
+                <label> Vía # {{ index + 1 }}</label>
               </template>
             </ViaAcceso>
           </section>

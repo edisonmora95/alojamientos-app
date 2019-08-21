@@ -36,7 +36,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Servicio # {{ index+1 }}</label>
+                <label> Servicio # {{ index + 1 }}</label>
               </template>
             </ServicioBasico>
           </section>

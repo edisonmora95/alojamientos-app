@@ -75,7 +75,7 @@ export default {
         zona: "",
         provincia: "",
         canton: "",
-        parroquia: "",
+        parroquia: ""
       },
       imageSrc: ""
     };

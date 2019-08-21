@@ -36,7 +36,7 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Evento # {{ index+1 }}</label>
+                <label> Evento # {{ index + 1 }}</label>
               </template>
             </Evento>
           </section>
@@ -51,7 +51,10 @@
             map-options
           ></q-select>
         </section>
-        <section v-if="localForm.previoUso == true" class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
+        <section
+          v-if="localForm.previoUso == true"
+          class="col-xs-12 col-sm-6 q-my-sm q-px-sm"
+        >
           <q-input
             type="number"
             outlined

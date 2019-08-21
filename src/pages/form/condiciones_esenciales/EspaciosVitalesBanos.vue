@@ -36,12 +36,11 @@
               class="col-xs-12"
             >
               <template slot="header">
-                <label> Baño # {{ index+1 }}</label>
+                <label> Baño # {{ index + 1 }}</label>
               </template>
             </Bano>
           </section>
         </section>
-
       </main>
       <footer class="col-xs-12">
         <q-btn
