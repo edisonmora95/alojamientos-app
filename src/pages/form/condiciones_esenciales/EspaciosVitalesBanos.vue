@@ -1,41 +1,43 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.banos.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Baños registrados</label>
-          </header>
-          <Bano
-            v-for="(bano, index) in localForm.banos"
-            :key="'bano-' + index"
-            :bano="bano"
-            class="col-xs-12"
-          ></Bano>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="localForm.banos.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Baños registrados</label>
+            </header>
+            <Bano
+              v-for="(bano, index) in localForm.banos"
+              :key="'bano-' + index"
+              :bano="bano"
+              class="col-xs-12"
+            ></Bano>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newBano">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nuevo baño</label>
-          </header>
-          <Bano
-            class="col-xs-12"
-            :isNewBano="true"
-            v-on:addBano="onAddBano"
-          ></Bano>
+        <section class="col-xs-12" v-if="newBano">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nuevo baño</label>
+            </header>
+            <Bano
+              class="col-xs-12"
+              :isNewBano="true"
+              v-on:addBano="onAddBano"
+            ></Bano>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewBano"
-        v-if="!newBano"
-      >
-        <q-icon name="add" />Añadir otro baño
-      </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewBano"
+          v-if="!newBano"
+        >
+          <q-icon name="add" />Añadir otro baño
+        </p>
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat

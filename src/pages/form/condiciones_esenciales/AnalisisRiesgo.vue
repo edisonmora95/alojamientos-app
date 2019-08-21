@@ -1,41 +1,43 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Amenazas registradas</label>
-          </header>
-          <Amenaza
-            v-for="(amenaza, index) in localForm.amenazas"
-            :key="'amenaza-' + index"
-            :amenaza="amenaza"
-            class="col-xs-12"
-          ></Amenaza>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Amenazas registradas</label>
+            </header>
+            <Amenaza
+              v-for="(amenaza, index) in localForm.amenazas"
+              :key="'amenaza-' + index"
+              :amenaza="amenaza"
+              class="col-xs-12"
+            ></Amenaza>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newAmenaza">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nueva amenaza</label>
-          </header>
-          <Amenaza
-            class="col-xs-12"
-            :isNewAmenaza="true"
-            v-on:addAmenaza="onAddAmenaza"
-          ></Amenaza>
+        <section class="col-xs-12" v-if="newAmenaza">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nueva amenaza</label>
+            </header>
+            <Amenaza
+              class="col-xs-12"
+              :isNewAmenaza="true"
+              v-on:addAmenaza="onAddAmenaza"
+            ></Amenaza>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewAmenaza"
-        v-if="!newAmenaza"
-      >
-        <q-icon name="add" />Añadir otra
-      </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewAmenaza"
+          v-if="!newAmenaza"
+        >
+          <q-icon name="add" />Añadir otra
+        </p>
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat

@@ -1,76 +1,80 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.eventos.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Eventos registrados</label>
-          </header>
-          <Evento
-            v-for="(evento, index) in localForm.eventos"
-            :key="'evento-' + index"
-            :evento="evento"
-            class="col-xs-12"
-          ></Evento>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="newEvent">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nuevo evento</label>
+            </header>
+            <Evento
+              class="col-xs-12"
+              :showAddBtn="true"
+              v-on:addEvent="onAddEvent"
+            ></Evento>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newEvent">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nuevo evento</label>
-          </header>
-          <Evento
-            class="col-xs-12"
-            :showAddBtn="true"
-            v-on:addEvent="onAddEvent"
-          ></Evento>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewEvent"
+          v-if="!newEvent"
+        >
+          <q-icon name="add" />Añadir otro
+        </p>
+        <section class="col-xs-12" v-if="localForm.eventos.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Eventos registrados</label>
+            </header>
+            <Evento
+              v-for="(evento, index) in localForm.eventos"
+              :key="'evento-' + index"
+              :evento="evento"
+              class="col-xs-12"
+            ></Evento>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewEvent"
-        v-if="!newEvent"
-      >
-        <q-icon name="add" />Anadir otro
-      </p>
-      <section class="col-xs-12">
-        <q-select
-          label="Utilizada anteriormente como alojamiento"
-          v-model="localForm.previoUso"
-          :options="trueFalseOptions"
-          outlined
-          emit-value
-          map-options
-        ></q-select>
-      </section>
-      <section v-if="localForm.previoUso == true" class="col-xs-12">
-        <q-input
-          outlined
-          label="Año de uso"
-          v-model="localForm.anioUso"
-          mask="####"
-        ></q-input>
-      </section>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
-      <footer class="col-xs-12">
-        <q-btn
-          flat
-          class="btnRegresar"
-          color="blue-grey"
-          icon="keyboard_arrow_left"
-          label="Regresar"
-          @click="prevStep"
-        />
-        <q-btn
-          flat
-          class="btnContinuar"
-          color="secondary"
-          icon-right="keyboard_arrow_right"
-          label="Continuar"
-          @click="nextStep"
-        />
+        <section class="col-xs-12">
+          <q-select
+            label="Utilizada anteriormente como alojamiento"
+            v-model="localForm.previoUso"
+            :options="trueFalseOptions"
+            outlined
+            emit-value
+            map-options
+          ></q-select>
+        </section>
+        <section v-if="localForm.previoUso == true" class="col-xs-12">
+          <q-input
+            outlined
+            label="Año de uso"
+            v-model="localForm.anioUso"
+            mask="####"
+          ></q-input>
+        </section>
+      </main>
+      <footer class="row">
+        <main class="col-xs-12 q-mt-md">
+          <q-btn
+            flat
+            class="btnRegresar"
+            color="blue-grey"
+            icon="keyboard_arrow_left"
+            label="Regresar"
+            @click="prevStep"
+          />
+          <q-btn
+            flat
+            class="btnContinuar"
+            color="secondary"
+            icon-right="keyboard_arrow_right"
+            label="Continuar"
+            @click="nextStep"
+          />
+        </main>
       </footer>
     </q-form>
   </q-page>

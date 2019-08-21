@@ -1,41 +1,43 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.vias.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Vías de acceso registrados</label>
-          </header>
-          <ViaAcceso
-            v-for="(via, index) in localForm.vias"
-            :key="'via-' + index"
-            :via="via"
-            class="col-xs-12"
-          ></ViaAcceso>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="localForm.vias.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Vías de acceso registrados</label>
+            </header>
+            <ViaAcceso
+              v-for="(via, index) in localForm.vias"
+              :key="'via-' + index"
+              :via="via"
+              class="col-xs-12"
+            ></ViaAcceso>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newVia">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nueva vía de acceso</label>
-          </header>
-          <ViaAcceso
-            class="col-xs-12"
-            :isNewVia="true"
-            v-on:addVia="onAddVia"
-          ></ViaAcceso>
+        <section class="col-xs-12" v-if="newVia">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nueva vía de acceso</label>
+            </header>
+            <ViaAcceso
+              class="col-xs-12"
+              :isNewVia="true"
+              v-on:addVia="onAddVia"
+            ></ViaAcceso>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewVia"
-        v-if="!newVia"
-      >
-        <q-icon name="add" />Añadir otra
-      </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewVia"
+          v-if="!newVia"
+        >
+          <q-icon name="add" />Añadir otra
+        </p>
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat

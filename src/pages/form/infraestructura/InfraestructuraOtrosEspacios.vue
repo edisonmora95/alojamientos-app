@@ -1,41 +1,43 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Espacios registrados</label>
-          </header>
-          <OtroEspacio
-            v-for="(otroEspacio, index) in localForm.otrosEspacios"
-            :key="'otroEspacio-' + index"
-            :otroEspacio="otroEspacio"
-            class="col-xs-12"
-          ></OtroEspacio>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :no-error-focus="true" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Espacios registrados</label>
+            </header>
+            <OtroEspacio
+              v-for="(otroEspacio, index) in localForm.otrosEspacios"
+              :key="'otroEspacio-' + index"
+              :otroEspacio="otroEspacio"
+              class="col-xs-12"
+            ></OtroEspacio>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newOtroEspacio">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nuevo espacio</label>
-          </header>
-          <OtroEspacio
-            class="col-xs-12"
-            :isNewEspacio="true"
-            v-on:addOtroEspacio="onAddOtroEspacio"
-          ></OtroEspacio>
+        <section class="col-xs-12" v-if="newOtroEspacio">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nuevo espacio</label>
+            </header>
+            <OtroEspacio
+              class="col-xs-12"
+              :isNewEspacio="true"
+              v-on:addOtroEspacio="onAddOtroEspacio"
+            ></OtroEspacio>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewOtroEspacio"
-        v-if="!newOtroEspacio"
-      >
-        <q-icon name="add" />Añadir otro espacio
-      </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewOtroEspacio"
+          v-if="!newOtroEspacio"
+        >
+          <q-icon name="add" />Añadir otro espacio
+        </p>
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat

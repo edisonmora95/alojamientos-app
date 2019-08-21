@@ -1,77 +1,79 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <!-- RECURSOS -->
-      <section class="col-xs-12" v-if="localForm.recursos.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Recursos internos registrados</label>
-          </header>
-          <RecursoInterno
-            v-for="(recurso, index) in localForm.recursos"
-            :key="'recurso-' + index"
-            :recurso="recurso"
-            class="col-xs-12"
-          ></RecursoInterno>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :no-error-focus="true" :ref="refForm">
+      <main class="row q-mt-md">
+        <!-- RECURSOS -->
+        <section class="col-xs-12" v-if="localForm.recursos.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Recursos internos registrados</label>
+            </header>
+            <RecursoInterno
+              v-for="(recurso, index) in localForm.recursos"
+              :key="'recurso-' + index"
+              :recurso="recurso"
+              class="col-xs-12"
+            ></RecursoInterno>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newRecurso">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nuevo recurso interno</label>
-          </header>
-          <RecursoInterno
-            class="col-xs-12"
-            :isNewRecurso="true"
-            v-on:addRecurso="onAddRecurso"
-          ></RecursoInterno>
+        <section class="col-xs-12" v-if="newRecurso">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nuevo recurso interno</label>
+            </header>
+            <RecursoInterno
+              class="col-xs-12"
+              :isNewRecurso="true"
+              v-on:addRecurso="onAddRecurso"
+            ></RecursoInterno>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewRecurso"
-        v-if="!newRecurso"
-      >
-        <q-icon name="add" />Añadir otro
-      </p>
-      <!-- ./RECURSOS -->
-      <!-- INSTITUCIONES EMERGENCIA -->
-      <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Instituciones de emergencia registrados</label>
-          </header>
-          <InstitucionEmergencia
-            v-for="(institucion, index) in localForm.instituciones"
-            :key="'institucion-' + index"
-            :institucionEmergencia="institucion"
-            class="col-xs-12"
-          ></InstitucionEmergencia>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewRecurso"
+          v-if="!newRecurso"
+        >
+          <q-icon name="add" />Añadir otro
+        </p>
+        <!-- ./RECURSOS -->
+        <!-- INSTITUCIONES EMERGENCIA -->
+        <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Instituciones de emergencia registrados</label>
+            </header>
+            <InstitucionEmergencia
+              v-for="(institucion, index) in localForm.instituciones"
+              :key="'institucion-' + index"
+              :institucionEmergencia="institucion"
+              class="col-xs-12"
+            ></InstitucionEmergencia>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newInstitucion">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nueva institución de emergencia</label>
-          </header>
-          <InstitucionEmergencia
-            class="col-xs-12"
-            :isNewInstitucion="true"
-            v-on:addInstitucion="onAddInstitucion"
-          ></InstitucionEmergencia>
+        <section class="col-xs-12" v-if="newInstitucion">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nueva institución de emergencia</label>
+            </header>
+            <InstitucionEmergencia
+              class="col-xs-12"
+              :isNewInstitucion="true"
+              v-on:addInstitucion="onAddInstitucion"
+            ></InstitucionEmergencia>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewInstitucion"
-        v-if="!newInstitucion"
-      >
-        <q-icon name="add" />Añadir otra
-      </p>
-      <!-- ./INSTITUCIONES EMERGENCIA -->
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewInstitucion"
+          v-if="!newInstitucion"
+        >
+          <q-icon name="add" />Añadir otra
+        </p>
+        <!-- ./INSTITUCIONES EMERGENCIA -->
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat

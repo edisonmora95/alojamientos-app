@@ -1,41 +1,43 @@
 <template>
-  <q-page class="q-pt-lg q-px-md">
-    <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.servicios.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Servicios básicos registrados</label>
-          </header>
-          <ServicioBasico
-            v-for="(servicio, index) in localForm.servicios"
-            :key="'servicio-' + index"
-            :servicio="servicio"
-            class="col-xs-12"
-          ></ServicioBasico>
+  <q-page>
+    <header>
+      <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
+    </header>
+    <q-form class="q-px-md" :ref="refForm">
+      <main class="row q-mt-md">
+        <section class="col-xs-12" v-if="localForm.servicios.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Servicios básicos registrados</label>
+            </header>
+            <ServicioBasico
+              v-for="(servicio, index) in localForm.servicios"
+              :key="'servicio-' + index"
+              :servicio="servicio"
+              class="col-xs-12"
+            ></ServicioBasico>
+          </section>
         </section>
-      </section>
-      <section class="col-xs-12" v-if="newServicio">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Nuevo servicio básico</label>
-          </header>
-          <ServicioBasico
-            class="col-xs-12"
-            :isNewServicio="true"
-            v-on:addServicio="onAddServicio"
-          ></ServicioBasico>
+        <section class="col-xs-12" v-if="newServicio">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Nuevo servicio básico</label>
+            </header>
+            <ServicioBasico
+              class="col-xs-12"
+              :isNewServicio="true"
+              v-on:addServicio="onAddServicio"
+            ></ServicioBasico>
+          </section>
         </section>
-      </section>
-      <p
-        class="text-positive cursor-pointer"
-        @click="showNewServicio"
-        v-if="!newServicio"
-      >
-        <q-icon name="add" />Añadir otro
-      </p>
-      <section class="col-xs-12">
-        <PuntajeSeccion :puntaje="puntaje"></PuntajeSeccion>
-      </section>
+        <p
+          class="text-positive cursor-pointer"
+          @click="showNewServicio"
+          v-if="!newServicio"
+        >
+          <q-icon name="add" />Añadir otro
+        </p>
+      </main>
       <footer class="col-xs-12">
         <q-btn
           flat
