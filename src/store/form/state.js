@@ -3,10 +3,6 @@ export default {
   provincia: "",
   canton: "",
   parroquia: "",
-  sector: "",
-  referencia: "",
-  principal: "",
-  secundaria: "",
 
   infraestructura: {
     id: null,
@@ -39,7 +35,7 @@ export default {
 
   eventos: [],
   previoUso: false,
-  anioUso: 0,
+  anioUso: 2019,
 
   amenazas: [],
 

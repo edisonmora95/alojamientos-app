@@ -6,19 +6,6 @@
     <q-form class="q-px-md" :no-error-focus="true" :ref="refForm">
       <main class="row q-mt-md">
         <!-- RECURSOS -->
-        <section class="col-xs-12" v-if="localForm.recursos.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Recursos internos registrados</label>
-            </header>
-            <RecursoInterno
-              v-for="(recurso, index) in localForm.recursos"
-              :key="'recurso-' + index"
-              :recurso="recurso"
-              class="col-xs-12"
-            ></RecursoInterno>
-          </section>
-        </section>
         <section class="col-xs-12" v-if="newRecurso">
           <section class="row">
             <header class="col-xs-12">
@@ -38,21 +25,25 @@
         >
           <q-icon name="add" />Añadir otro
         </p>
-        <!-- ./RECURSOS -->
-        <!-- INSTITUCIONES EMERGENCIA -->
-        <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
+        <section class="col-xs-12" v-if="localForm.recursos.length > 0">
           <section class="row">
             <header class="col-xs-12">
-              <label>Instituciones de emergencia registrados</label>
+              <label class="text-bold">Recursos internos registrados</label>
             </header>
-            <InstitucionEmergencia
-              v-for="(institucion, index) in localForm.instituciones"
-              :key="'institucion-' + index"
-              :institucionEmergencia="institucion"
+            <RecursoInterno
+              v-for="(recurso, index) in localForm.recursos"
+              :key="'recurso-' + index"
+              :recurso="recurso"
               class="col-xs-12"
-            ></InstitucionEmergencia>
+            >
+              <template slot="header">
+                <label> Recurso # {{ index+1 }}</label>
+              </template>
+            </RecursoInterno>
           </section>
         </section>
+        <!-- ./RECURSOS -->
+        <!-- INSTITUCIONES EMERGENCIA -->
         <section class="col-xs-12" v-if="newInstitucion">
           <section class="row">
             <header class="col-xs-12">
@@ -72,6 +63,24 @@
         >
           <q-icon name="add" />Añadir otra
         </p>
+        <section class="col-xs-12" v-if="localForm.instituciones.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label class="text-bold">Instituciones de emergencia registrados</label>
+            </header>
+            <InstitucionEmergencia
+              v-for="(institucion, index) in localForm.instituciones"
+              :key="'institucion-' + index"
+              :institucionEmergencia="institucion"
+              class="col-xs-12"
+            >
+              <template slot="header">
+                <label> Institución # {{ index+1 }}</label>
+              </template>
+            </InstitucionEmergencia>
+          </section>
+        </section>
+
         <!-- ./INSTITUCIONES EMERGENCIA -->
       </main>
       <footer class="col-xs-12">

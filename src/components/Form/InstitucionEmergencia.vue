@@ -1,34 +1,33 @@
 <template>
-  <div>
-    <q-form class="row" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Institución"
-          v-model="localForm.institucion"
-          :rules="[validaciones.required]"
-          :options="tiposInsitucion"
-          :disable="!isNewInstitucion"
-          outlined
-        ></q-select>
-      </section>
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-input
-          label="Distancia"
-          type="number"
-          suffix="[m]"
-          v-model.number="localForm.distancia"
-          :rules="[validaciones.required, validaciones.numberPositive]"
-          :disable="!isNewInstitucion"
-          outlined
-        ></q-input>
-      </section>
-    </q-form>
-    <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewInstitucion">
-        <q-btn color="primary" @click="addInstitucion">Aceptar</q-btn>
-      </section>
+  <q-form class="row q-py-sm" :ref="refForm" :no-error-focus="true">
+    <header class="col-xs-12 q-mb-sm">
+      <slot name="header"></slot>
+    </header>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Institución"
+        v-model="localForm.institucion"
+        :rules="[validaciones.required]"
+        :options="tiposInsitucion"
+        :disable="!isNewInstitucion"
+        outlined
+      ></q-select>
+    </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-input
+        label="Distancia"
+        type="number"
+        suffix="[m]"
+        v-model.number="localForm.distancia"
+        :rules="[validaciones.required, validaciones.numberPositive]"
+        :disable="!isNewInstitucion"
+        outlined
+      ></q-input>
+    </section>
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewInstitucion">
+      <q-btn color="primary" @click="addInstitucion">Aceptar</q-btn>
     </footer>
-  </div>
+  </q-form>
 </template>
 
 <script>

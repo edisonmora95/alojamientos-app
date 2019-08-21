@@ -5,19 +5,6 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Amenazas registradas</label>
-            </header>
-            <Amenaza
-              v-for="(amenaza, index) in localForm.amenazas"
-              :key="'amenaza-' + index"
-              :amenaza="amenaza"
-              class="col-xs-12"
-            ></Amenaza>
-          </section>
-        </section>
         <section class="col-xs-12" v-if="newAmenaza">
           <section class="row">
             <header class="col-xs-12">
@@ -37,6 +24,23 @@
         >
           <q-icon name="add" />Añadir otra
         </p>
+        <section class="col-xs-12" v-if="localForm.amenazas.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label class="text-bold">Amenazas registradas</label>
+            </header>
+            <Amenaza
+              v-for="(amenaza, index) in localForm.amenazas"
+              :key="'amenaza-' + index"
+              :amenaza="amenaza"
+              class="col-xs-12"
+            >
+              <template slot="header">
+                <label> Amenaza # {{ index+1 }}</label>
+              </template>
+            </Amenaza>
+          </section>
+        </section>
       </main>
       <footer class="col-xs-12">
         <q-btn

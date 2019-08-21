@@ -1,33 +1,32 @@
 <template>
-  <div>
-    <q-form class="row" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Tipo de servicio"
-          v-model="localForm.tipoServicio"
-          :options="tiposServicio"
-          :disable="!isNewServicio"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-select>
-      </section>
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Estado"
-          v-model="localForm.estado"
-          :options="estados"
-          :disable="!isNewServicio"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-select>
-      </section>
-    </q-form>
-    <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewServicio">
-        <q-btn color="primary" @click="addServicio">Aceptar</q-btn>
-      </section>
+  <q-form class="row q-py-md" :ref="refForm" :no-error-focus="true">
+    <header class="col-xs-12 q-mb-sm">
+      <slot name="header"></slot>
+    </header>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Tipo de servicio"
+        v-model="localForm.tipoServicio"
+        :options="tiposServicio"
+        :disable="!isNewServicio"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-select>
+    </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Estado"
+        v-model="localForm.estado"
+        :options="estados"
+        :disable="!isNewServicio"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-select>
+    </section>
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewServicio">
+      <q-btn color="primary" @click="addServicio">Aceptar</q-btn>
     </footer>
-  </div>
+  </q-form>
 </template>
 
 <script>

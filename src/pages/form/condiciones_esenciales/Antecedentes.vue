@@ -27,19 +27,23 @@
         <section class="col-xs-12" v-if="localForm.eventos.length > 0">
           <section class="row">
             <header class="col-xs-12">
-              <label>Eventos registrados</label>
+              <label class="text-bold">Eventos registrados</label>
             </header>
             <Evento
               v-for="(evento, index) in localForm.eventos"
               :key="'evento-' + index"
               :evento="evento"
               class="col-xs-12"
-            ></Evento>
+            >
+              <template slot="header">
+                <label> Evento # {{ index+1 }}</label>
+              </template>
+            </Evento>
           </section>
         </section>
-        <section class="col-xs-12">
+        <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
           <q-select
-            label="Utilizada anteriormente como alojamiento"
+            label="¿Fue utilizada anteriormente como alojamiento?"
             v-model="localForm.previoUso"
             :options="trueFalseOptions"
             outlined
@@ -47,8 +51,9 @@
             map-options
           ></q-select>
         </section>
-        <section v-if="localForm.previoUso == true" class="col-xs-12">
+        <section v-if="localForm.previoUso == true" class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
           <q-input
+            type="number"
             outlined
             label="Año de uso"
             v-model="localForm.anioUso"
@@ -57,7 +62,7 @@
         </section>
       </main>
       <footer class="row">
-        <main class="col-xs-12 q-mt-md">
+        <main class="col-xs-12 q-my-md">
           <q-btn
             flat
             class="btnRegresar"

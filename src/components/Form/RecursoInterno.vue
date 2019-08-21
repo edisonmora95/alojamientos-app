@@ -1,33 +1,32 @@
 <template>
-  <div>
-    <q-form class="row" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Tipo de recurso"
-          v-model="localForm.tipoRecurso"
-          :options="tiposRecurso"
-          :disable="!isNewRecurso"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-select>
-      </section>
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Estado del recurso"
-          v-model="localForm.estado"
-          :options="estados"
-          :disable="!isNewRecurso"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-select>
-      </section>
-    </q-form>
-    <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewRecurso">
-        <q-btn color="primary" @click="addRecurso">Aceptar</q-btn>
-      </section>
+  <q-form class="row q-py-sm" :ref="refForm" :no-error-focus="true">
+    <header class="col-xs-12 q-mb-sm">
+      <slot name="header"></slot>
+    </header>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Tipo de recurso"
+        v-model="localForm.tipoRecurso"
+        :options="tiposRecurso"
+        :disable="!isNewRecurso"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-select>
+    </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Estado del recurso"
+        v-model="localForm.estado"
+        :options="estados"
+        :disable="!isNewRecurso"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-select>
+    </section>
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewRecurso">
+      <q-btn color="primary" @click="addRecurso">Aceptar</q-btn>
     </footer>
-  </div>
+  </q-form>
 </template>
 
 <script>

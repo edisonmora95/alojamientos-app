@@ -5,19 +5,6 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="localForm.vias.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Vías de acceso registrados</label>
-            </header>
-            <ViaAcceso
-              v-for="(via, index) in localForm.vias"
-              :key="'via-' + index"
-              :via="via"
-              class="col-xs-12"
-            ></ViaAcceso>
-          </section>
-        </section>
         <section class="col-xs-12" v-if="newVia">
           <section class="row">
             <header class="col-xs-12">
@@ -37,6 +24,23 @@
         >
           <q-icon name="add" />Añadir otra
         </p>
+        <section class="col-xs-12" v-if="localForm.vias.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label class="text-bold">Vías de acceso registrados</label>
+            </header>
+            <ViaAcceso
+              v-for="(via, index) in localForm.vias"
+              :key="'via-' + index"
+              :via="via"
+              class="col-xs-12"
+            >
+              <template slot="header">
+                <label> Vía # {{ index+1 }}</label>
+              </template>
+            </ViaAcceso>
+          </section>
+        </section>
       </main>
       <footer class="col-xs-12">
         <q-btn

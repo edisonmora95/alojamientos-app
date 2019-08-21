@@ -5,19 +5,6 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="localForm.banos.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Baños registrados</label>
-            </header>
-            <Bano
-              v-for="(bano, index) in localForm.banos"
-              :key="'bano-' + index"
-              :bano="bano"
-              class="col-xs-12"
-            ></Bano>
-          </section>
-        </section>
         <section class="col-xs-12" v-if="newBano">
           <section class="row">
             <header class="col-xs-12">
@@ -37,6 +24,24 @@
         >
           <q-icon name="add" />Añadir otro baño
         </p>
+        <section class="col-xs-12" v-if="localForm.banos.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label class="text-bold">Baños registrados</label>
+            </header>
+            <Bano
+              v-for="(bano, index) in localForm.banos"
+              :key="'bano-' + index"
+              :bano="bano"
+              class="col-xs-12"
+            >
+              <template slot="header">
+                <label> Baño # {{ index+1 }}</label>
+              </template>
+            </Bano>
+          </section>
+        </section>
+
       </main>
       <footer class="col-xs-12">
         <q-btn

@@ -1,48 +1,49 @@
 <template>
-  <div>
-    <q-form class="row" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-12 q-my-sm q-px-sm">
-        <q-select
-          label="Tipo de evento"
-          v-model="localForm.tipoEvento"
-          :options="tiposEventos"
-          :disable="!showAddBtn"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-select>
-      </section>
-      <section v-if="localForm.tipoEvento != 'Ninguno'" class="col-xs-12">
-        <main class="row">
-          <section class="col-xs-12 q-my-sm q-px-sm">
-            <q-select
-              label="Infraestructura expuesta a danos"
-              v-model="localForm.danos"
-              :options="trueFalseOptions"
-              :disable="!showAddBtn"
-              outlined
-              emit-value
-              map-options
-            ></q-select>
-          </section>
-          <section
-            v-if="localForm.danos == true"
-            class="col-xs-12 q-my-sm q-px-sm"
-          >
-            <q-select
-              label="Tipo de dano"
-              v-model="localForm.tipoDano"
-              :options="tiposDano"
-              :disable="!showAddBtn"
-              outlined
-            ></q-select>
-          </section>
-        </main>
-      </section>
-      <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
-        <q-btn color="primary" @click="addEvent">Aceptar</q-btn>
-      </footer>
-    </q-form>
-  </div>
+  <q-form class="row q-py-md" :ref="refForm" :no-error-focus="true">
+    <header class="col-xs-12 q-mb-sm">
+      <slot name="header"></slot>
+    </header>
+    <section class="col-xs-12 q-px-sm">
+      <q-select
+        label="Tipo de evento"
+        v-model="localForm.tipoEvento"
+        :options="tiposEventos"
+        :disable="!showAddBtn"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-select>
+    </section>
+    <section v-if="localForm.tipoEvento != 'Ninguno'" class="col-xs-12">
+      <main class="row">
+        <section class="col-xs-12 q-my-sm q-px-sm">
+          <q-select
+            label="¿La infraestructura fue expuesta a daños?"
+            v-model="localForm.danos"
+            :options="trueFalseOptions"
+            :disable="!showAddBtn"
+            outlined
+            emit-value
+            map-options
+          ></q-select>
+        </section>
+        <section
+          v-if="localForm.danos == true"
+          class="col-xs-12 q-my-sm q-px-sm"
+        >
+          <q-select
+            label="Tipo de daño"
+            v-model="localForm.tipoDano"
+            :options="tiposDano"
+            :disable="!showAddBtn"
+            outlined
+          ></q-select>
+        </section>
+      </main>
+    </section>
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
+      <q-btn color="primary" @click="addEvent">Aceptar</q-btn>
+    </footer>
+  </q-form>
 </template>
 
 <script>

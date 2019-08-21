@@ -1,55 +1,54 @@
 <template>
-  <div>
-    <q-form class="row" :ref="refForm" :no-error-focus="true">
-      <section class="col-xs-8 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Area de bano"
-          v-model="localForm.areaBano"
-          :options="tiposEspacio"
-          :rules="[validaciones.required]"
-          :disable="!isNewBano"
-          outlined
-        ></q-select>
-      </section>
-      <section class="col-xs-4 col-sm-6 q-my-sm q-px-sm">
-        <q-input
-          label="Cantidad"
-          type="number"
-          v-model.number="localForm.cantidad"
-          :disable="!isNewBano"
-          :rules="[validaciones.required]"
-          outlined
-        ></q-input>
-      </section>
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Estado del espacio"
-          v-model="localForm.estado"
-          :options="estados"
-          :rules="[validaciones.required]"
-          :disable="!isNewBano"
-          outlined
-        ></q-select>
-      </section>
-      <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
-        <q-select
-          label="Accesible para personas con discapacidad"
-          v-model="localForm.accesible"
-          :options="trueFalseOptions"
-          :rules="[validaciones.required]"
-          :disable="!isNewBano"
-          emit-value
-          map-options
-          outlined
-        ></q-select>
-      </section>
-    </q-form>
-    <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewBano">
-        <q-btn color="primary" @click="addBano">Aceptar</q-btn>
-      </section>
+  <q-form class="row q-py-md" :ref="refForm" :no-error-focus="true">
+    <header class="col-xs-12 q-mb-sm">
+      <slot name="header"></slot>
+    </header>
+    <section class="col-xs-8 col-sm-6 q-px-sm">
+      <q-select
+        label="Área de bano"
+        v-model="localForm.areaBano"
+        :options="tiposEspacio"
+        :rules="[validaciones.required]"
+        :disable="!isNewBano"
+        outlined
+      ></q-select>
+    </section>
+    <section class="col-xs-4 col-sm-6 q-px-sm">
+      <q-input
+        label="Cantidad"
+        type="number"
+        v-model.number="localForm.cantidad"
+        :disable="!isNewBano"
+        :rules="[validaciones.required]"
+        outlined
+      ></q-input>
+    </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Estado del espacio"
+        v-model="localForm.estado"
+        :options="estados"
+        :rules="[validaciones.required]"
+        :disable="!isNewBano"
+        outlined
+      ></q-select>
+    </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm">
+      <q-select
+        label="Accesible para personas con discapacidad"
+        v-model="localForm.accesible"
+        :options="trueFalseOptions"
+        :rules="[validaciones.required]"
+        :disable="!isNewBano"
+        emit-value
+        map-options
+        outlined
+      ></q-select>
+    </section>
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewBano">
+      <q-btn color="primary" @click="addBano">Aceptar</q-btn>
     </footer>
-  </div>
+  </q-form>
 </template>
 
 <script>

@@ -1,19 +1,6 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.dormitorios.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Dormitorios registrados</label>
-          </header>
-          <Dormitorio
-            v-for="(dormitorio, index) in localForm.dormitorios"
-            :key="'dormitorio-' + index"
-            :dormitorio="dormitorio"
-            class="col-xs-12"
-          ></Dormitorio>
-        </section>
-      </section>
       <section class="col-xs-12" v-if="newDormitorio">
         <section class="row">
           <header class="col-xs-12">
@@ -33,6 +20,23 @@
       >
         <q-icon name="add" />Añadir otro dormitorio
       </p>
+      <section class="col-xs-12" v-if="localForm.dormitorios.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label class="text-bold">Dormitorios registrados</label>
+          </header>
+          <Dormitorio
+            v-for="(dormitorio, index) in localForm.dormitorios"
+            :key="'dormitorio-' + index"
+            :dormitorio="dormitorio"
+            class="col-xs-12"
+          >
+            <template slot="header">
+                <label> Dormitorio # {{ index+1 }}</label>
+              </template>
+          </Dormitorio>
+        </section>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat
