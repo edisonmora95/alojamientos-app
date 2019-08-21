@@ -84,7 +84,12 @@ export default {
       newServicio: true, // Controls the New ServicioBasico input
       localForm: {
         servicios: []
-      }
+      },
+      serviciosBasicosMinimos: [
+        "Abastecimiento de agua",
+        "Alcantarillado",
+        "Energía eléctrica"
+      ]
     };
   },
   computed: {
@@ -96,8 +101,17 @@ export default {
      * Puntaje 10 si existe al menos un servicio básico disponible
      */
     puntaje() {
-      const serviciosDisponibles = this.localForm.servicios.length > 0;
-      if (!serviciosDisponibles) {
+      const servicios = this.localForm.servicios.map(
+        servicio => servicio.tipoServicio
+      );
+      let apto = true;
+      for (let i = 0; i < this.serviciosBasicosMinimos.length; i++) {
+        if (!servicios.includes(this.serviciosBasicosMinimos[i])) {
+          apto = false;
+          break;
+        }
+      }
+      if (!apto) {
         return 0;
       }
       return 10;
@@ -107,7 +121,26 @@ export default {
     nextStep() {
       this.updateForm();
       this.setPuntajeSeccion("puntajeServicios", this.puntaje);
-      this.$router.push(this.nextPage);
+      if (this.puntaje === 0) {
+        this.$q
+          .dialog({
+            title: "No Apto",
+            message:
+              "La infraestructura no cuenta con los servicios básicos mínimos. ¿Desea continuar llenando los demás campos del formulario o concluir su trabajo?",
+            cancel: "Continuar",
+            ok: "Terminar",
+            persistent: true
+          })
+          .onOk(() => {
+            this.$store.commit("form/setCalificacionGeneral", "NO APTO");
+            this.$router.push({ name: "recomendaciones" });
+          })
+          .onCancel(() => {
+            this.$router.push(this.nextPage);
+          });
+      } else {
+        this.$router.push(this.nextPage);
+      }
     },
     showNewServicio() {
       this.newServicio = true;

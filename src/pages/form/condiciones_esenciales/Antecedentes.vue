@@ -146,6 +146,21 @@ export default {
     onAddEvent(payload) {
       this.localForm.eventos.push(payload);
       this.newEvent = false;
+      if (payload.danos && payload.tipoDanos !== "") {
+        this.$q
+          .dialog({
+            title: "No Apto",
+            message:
+              "La infraestructura se considera como NO APTO para funcionar como campamento temporal. ¿Desea continuar llenando los demás campos del formulario o concluir su trabajo?",
+            cancel: "Continuar",
+            ok: "Terminar",
+            persistent: true
+          })
+          .onOk(() => {
+            this.$store.commit("form/setCalificacionGeneral", "NO APTO");
+            this.$router.push({ name: "recomendaciones" });
+          });
+      }
     }
   },
   mixins: [FormMixin],

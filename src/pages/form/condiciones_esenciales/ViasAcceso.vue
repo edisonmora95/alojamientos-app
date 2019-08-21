@@ -107,7 +107,26 @@ export default {
     nextStep() {
       this.updateForm();
       this.setPuntajeSeccion("puntajeViasAcceso", this.puntaje);
-      this.$router.push(this.nextPage);
+      if (this.localForm.vias.length === 0) {
+        this.$q
+          .dialog({
+            title: "No Apto",
+            message:
+              "No existen vías de acceso en buen estado que permitan llegar con facilidad a las instalaciones del terreno. ¿Desea continuar llenando los demás campos del formulario o concluir su trabajo?",
+            cancel: "Continuar",
+            ok: "Terminar",
+            persistent: true
+          })
+          .onOk(() => {
+            this.$store.commit("form/setCalificacionGeneral", "NO APTO");
+            this.$router.push({ name: "recomendaciones" });
+          })
+          .onCancel(() => {
+            this.$router.push(this.nextPage);
+          });
+      } else {
+        this.$router.push(this.nextPage);
+      }
     },
     showNewVia() {
       this.newVia = true;

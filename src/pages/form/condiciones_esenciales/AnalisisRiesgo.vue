@@ -117,6 +117,21 @@ export default {
     onAddAmenaza(payload) {
       this.localForm.amenazas.push(payload);
       this.newAmenaza = false;
+      if (payload.nivelRecurrencia === "Alto") {
+        this.$q
+          .dialog({
+            title: "No Apto",
+            message:
+              "La infraestructura no se encuentra en un lugar seguro. ¿Desea continuar llenando los demás campos del formulario o concluir su trabajo?",
+            cancel: "Continuar",
+            ok: "Terminar",
+            persistent: true
+          })
+          .onOk(() => {
+            this.$store.commit("form/setCalificacionGeneral", "NO APTO");
+            this.$router.push({ name: "recomendaciones" });
+          });
+      }
     }
   },
   mixins: [FormMixin],

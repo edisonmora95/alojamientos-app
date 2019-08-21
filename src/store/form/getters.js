@@ -14,3 +14,7 @@ export function puntajeTotal(state) {
     state.puntajeAccesibilidad
   );
 }
+
+export function calificacion(state) {
+  return state.calificacion;
+}

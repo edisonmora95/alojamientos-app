@@ -79,3 +79,11 @@ export function clearForm(state) {
   };
   return state;
 }
+
+/**
+ * Ingresa el valor final de la calificacion del formulario
+ * @param {string} calificacion APTO | NO APTO
+ */
+export function setCalificacionGeneral(state, calificacion) {
+  state.calificacion = calificacion;
+}

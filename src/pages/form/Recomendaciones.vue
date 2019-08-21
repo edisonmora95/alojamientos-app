@@ -79,8 +79,13 @@ export default {
     puntajeTotal() {
       return this.$store.getters["form/puntajeTotal"];
     },
+    calificacion() {
+      return this.$store.getters["form/calificacion"];
+    },
     calificacionClass() {
-      if (this.puntajeTotal > 90) {
+      if (this.calificacionGeneral === "NO APTO") {
+        return "text-negative";
+      } else if (this.puntajeTotal > 90) {
         return "text-positive";
       } else if (this.puntajeTotal > 60) {
         return "text-warning";
@@ -89,7 +94,9 @@ export default {
       }
     },
     calificacionGeneral() {
-      if (this.puntajeTotal > 90) {
+      if (this.calificacion) {
+        return this.calificacion;
+      } else if (this.puntajeTotal > 90) {
         return "APTO";
       } else if (this.puntajeTotal > 60) {
         return "SUJETO A CUMPLIR RECOMENDACIONES";
@@ -118,6 +125,10 @@ export default {
     },
     ingresarFormulario() {
       this.updateForm();
+      this.$store.commit(
+        "form/setCalificacionGeneral",
+        this.calificacionGeneral
+      );
       this.$store.dispatch("form/ingresarFormulario", this.form);
     }
   }

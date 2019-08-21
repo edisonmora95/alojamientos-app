@@ -107,7 +107,26 @@ export default {
     nextStep() {
       this.updateForm();
       this.setPuntajeSeccion("puntajeEspacios", this.puntaje);
-      this.$router.push(this.nextPage);
+      if (this.puntaje === 0) {
+        this.$q
+          .dialog({
+            title: "No Apto",
+            message:
+              "La infraestructura no cuenta con los espacios mínimos necesarios. ¿Desea continuar llenando los demás campos del formulario o concluir su trabajo?",
+            cancel: "Continuar",
+            ok: "Terminar",
+            persistent: true
+          })
+          .onOk(() => {
+            this.$store.commit("form/setCalificacionGeneral", "NO APTO");
+            this.$router.push({ name: "recomendaciones" });
+          })
+          .onCancel(() => {
+            this.$router.push(this.nextPage);
+          });
+      } else {
+        this.$router.push(this.nextPage);
+      }
     },
     showNewBano() {
       this.newBano = true;
