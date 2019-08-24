@@ -44,7 +44,7 @@
         <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
           <q-select
             label="¿Fue utilizada anteriormente como alojamiento?"
-            v-model="localForm.previoUso"
+            v-model="localForm.usoPrevio"
             :options="trueFalseOptions"
             outlined
             emit-value
@@ -52,7 +52,7 @@
           ></q-select>
         </section>
         <section
-          v-if="localForm.previoUso == true"
+          v-if="localForm.usoPrevio == true"
           class="col-xs-12 col-sm-6 q-my-sm q-px-sm"
         >
           <q-input
@@ -108,7 +108,7 @@ export default {
       newEvent: true, // Controls the New Event input
       localForm: {
         eventos: [],
-        previoUso: false,
+        usoPrevio: false,
         anioUso: ""
       }
     };

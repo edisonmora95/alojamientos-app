@@ -32,10 +32,10 @@ export default {
 
   fechaInspeccion: "",
   horaInspeccion: "",
+  usoPrevio: false,
+  anioUso: 2019,
 
   eventos: [],
-  previoUso: false,
-  anioUso: 2019,
 
   amenazas: [],
 
