@@ -19,6 +19,32 @@ export function ingresarFormulario({ commit }, payload) {
     puntaje: payload.puntajeServicios,
     servicios: payload.servicios
   };
+  form["espacios"] = {
+    puntaje: payload.puntajeEspacios,
+    totalEspacios: 2,
+    totalM2: 50,
+    banos: payload.banos,
+    dormitorios: payload.dormitorios
+  };
+  form["medidas"] = {
+    puntaje: payload.puntajeMedidasSeguridad,
+    recursosInternos: payload.recursos,
+    institucionesEmergencia: payload.instituciones
+  };
+  form["datosInfraestructura"] = {
+    puntaje: payload.puntajeInfraestructura,
+    pared: payload.paredes[0],
+    techo: payload.techos[0],
+    piso: payload.pisos[0],
+    ingresosSalidas: payload.ingresosSalidas,
+    otrosEspacios: payload.otrosEspacios
+  };
+  form["accesibilidad"] = {
+    zonaArriboVehicular: payload.zonaArriboVehicular,
+    areaCirculacion: payload.areaCirculacion,
+    comunicacion: payload.comunicacion,
+    puntaje: payload.puntajeAccesibilidad
+  };
   delete form.eventos;
   delete form.vias;
   return FormService.ingresarFormulario(form).then(() => {
