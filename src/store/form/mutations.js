@@ -1,6 +1,6 @@
 export function updateForm(state, payload) {
   for (let key in payload) {
-    state[key] = payload[key];
+    state.form[key] = payload[key];
   }
 }
 
@@ -10,11 +10,11 @@ export function updateForm(state, payload) {
  * @param {number} payload.puntaje Puntaje a añadir a la sección
  */
 export function setPuntajeSeccion(state, payload) {
-  state[payload.seccion] = payload.puntaje;
+  state.form[payload.seccion] = payload.puntaje;
 }
 
 export function clearForm(state) {
-  state = {
+  state.form = {
     zona: "",
     provincia: "",
     canton: "",
@@ -77,7 +77,7 @@ export function clearForm(state) {
     puntajeInfraestructura: 0,
     puntajeAccesibilidad: 0
   };
-  return state;
+  return state.form;
 }
 
 /**
@@ -85,5 +85,9 @@ export function clearForm(state) {
  * @param {string} calificacion APTO | NO APTO
  */
 export function setCalificacionGeneral(state, calificacion) {
-  state.calificacion = calificacion;
+  state.form.calificacion = calificacion;
+}
+
+export function addForm(state, form) {
+  state.forms.push(form);
 }

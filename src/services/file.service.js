@@ -13,13 +13,23 @@ const DIRECTORY_PATH = "AlojamientosApp/";
  */
 const createFile = (fileName, options) => {
   return new Promise((resolve, reject) => {
-    window.requestFileSystem(window.PERSISTENT, 0, (fs) => {
-      fs.root.getDirectory(DIRECTORY_PATH, { create: true }, (dirEntry) => {
-        dirEntry.getFile(fileName, options, (fileEntry) => {
-          resolve(fileEntry);
-        }, error => reject(error));
-      });
-    }, error => reject(error));
+    window.requestFileSystem(
+      window.PERSISTENT,
+      0,
+      fs => {
+        fs.root.getDirectory(DIRECTORY_PATH, { create: true }, dirEntry => {
+          dirEntry.getFile(
+            fileName,
+            options,
+            fileEntry => {
+              resolve(fileEntry);
+            },
+            error => reject(error)
+          );
+        });
+      },
+      error => reject(error)
+    );
   });
 };
 
@@ -33,7 +43,6 @@ const writeFile = (fileEntry, dataObj) => {
   return new Promise((resolve, reject) => {
     // Create a FileWriter object for our FileEntry (log.txt).
     fileEntry.createWriter(fileWriter => {
-
       fileWriter.onwriteend = () => {
         console.log("Successful file write...");
         resolve(true);
@@ -47,7 +56,7 @@ const writeFile = (fileEntry, dataObj) => {
       // If data object is not passed in,
       // create a new Blob instead.
       if (!dataObj) {
-        dataObj = new Blob([dataObj], { type: 'text/plain' });
+        dataObj = new Blob([dataObj], { type: "text/plain" });
       }
 
       fileWriter.write(dataObj);
@@ -62,16 +71,19 @@ const writeFile = (fileEntry, dataObj) => {
  *
  * @return {Promise<object>} fileEntry Datos del archivo leído
  */
-const readFile = (fileEntry) => {
+const readFile = fileEntry => {
   return new Promise((resolve, reject) => {
-    fileEntry.file(function (file) {
-      const reader = new FileReader();
-      reader.onloadend = function() {
-        console.log("Successful file read...");
-        resolve(this.result);
-      };
-      reader.readAsText(file);
-    }, error => reject(error));
+    fileEntry.file(
+      function(file) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          console.log("Successful file read...");
+          resolve(this.result);
+        };
+        reader.readAsText(file);
+      },
+      error => reject(error)
+    );
   });
 };
 

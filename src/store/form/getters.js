@@ -1,20 +1,20 @@
 export function form(state) {
-  return state;
+  return state.form;
 }
 
 export function puntajeTotal(state) {
   return (
-    state.puntajeAntecedentes +
-    state.puntajeRiesgos +
-    state.puntajeViasAcceso +
-    state.puntajeServicios +
-    state.puntajeEspacios +
-    state.puntajeMedidasSeguridad +
-    state.puntajeInfraestructura +
-    state.puntajeAccesibilidad
+    state.form.puntajeAntecedentes +
+    state.form.puntajeRiesgos +
+    state.form.puntajeViasAcceso +
+    state.form.puntajeServicios +
+    state.form.puntajeEspacios +
+    state.form.puntajeMedidasSeguridad +
+    state.form.puntajeInfraestructura +
+    state.form.puntajeAccesibilidad
   );
 }
 
 export function calificacion(state) {
-  return state.calificacion;
+  return state.form.calificacion;
 }

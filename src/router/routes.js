@@ -162,6 +162,14 @@ const routes = [
         meta: {
           title: "7. Recomendaciones"
         }
+      },
+      {
+        path: "/finalizar",
+        component: () => import("pages/form/FinFormulario.vue"),
+        name: "finFormulario",
+        meta: {
+          title: "8. Fin del formulario"
+        }
       }
     ]
   }

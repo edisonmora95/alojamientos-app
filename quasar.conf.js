@@ -54,7 +54,10 @@ module.exports = function (ctx) {
         'QTime',
         'QOptionGroup',
         'QImg',
-        'QExpansionItem'
+        'QExpansionItem',
+        'QCard',
+        'QCardSection',
+        'QCardActions'
       ],
 
       directives: [

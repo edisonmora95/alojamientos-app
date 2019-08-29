@@ -47,7 +47,7 @@
           color="secondary"
           icon-right="keyboard_arrow_right"
           label="Continuar"
-          @click="ingresarFormulario"
+          @click="nextStep"
         />
       </footer>
     </q-form>
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       nextPage: {
-        name: "anexos"
+        name: "finFormulario"
       },
       prevPage: {
         name: "accesibilidad"
@@ -117,19 +117,15 @@ export default {
     },
     nextStep() {
       this.updateForm();
+      this.$store.commit(
+        "form/setCalificacionGeneral",
+        this.calificacionGeneral
+      );
       this.$router.push(this.nextPage);
     },
     prevStep() {
       this.updateForm();
       this.$router.push(this.prevPage);
-    },
-    ingresarFormulario() {
-      this.updateForm();
-      this.$store.commit(
-        "form/setCalificacionGeneral",
-        this.calificacionGeneral
-      );
-      this.$store.dispatch("form/ingresarFormulario", this.form);
     }
   }
 };

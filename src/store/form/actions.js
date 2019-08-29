@@ -1,4 +1,5 @@
 import FormService from "../../services/form.service";
+import FileService from "../../services/file.service";
 
 export function ingresarFormulario({ commit }, payload) {
   // Formateando el formulario a enviar al servidor
@@ -50,4 +51,14 @@ export function ingresarFormulario({ commit }, payload) {
   return FormService.ingresarFormulario(form).then(() => {
     commit("clearForm");
   });
+}
+
+export async function guardarFormulario({ commit }, payload) {
+  const options = {
+    create: true
+  };
+  const fileEntry = await FileService.createFile("formulario.json", options);
+  await FileService.writeFile(fileEntry, payload);
+  commit("addForm", payload);
+  return true;
 }
