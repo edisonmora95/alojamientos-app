@@ -57,7 +57,9 @@ module.exports = function (ctx) {
         'QExpansionItem',
         'QCard',
         'QCardSection',
-        'QCardActions'
+        'QCardActions',
+        'QChip',
+        'QSeparator'
       ],
 
       directives: [

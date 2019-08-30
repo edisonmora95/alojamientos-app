@@ -1,11 +1,24 @@
 const routes = [
   {
-    path: "/",
+    path: "/forms",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Forms.vue"),
+        meta: {
+          title: "Formularios"
+        }
+      },
+    ]
+  },
+  {
+    path: "/form",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/Index.vue") },
       {
-        path: "/localizacion",
+        path: "localizacion",
         component: () => import("pages/form/Localizacion.vue"),
         name: "localizacion",
         meta: {
@@ -13,7 +26,7 @@ const routes = [
         }
       },
       {
-        path: "/datos-generales",
+        path: "datos-generales",
         component: () => import("pages/form/DatosGenerales.vue"),
         name: "generales",
         meta: {
@@ -21,7 +34,7 @@ const routes = [
         }
       },
       {
-        path: "/datos-infraestructura",
+        path: "datos-infraestructura",
         component: () => import("pages/form/DatosInfraestructura.vue"),
         name: "infraestructura",
         meta: {
@@ -30,7 +43,7 @@ const routes = [
         }
       },
       {
-        path: "/antecedentes",
+        path: "antecedentes",
         component: () =>
           import("pages/form/condiciones_esenciales/Antecedentes.vue"),
         name: "antecedentesEventos",
@@ -40,7 +53,7 @@ const routes = [
         }
       },
       {
-        path: "/riesgo",
+        path: "riesgo",
         component: () =>
           import("pages/form/condiciones_esenciales/AnalisisRiesgo.vue"),
         name: "riesgo",
@@ -50,7 +63,7 @@ const routes = [
         }
       },
       {
-        path: "/vias-acceso",
+        path: "vias-acceso",
         component: () =>
           import("pages/form/condiciones_esenciales/ViasAcceso.vue"),
         name: "viasAcceso",
@@ -60,7 +73,7 @@ const routes = [
         }
       },
       {
-        path: "/servicios-basicos",
+        path: "servicios-basicos",
         component: () =>
           import("pages/form/condiciones_esenciales/ServiciosBasicos.vue"),
         name: "serviciosBasicos",
@@ -70,7 +83,7 @@ const routes = [
         }
       },
       {
-        path: "/espacios-vitales-dormitorios",
+        path: "espacios-vitales-dormitorios",
         component: () =>
           import("pages/form/condiciones_esenciales/EspaciosVitalesDormitorios.vue"),
         name: "espaciosVitalesDormitorios",
@@ -80,7 +93,7 @@ const routes = [
         }
       },
       {
-        path: "/espacios-vitales-banos",
+        path: "espacios-vitales-banos",
         component: () =>
           import("pages/form/condiciones_esenciales/EspaciosVitalesBanos.vue"),
         name: "espaciosVitalesBanos",
@@ -90,7 +103,7 @@ const routes = [
         }
       },
       {
-        path: "/medidas-seguridad",
+        path: "medidas-seguridad",
         component: () => import("pages/form/MedidasSeguridad.vue"),
         name: "medidasSeguridad",
         meta: {
@@ -98,7 +111,7 @@ const routes = [
         }
       },
       {
-        path: "/infrarestructura-paredes",
+        path: "infrarestructura-paredes",
         component: () =>
           import("pages/form/infraestructura/InfraestructuraParedes.vue"),
         name: "infraestructuraParedes",
@@ -108,7 +121,7 @@ const routes = [
         }
       },
       {
-        path: "/infrarestructura-pisos",
+        path: "infrarestructura-pisos",
         component: () =>
           import("pages/form/infraestructura/InfraestructuraPisos.vue"),
         name: "infraestructuraPisos",
@@ -118,7 +131,7 @@ const routes = [
         }
       },
       {
-        path: "/infrarestructura-techos",
+        path: "infrarestructura-techos",
         component: () =>
           import("pages/form/infraestructura/InfraestructuraTechos.vue"),
         name: "infraestructuraTechos",
@@ -128,7 +141,7 @@ const routes = [
         }
       },
       {
-        path: "/infrarestructura-ingresos-salidas",
+        path: "infrarestructura-ingresos-salidas",
         component: () =>
           import("pages/form/infraestructura/InfraestructuraIngresosSalidas.vue"),
         name: "infraestructuraIngresosSalidas",
@@ -138,7 +151,7 @@ const routes = [
         }
       },
       {
-        path: "/infrarestructura-otros-espacios",
+        path: "infrarestructura-otros-espacios",
         component: () =>
           import("pages/form/infraestructura/InfraestructuraOtrosEspacios.vue"),
         name: "infraestructuraOtrosEspacios",
@@ -148,7 +161,7 @@ const routes = [
         }
       },
       {
-        path: "/accesibilidad",
+        path: "accesibilidad",
         component: () => import("pages/form/Accesibilidad.vue"),
         name: "accesibilidad",
         meta: {
@@ -156,7 +169,7 @@ const routes = [
         }
       },
       {
-        path: "/recomendaciones",
+        path: "recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
         meta: {
@@ -164,7 +177,7 @@ const routes = [
         }
       },
       {
-        path: "/finalizar",
+        path: "finalizar",
         component: () => import("pages/form/FinFormulario.vue"),
         name: "finFormulario",
         meta: {

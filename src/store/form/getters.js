@@ -18,3 +18,15 @@ export function puntajeTotal(state) {
 export function calificacion(state) {
   return state.form.calificacion;
 }
+
+export function forms(state) {
+  return state.forms;
+}
+
+export function formsInfraestructuras(state) {
+  return state.forms.filter(form => form.tipo === "INFRAESTRUCTURA");
+}
+
+export function formsTerrenos(state) {
+  return state.forms.filter(form => form.tipo === "TERRENO");
+}
