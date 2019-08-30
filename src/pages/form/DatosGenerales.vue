@@ -1,6 +1,17 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
+      <section class="col-xs-12">
+        <q-select
+          v-model="localForm.tipo"
+          :options="tipos"
+          :rules="[validaciones.required]"
+          label="Tipo de ubicación a calificar"
+          outlined
+          map-options
+          emit-value
+        ></q-select>
+      </section>
       <section class="col-xs-12 col-md-6">
         <q-input
           v-model="localForm.fechaInspeccion"
@@ -88,11 +99,18 @@ export default {
       },
       localForm: {
         fechaInspeccion: "",
-        horaInspeccion: ""
+        horaInspeccion: "",
+        tipo: 0
       }
     };
   },
   computed: {
+    tipos() {
+      return [
+        { label: "Infraestructura", value: 1 },
+        { label: "Terreno", value: 2 },
+      ];
+    },
     form() {
       return this.$store.getters["form/form"];
     },

@@ -24,9 +24,9 @@ export function forms(state) {
 }
 
 export function formsInfraestructuras(state) {
-  return state.forms.filter(form => form.tipo === "INFRAESTRUCTURA");
+  return state.forms.filter(form => form.tipo === 1);
 }
 
 export function formsTerrenos(state) {
-  return state.forms.filter(form => form.tipo === "TERRENO");
+  return state.forms.filter(form => form.tipo === 2);
 }

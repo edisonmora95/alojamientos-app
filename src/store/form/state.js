@@ -5,6 +5,8 @@ export default {
     canton: "",
     parroquia: "",
 
+    tipo: 1,
+
     infraestructura: {
       id: null,
       nombre: "",
