@@ -65,6 +65,8 @@ export default {
     comunicacion: false,
     caracteristicas: [],
 
+    anexos: [],
+
     recomendaciones: "",
     puntaje: 0,
     calificacion: "",

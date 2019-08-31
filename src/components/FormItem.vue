@@ -93,12 +93,11 @@ export default {
       }
     },
     dialogContinuar() {
-      this.$q
-        .dialog({
-          title: "Formulario guardado",
-          message: "El formulario fue enviado exitosamente",
-          ok: "Ok"
-        });
+      this.$q.dialog({
+        title: "Formulario guardado",
+        message: "El formulario fue enviado exitosamente",
+        ok: "Ok"
+      });
     }
   }
 };

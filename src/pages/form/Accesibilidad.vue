@@ -89,7 +89,7 @@ export default {
         name: "infraestructuraOtrosEspacios"
       },
       nextPage: {
-        name: "recomendaciones"
+        name: "anexos"
       },
       localForm: {
         zonaArriboVehicular: "",

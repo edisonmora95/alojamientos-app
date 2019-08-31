@@ -65,7 +65,7 @@ export default {
         name: "finFormulario"
       },
       prevPage: {
-        name: "accesibilidad"
+        name: "anexos"
       },
       localForm: {
         recomendaciones: ""

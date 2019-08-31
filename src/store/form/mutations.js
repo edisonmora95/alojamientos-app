@@ -76,6 +76,8 @@ export function clearForm(state) {
     puntaje: 0,
     calificacion: "",
 
+    anexos: [],
+
     // PUNTAJES DE SECCIONES
     puntajeAntecedentes: 0,
     puntajeRiesgos: 0,

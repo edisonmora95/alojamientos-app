@@ -164,11 +164,19 @@ const routes = [
         }
       },
       {
+        path: "anexos",
+        component: () => import("pages/form/Anexos.vue"),
+        name: "anexos",
+        meta: {
+          title: "7. Anexos"
+        }
+      },
+      {
         path: "recomendaciones",
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
         meta: {
-          title: "7. Recomendaciones"
+          title: "8. Recomendaciones"
         }
       },
       {
@@ -176,7 +184,7 @@ const routes = [
         component: () => import("pages/form/FinFormulario.vue"),
         name: "finFormulario",
         meta: {
-          title: "8. Fin del formulario"
+          title: "9. Fin del formulario"
         }
       }
     ]

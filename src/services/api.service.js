@@ -13,8 +13,11 @@ const ApiService = {
   getApi(url, queryData) {
     return axios.get(url, queryData);
   },
-  postApi(url, payloadData) {
-    return axios.post(url, payloadData);
+  postApi(url, payloadData, options) {
+    if (!options) {
+      options = {};
+    }
+    return axios.post(url, payloadData, options);
   },
   putApi(url, payloadData) {
     return axios.put(url, payloadData);

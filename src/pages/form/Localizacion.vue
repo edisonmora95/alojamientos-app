@@ -100,30 +100,6 @@ export default {
       return this.$store.getters["app/validaciones"];
     }
   },
-  methods: {
-    captureImage() {
-      const options = {
-        // Some common settings are 20, 50, and 100
-        quality: 50,
-        destinationType: navigator.camera.DestinationType.DATA_URL,
-        // In this app, dynamically set the picture source, Camera or photo gallery
-        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-        encodingType: navigator.camera.EncodingType.JPEG,
-        mediaType: navigator.camera.MediaType.PICTURE,
-        correctOrientation: true //Corrects Android orientation quirks
-      };
-      navigator.camera.getPicture(
-        data => {
-          console.log("Image loaded");
-          this.imageSrc = `data:image/jpeg;base64,${data}`;
-        },
-        () => {
-          this.$q.notify("Could not access device camera.");
-        },
-        options
-      );
-    }
-  },
   mixins: [FormMixin]
 };
 </script>
