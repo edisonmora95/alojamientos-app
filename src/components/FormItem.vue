@@ -70,7 +70,8 @@ export default {
       this.$router.push({ name: "localizacion" });
     },
     editar() {
-      console.log("editar");
+      this.$store.commit("form/setActualForm", this.form);
+      this.$router.push({ name: "localizacion" });
     },
     async enviar() {
       try {
