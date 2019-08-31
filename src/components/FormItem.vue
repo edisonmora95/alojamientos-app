@@ -72,8 +72,32 @@ export default {
     editar() {
       console.log("editar");
     },
-    enviar() {
-      console.log("ënviar");
+    async enviar() {
+      try {
+        await this.$store.dispatch("form/ingresarFormulario", this.form);
+        this.dialogContinuar();
+      } catch (error) {
+        this.$q
+          .dialog({
+            title: "Error",
+            message:
+              "Parece que hubo un error al subir al servidor ¿Desea volver a intentar?",
+            cancel: "Cancelar",
+            ok: "Volver a intentar"
+          })
+          .onOk(() => {
+            this.enviar();
+          });
+        console.error(error);
+      }
+    },
+    dialogContinuar() {
+      this.$q
+        .dialog({
+          title: "Formulario guardado",
+          message: "El formulario fue enviado exitosamente",
+          ok: "Ok"
+        });
     }
   }
 };
