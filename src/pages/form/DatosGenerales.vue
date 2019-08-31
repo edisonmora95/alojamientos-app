@@ -108,7 +108,7 @@ export default {
     tipos() {
       return [
         { label: "Infraestructura", value: 1 },
-        { label: "Terreno", value: 2 },
+        { label: "Terreno", value: 2 }
       ];
     },
     form() {

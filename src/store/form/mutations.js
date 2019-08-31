@@ -103,3 +103,11 @@ export function setCalificacionGeneral(state, calificacion) {
 export function saveForm(state, form) {
   state.forms.push(form);
 }
+
+/**
+ * Setea los valores del formulario actual del store con los valores enviados en el payload
+ * @param {object} form Formulario a presentar como actual en el store
+ */
+export function setActualForm(state, form) {
+  state.form = form;
+}

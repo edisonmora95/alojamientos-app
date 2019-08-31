@@ -5,12 +5,20 @@
         <p class="text-h6">Infraestructuras</p>
       </q-item-label>
       <q-separator spaced />
-      <form-item :form="form" v-for="form in formsInfraestructuras" :key="form.parroquia"></form-item>
+      <form-item
+        :form="form"
+        v-for="form in formsInfraestructuras"
+        :key="form.parroquia"
+      ></form-item>
       <q-item-label header>
         <p class="text-h6">Terrenos</p>
       </q-item-label>
       <q-separator spaced />
-      <form-item :form="form" v-for="form in formsTerrenos" :key="form.parroquia"></form-item>
+      <form-item
+        :form="form"
+        v-for="form in formsTerrenos"
+        :key="form.parroquia"
+      ></form-item>
     </q-list>
   </q-page>
 </template>
@@ -27,8 +35,7 @@ export default {
     console.log(this.forms);
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     formsInfraestructuras() {

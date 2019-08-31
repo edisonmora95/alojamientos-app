@@ -14,7 +14,9 @@ export default {
   methods: {
     /** Al iniciar la app se cargan los archivos almacenados */
     async readFile() {
-      const fileEntry = await FileService.createFile("formularios.json", { create: true });
+      const fileEntry = await FileService.createFile("formularios.json", {
+        create: true
+      });
       let files = await FileService.readFile(fileEntry);
       if (files) {
         files = JSON.parse(files);
