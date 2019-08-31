@@ -22,6 +22,8 @@ export default {
     FormItem
   },
   mounted() {
+    console.log(this.formsInfraestructuras);
+    console.log(this.formsTerrenos);
     console.log(this.forms);
   },
   data() {
@@ -34,6 +36,9 @@ export default {
     },
     formsTerrenos() {
       return this.$store.getters["form/formsTerrenos"];
+    },
+    forms() {
+      return this.$store.getters["form/forms"];
     }
   },
   methods: {}

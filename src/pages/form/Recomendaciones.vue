@@ -99,7 +99,7 @@ export default {
       } else if (this.puntajeTotal > 90) {
         return "APTO";
       } else if (this.puntajeTotal > 60) {
-        return "SUJETO A CUMPLIR RECOMENDACIONES";
+        return "RECOMENDACIONES";
       } else {
         return "NO APTO";
       }

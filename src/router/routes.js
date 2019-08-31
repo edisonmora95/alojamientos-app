@@ -1,22 +1,18 @@
 const routes = [
+
   {
-    path: "/forms",
+    path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
+      { path: "", component: () => import("pages/Forms.vue") },
       {
-        path: "",
+        path: "formularios",
         component: () => import("pages/Forms.vue"),
+        name: "formularios",
         meta: {
           title: "Formularios"
         }
       },
-    ]
-  },
-  {
-    path: "/form",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      { path: "", component: () => import("pages/Index.vue") },
       {
         path: "localizacion",
         component: () => import("pages/form/Localizacion.vue"),

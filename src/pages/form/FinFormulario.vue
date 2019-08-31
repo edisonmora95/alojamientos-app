@@ -16,7 +16,7 @@
           >
         </article>
         <article class="col-xs-6 text-center">
-          <q-btn flat color="positive">Enviar</q-btn>
+          <q-btn flat color="positive" :loading="loadingEnviar" @click="enviar">Enviar</q-btn>
         </article>
       </q-card-actions>
     </q-card>
@@ -28,7 +28,8 @@
 export default {
   data() {
     return {
-      loadingGuardar: false
+      loadingGuardar: false,
+      loadingEnviar: false
     };
   },
   computed: {
@@ -37,19 +38,64 @@ export default {
     },
     form() {
       return this.$store.getters["form/form"];
+    },
+    forms() {
+      return this.$store.getters["form/forms"];
     }
   },
   methods: {
-    guardar() {
-      this.loadingGuardar = true;
-      this.$store
-        .dispatch("form/guardarFormulario", this.form)
-        .then(() => {
-          this.loadingGuardar = false;
+    async guardar() {
+      try {
+        this.loadingGuardar = true;
+        this.$store.commit("form/saveForm", this.form);
+        await this.$store.dispatch("form/guardarFormularios", this.forms);
+        this.loadingGuardar = false;
+        this.dialogContinuar();
+      } catch(error) {
+        this.loadingGuardar = false;
+        console.error(error);
+
+      }
+    },
+    async enviar() {
+      this.loadingEnviar = true;
+      try {
+        await this.$store.dispatch("form/ingresarFormulario", this.form);
+        this.loadingEnviar = false;
+        this.dialogContinuar();
+      } catch(error) {
+        this.loadingEnviar = false;
+        this.$q
+          .dialog({
+            title: "Error",
+            message: "Parece que hubo un error al subir al servidor ¿Desea guardar el formulario temporalmente?",
+            cancel: "Volver a intentar",
+            ok: "Guardar",
+            persistent: true
+          })
+          .onOk(() => { // GUARDAR
+            this.guardar();
+          })
+          .onCancel(() => { // VOLVER A INTENTAR
+            this.enviar();
+          });
+        console.error(error);
+      }
+    },
+    dialogContinuar() {
+      this.$q
+        .dialog({
+          title: "Formulario guardado",
+          message: "¿Desea ingresar otra calificación?",
+          cancel: "Continuar",
+          ok: "Terminar",
+          persistent: true
         })
-        .catch(error => {
-          this.loadingGuardar = false;
-          console.error(error);
+        .onOk(() => { // TERMINAR
+          this.$router.push({ name: "formularios" });
+        })
+        .onCancel(() => { // CONTINUAR
+          this.$router.push({ name: "localizacion" });
         });
     }
   }

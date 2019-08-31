@@ -12,11 +12,16 @@ export default {
     document.addEventListener("deviceready", this.readFile, false);
   },
   methods: {
+    /** Al iniciar la app se cargan los archivos almacenados */
     async readFile() {
-      const fileEntry = await FileService.createFile("formulario.json", {});
-      let file = await FileService.readFile(fileEntry);
-      file = JSON.parse(file);
-      this.$store.commit("form/addForm", file);
+      const fileEntry = await FileService.createFile("formularios.json", { create: true });
+      let files = await FileService.readFile(fileEntry);
+      if (files) {
+        files = JSON.parse(files);
+        for (let i = 0; i < files.length; i++) {
+          this.$store.commit("form/saveForm", files[i]);
+        }
+      }
     }
   }
 };

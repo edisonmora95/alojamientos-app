@@ -1,7 +1,13 @@
+/**
+ * Retorna el formulario actual que se encuentra en el store
+ */
 export function form(state) {
   return state.form;
 }
 
+/**
+ * Retorna la suma de los puntajes de todas las secciones del formulario
+ */
 export function puntajeTotal(state) {
   return (
     state.form.puntajeAntecedentes +
@@ -15,10 +21,16 @@ export function puntajeTotal(state) {
   );
 }
 
+/**
+ * Retorna la calificación del formulario actual que se encuentra en el store
+ */
 export function calificacion(state) {
   return state.form.calificacion;
 }
 
+/**
+ * Retorna todos los formularios almacenados en el store
+ */
 export function forms(state) {
   return state.forms;
 }

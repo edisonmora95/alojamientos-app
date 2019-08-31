@@ -1,3 +1,7 @@
+/**
+ * Actualiza los campos del formulario del store que coinciden con los campos enviados en el payload
+ * @param {object} payload
+ */
 export function updateForm(state, payload) {
   for (let key in payload) {
     state.form[key] = payload[key];
@@ -13,6 +17,9 @@ export function setPuntajeSeccion(state, payload) {
   state.form[payload.seccion] = payload.puntaje;
 }
 
+/**
+ * "Limpia" el registro de formulario para que el usuario pueda ingresar uno nuevo
+ */
 export function clearForm(state) {
   state.form = {
     zona: "",
@@ -23,6 +30,8 @@ export function clearForm(state) {
     referencia: "",
     principal: "",
     secundaria: "",
+
+    tipo: 1,
 
     nombreInfraestructura: "",
     fechaInspeccion: "",
@@ -77,7 +86,6 @@ export function clearForm(state) {
     puntajeInfraestructura: 0,
     puntajeAccesibilidad: 0
   };
-  return state.form;
 }
 
 /**
@@ -88,6 +96,10 @@ export function setCalificacionGeneral(state, calificacion) {
   state.form.calificacion = calificacion;
 }
 
-export function addForm(state, form) {
+/**
+ * Ingresa el registro del formulario en el array de formularios almacenados
+ * @param {object} form Formulario a guardar
+ */
+export function saveForm(state, form) {
   state.forms.push(form);
 }

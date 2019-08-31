@@ -1,7 +1,11 @@
 import FormService from "../../services/form.service";
 import FileService from "../../services/file.service";
 
-export function ingresarFormulario({ commit }, payload) {
+/**
+ * Envía el formulario al servidor para ser almacenado en la base de datos
+ * @param {object} payload Formulario a enviar
+ */
+export async function ingresarFormulario({ commit }, payload) {
   // Formateando el formulario a enviar al servidor
   const form = Object.assign({}, payload);
   form["antecedentes"] = {
@@ -48,17 +52,20 @@ export function ingresarFormulario({ commit }, payload) {
   };
   delete form.eventos;
   delete form.vias;
-  return FormService.ingresarFormulario(form).then(() => {
-    commit("clearForm");
-  });
+  await FormService.ingresarFormulario(form);
+  commit("clearForm");
 }
 
-export async function guardarFormulario({ commit }, payload) {
+/**
+ * Sobreescribe el archivo formularios.json con los formularios que se envían en el payload
+ * @param {object[]} payload Array de formularios a guardar en memoria del dispositivo
+ */
+export async function guardarFormularios({ commit }, payload) {
   const options = {
     create: true
   };
-  const fileEntry = await FileService.createFile("formulario.json", options);
+  const fileEntry = await FileService.createFile("formularios.json", options);
   await FileService.writeFile(fileEntry, payload);
-  commit("addForm", payload);
+  commit("clearForm");
   return true;
 }

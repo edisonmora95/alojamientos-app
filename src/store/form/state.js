@@ -1,4 +1,5 @@
 export default {
+  /** Formulario a llenar por el usuario */
   form: {
     zona: "",
     provincia: "",
@@ -78,5 +79,6 @@ export default {
     puntajeInfraestructura: 0,
     puntajeAccesibilidad: 0
   },
+  /** Array de todos los formularios */
   forms: []
 };
