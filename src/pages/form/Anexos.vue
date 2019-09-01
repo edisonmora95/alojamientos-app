@@ -2,7 +2,7 @@
   <q-page class="q-pt-lg q-px-md">
     <section class="row">
       <article class="col-xs-6 col-sm-3 text-center">
-        <q-btn flat id="btnAdd" @click="captureImage">
+        <q-btn flat id="btnAdd" @click="openBottomSheet">
           <q-icon name="camera_alt" style="font-size: 2.5em;" />
         </q-btn>
       </article>
@@ -11,7 +11,6 @@
         v-for="image in localForm.anexos"
         :key="image"
       >
-        <!-- <img :src="image"/> -->
         <q-img class="imagen" :src="image" spinner-color="primary"></q-img>
       </article>
     </section>
@@ -49,11 +48,7 @@ export default {
         name: "accesibilidad"
       },
       localForm: {
-        anexos: [
-          "https://i.imgur.com/rV19FXa.jpg",
-          "https://i.imgur.com/b7JQceE.jpg",
-          "https://i.imgur.com/R9D4KjX.jpg"
-        ]
+        anexos: []
       }
     };
   },
@@ -63,9 +58,39 @@ export default {
     }
   },
   methods: {
-    async captureImage() {
+    openBottomSheet() {
+      this.$q
+        .bottomSheet({
+          message: "Subir imagen",
+          grid: true,
+          actions: [
+            {
+              label: "Cámara",
+              icon: "camera_alt",
+              id: "camara"
+            },
+            {
+              label: "Galería",
+              icon: "folder",
+              id: "galeria"
+            }
+          ]
+        })
+        .onOk(action => {
+          if (action.id === "camara") {
+            this.captureImage(1);
+          } else if (action.id === "galeria") {
+            this.captureImage(0);
+          }
+        });
+    },
+    /**
+     * @param {number} sourceType 1 -> cámara | 0 -> archivos
+     */
+    async captureImage(sourceType) {
       const options = {
-        destinationType: 0
+        destinationType: 0,
+        sourceType
       };
       navigator.camera.getPicture(
         async data => {
@@ -73,9 +98,10 @@ export default {
           const result = await ImagesService.subirImagen(data);
           this.localForm.anexos.push(result.data.data.link);
         },
-        () => {
-          // on fail
-          this.$q.notify("Could not access device camera.");
+        error => {
+          if (error != "No Image Selected") {
+            this.$q.notify("No se pudo acceder a la cámara del dispositivo");
+          }
         },
         options
       );
