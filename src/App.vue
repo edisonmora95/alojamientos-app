@@ -20,6 +20,7 @@ export default {
       let files = await FileService.readFile(fileEntry);
       if (files) {
         files = JSON.parse(files);
+        console.log(files);
         for (let i = 0; i < files.length; i++) {
           this.$store.commit("form/saveForm", files[i]);
         }

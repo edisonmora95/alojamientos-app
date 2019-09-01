@@ -133,7 +133,7 @@ export default {
           })
           .onOk(() => {
             this.$store.commit("form/setCalificacionGeneral", "NO APTO");
-            this.$router.push({ name: "recomendaciones" });
+            this.$router.push({ name: "medidasSeguridad" });
           })
           .onCancel(() => {
             this.$router.push(this.nextPage);

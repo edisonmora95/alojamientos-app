@@ -1,6 +1,7 @@
 export default {
   /** Formulario a llenar por el usuario */
   form: {
+    id: 0,
     zona: "",
     provincia: "",
     canton: "",
