@@ -6,7 +6,7 @@
           form.infraestructura.nombre
         }}</q-item-label>
       </q-item-section>
-      <q-item-section middle>
+      <q-item-section middle class="text-center">
         <q-item-label lines="1">
           <q-chip
             outline
@@ -16,6 +16,9 @@
             :label="form.calificacion"
           />
         </q-item-label>
+         <q-item-label caption lines="1">
+            <label :class="estadoColor">{{ form.estado }}</label>
+          </q-item-label>
       </q-item-section>
       <q-item-section middle class="gt-xs">
         <q-item-label lines="1">
@@ -31,10 +34,10 @@
                 <q-item clickable @click="revisar">
                   <q-item-section>Revisar</q-item-section>
                 </q-item>
-                <q-item clickable @click="editar">
+                <!-- <q-item clickable @click="editar">
                   <q-item-section>Editar</q-item-section>
-                </q-item>
-                <q-item clickable @click="enviar">
+                </q-item> -->
+                <q-item clickable @click="enviar" v-if="form.estado === 'GUARDADO'">
                   <q-item-section>Enviar</q-item-section>
                 </q-item>
               </q-list>
@@ -61,6 +64,13 @@ export default {
         return "primary";
       } else {
         return "orange";
+      }
+    },
+    estadoColor() {
+      if (this.form.estado === "ENVIADO") {
+        return "text-positive";
+      } else {
+        return "";
       }
     }
   },

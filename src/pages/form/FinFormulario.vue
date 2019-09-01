@@ -49,8 +49,9 @@ export default {
     async guardar() {
       try {
         this.loadingGuardar = true;
-        this.$store.commit("form/saveForm", this.form);
-        await this.$store.dispatch("form/guardarFormularios", this.forms);
+        this.$store.commit("form/setEstado", "ENVIADO");
+        this.$store.commit("form/saveForm", this.form); // Guardo el formulario en vuex
+        await this.$store.dispatch("form/guardarFormularios", this.forms); // Guardo el formulario en el dispositivo
         this.loadingGuardar = false;
         this.dialogContinuar();
       } catch (error) {
@@ -71,14 +72,17 @@ export default {
           .dialog({
             title: "Error",
             message:
-              "Parece que hubo un error al subir al servidor. Hemos guardado temporalmente el formulario ¿Desea volver a intentar?",
-            cancel: "Cancelar",
-            ok: "Volver a intentar"
-            // persistent: true
+              "Parece que hubo un error al subir al servidor. ¿Desea volver a intentar o guardar el formulario temporalmente?",
+            cancel: "Guardar",
+            ok: "Volver a intentar",
+            persistent: true
           })
           .onOk(() => {
             // VOLVER A INTENTAR
             this.enviar();
+          })
+          .onCancel(() => {
+            this.guardar();
           });
         console.error(error);
       }

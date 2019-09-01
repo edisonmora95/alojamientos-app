@@ -23,6 +23,8 @@ export function setPuntajeSeccion(state, payload) {
 export function clearForm(state) {
   state.form = {
     id: 0,
+    estado: "",
+
     zona: "",
     provincia: "",
     canton: "",
@@ -113,4 +115,14 @@ export function saveForm(state, form) {
  */
 export function setActualForm(state, form) {
   state.form = form;
+}
+
+/**
+ * Setea el estado del formulario actual
+ * Posibles estados:
+ *   * GUARDADO -> Solo se encuentra guardado en memoria
+ *   * ENVIADO  -> Se encuentra guardado en memoria y fue enviado al servidor
+ */
+export function setEstado(state, estado) {
+  state.form.estado = estado;
 }
