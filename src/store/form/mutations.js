@@ -29,27 +29,41 @@ export function clearForm(state) {
     provincia: "",
     canton: "",
     parroquia: "",
-    sector: "",
-    referencia: "",
-    principal: "",
-    secundaria: "",
 
     tipo: 1,
 
-    nombreInfraestructura: "",
+    infraestructura: {
+      id: null,
+      nombre: "",
+      direccion: {
+        callePrincipal: "",
+        calleSecundaria: "",
+        sector: "",
+        puntoReferencia: ""
+      },
+      coordenadas: {
+        easting: 0,
+        northing: 0,
+        zoneLetter: "",
+        zoneNum: 0
+      },
+      tipoServicio: "",
+      otroTipoServicio: "",
+      institucion: {
+        id: null,
+        nombre: "",
+        nombreRepresentante: "",
+        celularRepresentante: "",
+        convencionalRepresentante: ""
+      }
+    },
+
     fechaInspeccion: "",
     horaInspeccion: "",
-
-    tipoServicio: "",
-    otroTipoServicio: "",
-    institucion: "",
-    nombreRepresentante: "Edison Mora",
-    celularRepresentante: "+593992556793",
-    convencionalRepresentante: "042348515",
+    usoPrevio: false,
+    anioUso: 2019,
 
     eventos: [],
-    previoUso: false,
-    anioUso: 0,
 
     amenazas: [],
 
@@ -75,11 +89,11 @@ export function clearForm(state) {
     comunicacion: false,
     caracteristicas: [],
 
+    anexos: [],
+
     recomendaciones: "",
     puntaje: 0,
     calificacion: "",
-
-    anexos: [],
 
     // PUNTAJES DE SECCIONES
     puntajeAntecedentes: 0,

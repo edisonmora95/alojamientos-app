@@ -10,7 +10,7 @@ export async function login({ email, password }) {
   };
   try {
     const response = await ApiServcie.postApi(url, payloadData);
-    ApiServcie.setHeaderAuth(response.body.data.token);
+    ApiServcie.setHeaderAuth(response.data.data.token);
     return Promise.resolve(response.body.data);
   } catch (error) {
     return Promise.reject(error);
@@ -26,3 +26,20 @@ export async function logout() {
     return Promise.reject(error);
   }
 }
+
+export async function sincronizarDatos() {
+  const url = BASE_URL + routes.SINCRONIZAR_DATOS;
+
+  try {
+    const response = await ApiServcie.getApi(url);
+    return Promise.resolve(response.data.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export default {
+  login,
+  logout,
+  sincronizarDatos
+};

@@ -1,27 +1,20 @@
-export function zonas(state) {
-  return state.zonas;
-}
+export const zonas = state => state.zonas;
 
-export function provincias(state) {
-  return state.provincias;
-}
+export const provincias = state => zonaId =>
+  state.provincias.filter(provincia => provincia.zona == zonaId);
 
-export function cantones(state) {
-  return state.cantones;
-}
+export const cantones = state => provinciaId =>
+  state.cantones.filter(canton => canton.provincia == provinciaId);
 
-export function parroquias(state) {
-  return state.parroquias;
-}
+export const parroquias = state => cantonId =>
+  state.parroquias.filter(parroquia => parroquia.canton == cantonId);
 
-export function validaciones(state) {
-  return state.validaciones;
-}
+export const validaciones = state => state.validaciones;
 
-export function infraestructuras(state) {
+/*export function infraestructuras(state) {
   return state.infraestructuras;
 }
 
 export function instituciones(state) {
   return state.instituciones;
-}
+}*/
