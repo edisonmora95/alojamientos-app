@@ -5,6 +5,8 @@
         <q-select
           v-model="localForm.zona"
           :options="zonas"
+          option-value="id"
+          option-label="nombre"
           :rules="[validaciones.required]"
           label="Zona"
           outlined
@@ -16,6 +18,8 @@
         <q-select
           v-model="localForm.provincia"
           :options="provincias"
+          option-value="id"
+          option-label="nombre"
           :rules="[validaciones.required]"
           label="Provincia"
           outlined
@@ -27,6 +31,8 @@
         <q-select
           v-model="localForm.canton"
           :options="cantones"
+          option-value="id"
+          option-label="nombre"
           :rules="[validaciones.required]"
           label="Canton"
           outlined
@@ -38,6 +44,8 @@
         <q-select
           v-model="localForm.parroquia"
           :options="parroquias"
+          option-value="id"
+          option-label="nombre"
           :rules="[validaciones.required]"
           label="Parroquia"
           outlined
@@ -88,13 +96,13 @@ export default {
       return this.$store.getters["app/zonas"];
     },
     provincias() {
-      return this.$store.getters["app/provincias"];
+      return this.$store.getters["app/provincias"](this.localForm.zona);
     },
     cantones() {
-      return this.$store.getters["app/cantones"];
+      return this.$store.getters["app/cantones"](this.localForm.provincia);
     },
     parroquias() {
-      return this.$store.getters["app/parroquias"];
+      return this.$store.getters["app/parroquias"](this.localForm.canton);
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];

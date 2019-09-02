@@ -7,8 +7,8 @@
       <q-separator spaced />
       <form-item
         :form="form"
-        v-for="form in formsInfraestructuras"
-        :key="form.parroquia"
+        v-for="(form, index) in formsInfraestructuras"
+        :key="index"
       ></form-item>
       <q-item-label header>
         <p class="text-h6">Terrenos</p>

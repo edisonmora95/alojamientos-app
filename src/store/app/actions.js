@@ -1,6 +1,14 @@
-// import ImagesService from "../../services/images.service";
+import AuthenticationService from "../../services/authentication.service";
 
-// export async function subirImagen({ commit }, payload) {
-//   const url = await ImagesService.subirImagen(payload);
-//   return url;
-// };
+export async function sincronizarDatosApp({ commit }) {
+  const data = await AuthenticationService.sincronizarDatos();
+  if (data.zonas.length > 0) {
+    commit("setZonas", data.zonas);
+    commit("setProvincias", data.provincias);
+    commit("setCantones", data.cantones);
+    commit("setParroquias", data.parroquias);
+    commit("setUbicaciones", data.ubicaciones);
+    return data;
+  }
+  return null;
+}

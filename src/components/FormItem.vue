@@ -16,9 +16,9 @@
             :label="form.calificacion"
           />
         </q-item-label>
-         <q-item-label caption lines="1">
-            <label :class="estadoColor">{{ form.estado }}</label>
-          </q-item-label>
+        <q-item-label caption lines="1">
+          <label :class="estadoColor">{{ form.estado }}</label>
+        </q-item-label>
       </q-item-section>
       <q-item-section middle class="gt-xs">
         <q-item-label lines="1">
@@ -31,13 +31,18 @@
           <q-btn size="12px" flat dense round icon="more_vert">
             <q-menu>
               <q-list>
-                <q-item clickable @click="revisar">
+                <q-item clickable v-close-popup @click="revisar">
                   <q-item-section>Revisar</q-item-section>
                 </q-item>
                 <!-- <q-item clickable @click="editar">
                   <q-item-section>Editar</q-item-section>
                 </q-item> -->
-                <q-item clickable @click="enviar" v-if="form.estado === 'GUARDADO'">
+                <q-item
+                  clickable
+                  @click="enviar"
+                  v-close-popup
+                  v-if="form.estado === 'GUARDADO'"
+                >
                   <q-item-section>Enviar</q-item-section>
                 </q-item>
               </q-list>
@@ -85,9 +90,14 @@ export default {
     },
     async enviar() {
       try {
+        this.$q.loading.show({
+          message: "Enviando formulario..."
+        });
         await this.$store.dispatch("form/ingresarFormulario", this.form);
+        this.$q.loading.hide();
         this.dialogContinuar();
       } catch (error) {
+        this.$q.loading.hide();
         this.$q
           .dialog({
             title: "Error",
