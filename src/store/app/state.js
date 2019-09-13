@@ -113,5 +113,6 @@ export default {
     numberPositive(val) {
       return val > 0 || "Valor debe ser positivo";
     }
-  }
+  },
+  isLoggedIn: false,
 };

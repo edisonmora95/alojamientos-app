@@ -12,3 +12,8 @@ export async function sincronizarDatosApp({ commit }) {
   }
   return null;
 }
+
+export async function login({ commit }, payload) {
+  await AuthenticationService.login(payload);
+  commit("setIsLoggedIn", true);
+}

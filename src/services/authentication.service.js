@@ -8,9 +8,10 @@ export async function login({ email, password }) {
     email,
     password
   };
+  console.log(payloadData)
   try {
     const response = await ApiServcie.postApi(url, payloadData);
-    ApiServcie.setHeaderAuth(response.data.data.token);
+    ApiServcie.setHeader("x-access-token", response.data.data.token);
     return Promise.resolve(response.body.data);
   } catch (error) {
     return Promise.reject(error);
@@ -21,6 +22,7 @@ export async function logout() {
   const url = BASE_URL + routes.LOGOUT;
   try {
     await ApiServcie.postApi(url);
+    ApiServcie.setHeader("x-access-token", "");
     return Promise.resolve(true);
   } catch (error) {
     return Promise.reject(error);

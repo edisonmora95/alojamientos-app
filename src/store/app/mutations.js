@@ -32,3 +32,7 @@ export function setParroquias(state, parroquias) {
 export function setUbicaciones(state, ubicaciones) {
   state.ubicaciones = ubicaciones;
 }
+
+export function setIsLoggedIn(state, isLoggedIn) {
+  state.isLoggedIn = isLoggedIn;
+}
