@@ -1,6 +1,7 @@
 import { routes, BASE_URL } from "./routes";
 
 import ApiServcie from "./api.service";
+import StorageService from "./storage.service";
 
 export async function login({ email, password }) {
   const url = BASE_URL + routes.LOGIN;
@@ -12,8 +13,10 @@ export async function login({ email, password }) {
     const response = await ApiServcie.postApi(url, payloadData);
     if (response.data.status === "success") {
       ApiServcie.setHeader("x-access-token", response.data.data);
+      StorageService.saveToken(response.data.data);
       return Promise.resolve(response.data.data);
     } else {
+      StorageService.removeToken();
       return Promise.reject(response.data.data);
     }
   } catch (error) {

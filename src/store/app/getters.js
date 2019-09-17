@@ -11,6 +11,8 @@ export const parroquias = state => cantonId =>
 
 export const validaciones = state => state.validaciones;
 
+export const isLoggedIn = state => state.isLoggedIn;
+
 /*export function infraestructuras(state) {
   return state.infraestructuras;
 }

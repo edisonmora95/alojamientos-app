@@ -5,7 +5,11 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("pages/Login.vue")
+        component: () => import("pages/Login.vue"),
+        name: "login",
+        meta: {
+          public: true
+        }
       }
     ]
   },
@@ -19,7 +23,8 @@ const routes = [
         component: () => import("pages/Forms.vue"),
         name: "formularios",
         meta: {
-          title: "Formularios"
+          title: "Formularios",
+          requiresLogin: true
         }
       },
       {
@@ -27,7 +32,8 @@ const routes = [
         component: () => import("pages/form/Localizacion.vue"),
         name: "localizacion",
         meta: {
-          title: "1. Localización"
+          title: "1. Localización",
+          requiresLogin: true
         }
       },
       {
@@ -35,7 +41,8 @@ const routes = [
         component: () => import("pages/form/DatosGenerales.vue"),
         name: "generales",
         meta: {
-          title: "2. Datos Generales"
+          title: "2. Datos Generales",
+          requiresLogin: true
         }
       },
       {
@@ -44,7 +51,8 @@ const routes = [
         name: "infraestructura",
         meta: {
           title: "2. Datos Generales",
-          subtitle: "2.1 Datos Infraestructura"
+          subtitle: "2.1 Datos Infraestructura",
+          requiresLogin: true
         }
       },
       {
@@ -54,7 +62,8 @@ const routes = [
         name: "antecedentesEventos",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.1 Antecedentes de eventos"
+          subtitle: "3.1 Antecedentes de eventos",
+          requiresLogin: true
         }
       },
       {
@@ -64,7 +73,8 @@ const routes = [
         name: "riesgo",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.2 Analisis de riesgo de la infraestructura"
+          subtitle: "3.2 Analisis de riesgo de la infraestructura",
+          requiresLogin: true
         }
       },
       {
@@ -74,7 +84,8 @@ const routes = [
         name: "viasAcceso",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.3 Vias de acceso a la infraestructura"
+          subtitle: "3.3 Vias de acceso a la infraestructura",
+          requiresLogin: true
         }
       },
       {
@@ -84,7 +95,8 @@ const routes = [
         name: "serviciosBasicos",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.4 Servicios Basicos"
+          subtitle: "3.4 Servicios Basicos",
+          requiresLogin: true
         }
       },
       {
@@ -94,7 +106,8 @@ const routes = [
         name: "espaciosVitalesDormitorios",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.5.1 Espacios Vitales (Dormitorios)"
+          subtitle: "3.5.1 Espacios Vitales (Dormitorios)",
+          requiresLogin: true
         }
       },
       {
@@ -104,7 +117,8 @@ const routes = [
         name: "espaciosVitalesBanos",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.5.2 Espacios Vitales (Banos)"
+          subtitle: "3.5.2 Espacios Vitales (Baños)",
+          requiresLogin: true
         }
       },
       {
@@ -112,7 +126,8 @@ const routes = [
         component: () => import("pages/form/MedidasSeguridad.vue"),
         name: "medidasSeguridad",
         meta: {
-          title: "4. Medidas de Seguridad"
+          title: "4. Medidas de Seguridad",
+          requiresLogin: true
         }
       },
       {
@@ -122,7 +137,8 @@ const routes = [
         name: "infraestructuraParedes",
         meta: {
           title: "5. Infraestructura",
-          subtitle: "5.1 Paredes"
+          subtitle: "5.1 Paredes",
+          requiresLogin: true
         }
       },
       {
@@ -132,7 +148,8 @@ const routes = [
         name: "infraestructuraPisos",
         meta: {
           title: "5. Infraestructura",
-          subtitle: "5.2 Pisos"
+          subtitle: "5.2 Pisos",
+          requiresLogin: true
         }
       },
       {
@@ -142,7 +159,8 @@ const routes = [
         name: "infraestructuraTechos",
         meta: {
           title: "5. Infraestructura",
-          subtitle: "5.3 Techos"
+          subtitle: "5.3 Techos",
+          requiresLogin: true
         }
       },
       {
@@ -152,7 +170,8 @@ const routes = [
         name: "infraestructuraIngresosSalidas",
         meta: {
           title: "5. Infraestructura",
-          subtitle: "5.4 Ingresos/Salidas"
+          subtitle: "5.4 Ingresos/Salidas",
+          requiresLogin: true
         }
       },
       {
@@ -162,7 +181,8 @@ const routes = [
         name: "infraestructuraOtrosEspacios",
         meta: {
           title: "5. Infraestructura",
-          subtitle: "5.5 Otros Espacios"
+          subtitle: "5.5 Otros Espacios",
+          requiresLogin: true
         }
       },
       {
@@ -170,7 +190,8 @@ const routes = [
         component: () => import("pages/form/Accesibilidad.vue"),
         name: "accesibilidad",
         meta: {
-          title: "6. Accesibilidad"
+          title: "6. Accesibilidad",
+          requiresLogin: true
         }
       },
       {
@@ -178,7 +199,8 @@ const routes = [
         component: () => import("pages/form/Anexos.vue"),
         name: "anexos",
         meta: {
-          title: "7. Anexos"
+          title: "7. Anexos",
+          requiresLogin: true
         }
       },
       {
@@ -186,7 +208,8 @@ const routes = [
         component: () => import("pages/form/Recomendaciones.vue"),
         name: "recomendaciones",
         meta: {
-          title: "8. Recomendaciones"
+          title: "8. Recomendaciones",
+          requiresLogin: true
         }
       },
       {
@@ -194,7 +217,8 @@ const routes = [
         component: () => import("pages/form/FinFormulario.vue"),
         name: "finFormulario",
         meta: {
-          title: "9. Fin del formulario"
+          title: "9. Fin del formulario",
+          requiresLogin: true
         }
       }
     ]
