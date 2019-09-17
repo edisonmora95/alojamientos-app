@@ -8,11 +8,14 @@ export async function login({ email, password }) {
     email,
     password
   };
-  console.log(payloadData)
   try {
     const response = await ApiServcie.postApi(url, payloadData);
-    ApiServcie.setHeader("x-access-token", response.data.data.token);
-    return Promise.resolve(response.body.data);
+    if (response.data.status === "success") {
+      ApiServcie.setHeader("x-access-token", response.data.data);
+      return Promise.resolve(response.data.data);
+    } else {
+      return Promise.reject(response.data.data);
+    }
   } catch (error) {
     return Promise.reject(error);
   }

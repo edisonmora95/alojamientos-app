@@ -114,5 +114,5 @@ export default {
       return val > 0 || "Valor debe ser positivo";
     }
   },
-  isLoggedIn: false,
+  isLoggedIn: false
 };

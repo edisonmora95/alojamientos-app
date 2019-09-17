@@ -2,17 +2,15 @@
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md">
       <section class="col-xs-12">
-        <q-input
-          v-model="form.email"
-          label="Correo"
-          outlined/>
+        <q-input v-model="form.email" label="Correo" outlined />
       </section>
       <section class="col-xs-12">
         <q-input
           v-model="form.password"
           label="Contraseña"
           :type="isPwd ? 'password' : 'text'"
-          outlined>
+          outlined
+        >
           <q-icon
             :name="isPwd ? 'visibility_off' : 'visibility'"
             class="cursor-pointer"
@@ -21,20 +19,25 @@
         </q-input>
       </section>
       <footer class="col-xs-12">
-        <q-btn color="primary" class="full-width q-mt-md" label="Login" :loading="loading" @click="login"/>
+        <q-btn
+          color="primary"
+          class="full-width q-mt-md"
+          label="Login"
+          :loading="loading"
+          @click="login"
+        />
       </footer>
     </q-form>
   </q-page>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       form: {
         email: "",
-        password: "",
+        password: ""
       },
       isPwd: true,
       loading: false
@@ -43,17 +46,20 @@ export default {
   methods: {
     login() {
       this.loading = true;
-      this.$store.dispatch("app/login", this.form)
+      this.$store
+        .dispatch("app/login", this.form)
         .then(() => {
           this.loading = false;
+          this.$router.push({ name: "formularios" });
         })
-        .catch((error) => {
+        .catch(error => {
           this.loading = false;
-          console.error(error);
+          this.$q.dialog({
+            title: "Error",
+            message: error
+          });
         });
     }
   }
 };
 </script>
-
-

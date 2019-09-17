@@ -2,13 +2,13 @@ import axios from "axios";
 
 const ApiService = {
   setHeader(key, value) {
-    axios.headers.common[key] = value;
+    axios.defaults.headers.common[key] = value;
   },
   setHeaderAuth(token) {
-    axios.headers.common["Authorization"] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   },
   removeHeaderAuth() {
-    axios.headers.common["Authorization"] = "";
+    axios.defaults.headers.common["Authorization"] = "";
   },
   getApi(url, queryData) {
     return axios.get(url, queryData);

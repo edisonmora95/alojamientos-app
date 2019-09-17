@@ -15,14 +15,14 @@ export default {
   name: "LoginLayout",
   data() {
     return {
-      imgSrc: require("../assets/img/logo.jpg"),
+      imgSrc: require("../assets/img/logo.jpg")
     };
-  },
+  }
 };
 </script>
 <style scoped>
-  .q-img {
-    height: 250px;
-    width: 250px;
-  }
+.q-img {
+  height: 250px;
+  width: 250px;
+}
 </style>
