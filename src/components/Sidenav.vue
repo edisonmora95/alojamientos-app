@@ -15,7 +15,7 @@
         <q-item-label>Sincronizar datos</q-item-label>
       </q-item-section>
     </q-item>
-    <q-item>
+    <q-item clickable @click.native="logout">
       <q-item-section>
         <q-item-label>Cerrar sesión</q-item-label>
       </q-item-section>
@@ -41,6 +41,11 @@ export default {
           });
           await FileService.writeFile(fileEntry, data);
         }
+      });
+    },
+    logout() {
+      this.$store.dispatch("app/logout").then(() => {
+        this.$router.push({ name: "login" });
       });
     }
   }

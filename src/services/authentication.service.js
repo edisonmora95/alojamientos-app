@@ -25,10 +25,9 @@ export async function login({ email, password }) {
 }
 
 export async function logout() {
-  const url = BASE_URL + routes.LOGOUT;
   try {
-    await ApiServcie.postApi(url);
     ApiServcie.setHeader("x-access-token", "");
+    StorageService.removeToken();
     return Promise.resolve(true);
   } catch (error) {
     return Promise.reject(error);

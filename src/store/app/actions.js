@@ -17,3 +17,8 @@ export async function login({ commit }, payload) {
   await AuthenticationService.login(payload);
   commit("setIsLoggedIn", true);
 }
+
+export async function logout({ commit }) {
+  await AuthenticationService.logout();
+  commit("setIsLoggedIn", false);
+}
