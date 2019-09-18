@@ -34,14 +34,29 @@ export default {
   },
   methods: {
     async sincronizarDatos() {
-      this.$store.dispatch("app/sincronizarDatosApp").then(async data => {
-        if (data) {
-          const fileEntry = await FileService.createFile("datos.json", {
-            create: true
-          });
-          await FileService.writeFile(fileEntry, data);
-        }
+      this.$q.loading.show({
+        message: "Sincronizando datos..."
       });
+      this.$store
+        .dispatch("app/sincronizarDatosApp")
+        .then(async data => {
+          this.$q.notify({
+            message: "Datos sincronizados."
+          });
+          if (data) {
+            const fileEntry = await FileService.createFile("datos.json", {
+              create: true
+            });
+            await FileService.writeFile(fileEntry, data);
+            this.$q.loading.hide();
+            this.$emit("closeDrawer");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          this.$q.loading.hide();
+          this.$emit("closeDrawer");
+        });
     },
     logout() {
       this.$store.dispatch("app/logout").then(() => {

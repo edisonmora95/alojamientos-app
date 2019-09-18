@@ -14,7 +14,7 @@
       </q-toolbar>
     </q-header>
     <q-drawer v-model="drawer" bordered content-class="bg-grey-2">
-      <sidenav></sidenav>
+      <sidenav v-on:closeDrawer="onCloseDrawer"></sidenav>
     </q-drawer>
 
     <q-page-container>
@@ -43,7 +43,10 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    onCloseDrawer() {
+      this.drawer = false;
+    }
   },
   components: {
     Sidenav

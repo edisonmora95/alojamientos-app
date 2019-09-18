@@ -53,7 +53,7 @@ export async function ingresarFormulario({ commit }, payload) {
   delete form.eventos;
   delete form.vias;
   const resultado = await FormService.ingresarFormulario(form);
-  commit("updateForm", { id: resultado.id });
+  commit("updateForm", { id: resultado.data });
   commit("saveForm", payload);
   commit("clearForm");
   return resultado;

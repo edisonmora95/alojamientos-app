@@ -8,7 +8,11 @@ const ingresarFormulario = async formulario => {
   const payloadData = formulario;
   try {
     const response = await ApiServcie.postApi(url, payloadData);
-    return Promise.resolve(response);
+    if (response.data.estado === "success") {
+      return Promise.resolve(response.data);
+    } else {
+      return Promise.reject(response.data);
+    }
   } catch (error) {
     return Promise.reject(error);
   }

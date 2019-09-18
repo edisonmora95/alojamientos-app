@@ -13,7 +13,7 @@
         ></q-select>
       </section>
       <!-- NUEVA INFRAESTRUCTURA -->
-      <section class="col-xs-12" v-if="localForm.infraestructura.id === 0">
+      <section class="col-xs-12" v-if="localForm.infraestructura.id === 0 || localForm.infraestructura.id === null">
         <q-input
           label="Nombre de la infraestructura"
           v-model="localForm.infraestructura.nombre"
@@ -224,7 +224,35 @@ export default {
       return this.$store.getters["app/instituciones"];
     },
     infraestructuras() {
-      return this.$store.getters["app/infraestructuras"];
+      let infraestructuras = this.$store.getters["app/infraestructuras"];
+      if (!infraestructuras) {
+        infraestructuras = [];
+      }
+      infraestructuras.push({
+        id: null,
+        nombre: "",
+        direccion: {
+          callePrincipal: "",
+          calleSecundaria: "",
+          sector: "",
+          puntoReferencia: ""
+        },
+        coordenadas: {
+          easting: 0,
+          northing: 0,
+          zoneLetter: "",
+          zoneNum: 0
+        },
+        tipoServicio: "",
+        institucion: {
+          id: null,
+          nombre: "",
+          nombreRepresentante: "",
+          celularRepresentante: "",
+          convencionalRepresentante: ""
+        }
+      });
+      return infraestructuras;
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];

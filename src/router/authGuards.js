@@ -10,7 +10,7 @@ const generalGuard = async (to, from, next) => {
       if (!accessToken) {
         next({ name: "login" });
       } else if (!isLoggedIn) {
-        ApiService.setHeaderAuth(accessToken);
+        ApiService.setHeader("x-access-token", accessToken);
         store().commit("app/setIsLoggedIn", true);
         next();
       } else {
@@ -21,7 +21,7 @@ const generalGuard = async (to, from, next) => {
         next();
       } else {
         if (!isLoggedIn) {
-          ApiService.setHeaderAuth(accessToken);
+          ApiService.setHeader("x-access-token", accessToken);
           store().commit("app/setIsLoggedIn", true);
           next({ name: "formularios" });
         }
