@@ -16,6 +16,9 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      requiresLogin: true
+    },
     children: [
       { path: "", component: () => import("pages/Forms.vue") },
       {
@@ -118,6 +121,17 @@ const routes = [
         meta: {
           title: "3. Condiciones Esenciales",
           subtitle: "3.5.2 Espacios Vitales (Baños)",
+          requiresLogin: true
+        }
+      },
+      {
+        path: "espacios-terreno",
+        component: () =>
+          import("pages/form/condiciones_esenciales/EspaciosVitalesTerrenos.vue"),
+        name: "espaciosVitalesTerrenos",
+        meta: {
+          title: "3. Condiciones Esenciales",
+          subtitle: "3.5 Espacios Vitales Terreno",
           requiresLogin: true
         }
       },
