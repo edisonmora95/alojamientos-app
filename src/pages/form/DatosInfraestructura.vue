@@ -4,7 +4,7 @@
       <section class="col-xs-12">
         <q-select
           v-model="localForm.infraestructura"
-          :options="infraestructuras"
+          :options="ubicaciones"
           :rules="[validaciones.required]"
           label="Infraestructura"
           :option-value="opt => (opt === null ? null : opt.id)"
@@ -13,7 +13,13 @@
         ></q-select>
       </section>
       <!-- NUEVA INFRAESTRUCTURA -->
-      <section class="col-xs-12" v-if="localForm.infraestructura.id === 0 || localForm.infraestructura.id === null">
+      <section
+        class="col-xs-12"
+        v-if="
+          localForm.infraestructura.id === 0 ||
+            localForm.infraestructura.id === null
+        "
+      >
         <q-input
           label="Nombre de la infraestructura"
           v-model="localForm.infraestructura.nombre"
@@ -99,7 +105,7 @@
         </section>
       </q-expansion-item>
       <!-- INSTITUCION -->
-      <q-expansion-item
+      <!-- <q-expansion-item
         expand-separator
         icon="business"
         label="Institución propietaria"
@@ -145,7 +151,7 @@
             mask="(##)# ### ###"
           ></q-input>
         </section>
-      </q-expansion-item>
+      </q-expansion-item> -->
       <!-- /INSTITUCION -->
       <footer class="col-xs-12">
         <q-btn
@@ -214,6 +220,9 @@ export default {
     };
   },
   computed: {
+    ubicaciones() {
+      return this.$store.getters["app/ubicacionesTipo"](this.form.tipo);
+    },
     form() {
       return this.$store.getters["form/form"];
     },
@@ -222,37 +231,6 @@ export default {
     },
     instituciones() {
       return this.$store.getters["app/instituciones"];
-    },
-    infraestructuras() {
-      let infraestructuras = this.$store.getters["app/infraestructuras"];
-      if (!infraestructuras) {
-        infraestructuras = [];
-      }
-      infraestructuras.push({
-        id: null,
-        nombre: "",
-        direccion: {
-          callePrincipal: "",
-          calleSecundaria: "",
-          sector: "",
-          puntoReferencia: ""
-        },
-        coordenadas: {
-          easting: 0,
-          northing: 0,
-          zoneLetter: "",
-          zoneNum: 0
-        },
-        tipoServicio: "",
-        institucion: {
-          id: null,
-          nombre: "",
-          nombreRepresentante: "",
-          celularRepresentante: "",
-          convencionalRepresentante: ""
-        }
-      });
-      return infraestructuras;
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];

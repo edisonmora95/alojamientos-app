@@ -39,6 +39,13 @@
 import ImagesService from "../../services/images.service";
 import FormMixin from "../../mixins/FormMixin";
 export default {
+  mounted() {
+    if (this.form.tipo === 2) {
+      this.prevPage = {
+        name: "medidasSeguridad"
+      };
+    }
+  },
   data() {
     return {
       nextPage: {

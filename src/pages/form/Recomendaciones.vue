@@ -117,6 +117,7 @@ export default {
     },
     nextStep() {
       this.updateForm();
+      this.$store.commit("form/updateForm", { puntaje: this.puntajeTotal });
       this.$store.commit(
         "form/setCalificacionGeneral",
         this.calificacionGeneral

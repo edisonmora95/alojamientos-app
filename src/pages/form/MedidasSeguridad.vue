@@ -6,42 +6,44 @@
     <q-form class="q-px-md" :no-error-focus="true" :ref="refForm">
       <main class="row q-mt-md">
         <!-- RECURSOS -->
-        <section class="col-xs-12" v-if="newRecurso">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Nuevo recurso interno</label>
-            </header>
-            <RecursoInterno
-              class="col-xs-12"
-              :isNewRecurso="true"
-              v-on:addRecurso="onAddRecurso"
-            ></RecursoInterno>
+        <div v-if="form.tipo === 1">
+          <section class="col-xs-12" v-if="newRecurso">
+            <section class="row">
+              <header class="col-xs-12">
+                <label>Nuevo recurso interno</label>
+              </header>
+              <RecursoInterno
+                class="col-xs-12"
+                :isNewRecurso="true"
+                v-on:addRecurso="onAddRecurso"
+              ></RecursoInterno>
+            </section>
           </section>
-        </section>
-        <p
-          class="text-positive cursor-pointer"
-          @click="showNewRecurso"
-          v-if="!newRecurso"
-        >
-          <q-icon name="add" />Añadir otro
-        </p>
-        <section class="col-xs-12" v-if="localForm.recursos.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label class="text-bold">Recursos internos registrados</label>
-            </header>
-            <RecursoInterno
-              v-for="(recurso, index) in localForm.recursos"
-              :key="'recurso-' + index"
-              :recurso="recurso"
-              class="col-xs-12"
-            >
-              <template slot="header">
-                <label> Recurso # {{ index + 1 }}</label>
-              </template>
-            </RecursoInterno>
+          <p
+            class="text-positive cursor-pointer"
+            @click="showNewRecurso"
+            v-if="!newRecurso"
+          >
+            <q-icon name="add" />Añadir otro
+          </p>
+          <section class="col-xs-12" v-if="localForm.recursos.length > 0">
+            <section class="row">
+              <header class="col-xs-12">
+                <label class="text-bold">Recursos internos registrados</label>
+              </header>
+              <RecursoInterno
+                v-for="(recurso, index) in localForm.recursos"
+                :key="'recurso-' + index"
+                :recurso="recurso"
+                class="col-xs-12"
+              >
+                <template slot="header">
+                  <label> Recurso # {{ index + 1 }}</label>
+                </template>
+              </RecursoInterno>
+            </section>
           </section>
-        </section>
+        </div>
         <!-- ./RECURSOS -->
         <!-- INSTITUCIONES EMERGENCIA -->
         <section class="col-xs-12" v-if="newInstitucion">
@@ -115,6 +117,15 @@ import PuntajeSeccion from "../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
+    // Si el formulario es de terrenos, se debe redirigir a la ventana de Espacios Vitales de terrenos, no la de infraestructuras que está por default
+    if (this.form.tipo === 2) {
+      this.prevPage = {
+        name: "espaciosVitalesTerrenos"
+      };
+      this.nextPage = {
+        name: "anexos"
+      };
+    }
   },
   data() {
     return {

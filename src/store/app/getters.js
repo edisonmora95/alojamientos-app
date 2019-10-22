@@ -13,6 +13,37 @@ export const validaciones = state => state.validaciones;
 
 export const isLoggedIn = state => state.isLoggedIn;
 
+export const ubicacionesTipo = state => tipo =>
+  state.ubicaciones
+    .filter(ubicacion => ubicacion.tipo === tipo)
+    .map(ubicacion => {
+      return {
+        id: ubicacion.id,
+        nombre: ubicacion.nombre,
+        direccion: {
+          callePrincipal: ubicacion.callePrincipal,
+          calleSecundaria: ubicacion.calleSecundaria,
+          sector: ubicacion.sector,
+          puntoReferencia: ubicacion.puntoReferencia,
+        },
+        tipoServicio: ubicacion.tipoServicio,
+        otroTipoServicio: "",
+        coordenadas: {
+          easting: 0,
+          northing: 0,
+          zoneLetter: "",
+          zoneNum: 0
+        },
+        institucion: {
+          id: 0,
+          nombre: "",
+          nombreRepresentante: "",
+          celularRepresentante: "",
+          convencionalRepresentante: ""
+        }
+      };
+    });
+
 /*export function infraestructuras(state) {
   return state.infraestructuras;
 }

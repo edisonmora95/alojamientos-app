@@ -9,7 +9,7 @@ export default {
     canton: "",
     parroquia: "",
 
-    tipo: 1,
+    tipo: 1, // Por default el tipo es Infraestructura
 
     infraestructura: {
       id: null,
@@ -53,6 +53,8 @@ export default {
     dormitorios: [],
 
     banos: [],
+
+    espaciosTerreno: [],
 
     recursos: [],
     instituciones: [],

@@ -75,6 +75,8 @@ export function clearForm(state) {
 
     banos: [],
 
+    espaciosTerreno: [],
+
     recursos: [],
     instituciones: [],
 

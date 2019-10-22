@@ -71,6 +71,12 @@ import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
+    // Si el formulario es de terrenos, se debe redirigir a la ventana de Espacios Vitales de terrenos, no la de infraestructuras que está por default
+    if (this.form.tipo === 2) {
+      this.nextPage = {
+        name: "espaciosVitalesTerrenos"
+      };
+    }
   },
   data() {
     return {
