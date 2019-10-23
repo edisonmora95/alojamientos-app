@@ -91,6 +91,13 @@ export function clearForm(state) {
     comunicacion: false,
     caracteristicas: [],
 
+    // CARACTERISTICAS DE TERRENO
+    suelos: [],
+    nivelTerreno: "",
+    observacionNivel: "",
+    pendienteInclinacion: 0,
+    observacionPendiente: "",
+
     anexos: [],
 
     recomendaciones: "",

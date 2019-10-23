@@ -136,6 +136,15 @@ const routes = [
         }
       },
       {
+        path: "caracteristicas-terreno",
+        component: () => import("pages/form/CaracteristicasTerreno.vue"),
+        name: "caracteristicasTerreno",
+        meta: {
+          title: "4. Características del Terreno",
+          requiresLogin: true
+        }
+      },
+      {
         path: "medidas-seguridad",
         component: () => import("pages/form/MedidasSeguridad.vue"),
         name: "medidasSeguridad",

@@ -24,7 +24,7 @@ export const ubicacionesTipo = state => tipo =>
           callePrincipal: ubicacion.callePrincipal,
           calleSecundaria: ubicacion.calleSecundaria,
           sector: ubicacion.sector,
-          puntoReferencia: ubicacion.puntoReferencia,
+          puntoReferencia: ubicacion.puntoReferencia
         },
         tipoServicio: ubicacion.tipoServicio,
         otroTipoServicio: "",

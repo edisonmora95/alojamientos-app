@@ -96,7 +96,7 @@ export default {
     return {
       refForm: "espacios-vitales-terrenos-form",
       nextPage: {
-        name: "medidasSeguridad"
+        name: "caracteristicasTerreno"
       },
       prevPage: {
         name: "serviciosBasicos"
