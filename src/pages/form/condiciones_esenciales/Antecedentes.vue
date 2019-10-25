@@ -158,7 +158,7 @@ export default {
           })
           .onOk(() => {
             this.$store.commit("form/setCalificacionGeneral", "NO APTO");
-            this.$router.push({ name: "medidasSeguridad" });
+            this.$router.push(this.failFormNextStep);
           });
       }
     }

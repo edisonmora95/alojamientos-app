@@ -3,6 +3,15 @@
  */
 
 const FormMixin = {
+  computed: {
+    failFormNextStep() {
+      if (this.form.tipo === 1) {
+        return { name: "medidasSeguridad" };
+      } else {
+        return { name: "caracteristicasTerreno" };
+      }
+    }
+  },
   methods: {
     /**
      * Inicializa los campos del componente con lo que esté guardado en el store
