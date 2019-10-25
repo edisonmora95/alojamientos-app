@@ -90,7 +90,8 @@ export default {
     puntajeEspacios: 0,
     puntajeMedidasSeguridad: 0,
     puntajeInfraestructura: 0,
-    puntajeAccesibilidad: 0
+    puntajeAccesibilidad: 0,
+    puntajeCaracteristicasTerreno: 0,
   },
   /** Array de todos los formularios */
   forms: []

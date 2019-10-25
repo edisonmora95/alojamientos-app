@@ -76,7 +76,7 @@ const routes = [
         name: "riesgo",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.2 Analisis de riesgo de la infraestructura",
+          subtitle: "3.2 Análisis de riesgo de la infraestructura",
           requiresLogin: true
         }
       },
@@ -87,7 +87,7 @@ const routes = [
         name: "viasAcceso",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.3 Vias de acceso a la infraestructura",
+          subtitle: "3.3 Vías de acceso a la infraestructura",
           requiresLogin: true
         }
       },
@@ -98,7 +98,7 @@ const routes = [
         name: "serviciosBasicos",
         meta: {
           title: "3. Condiciones Esenciales",
-          subtitle: "3.4 Servicios Basicos",
+          subtitle: "3.4 Servicios Básicos",
           requiresLogin: true
         }
       },

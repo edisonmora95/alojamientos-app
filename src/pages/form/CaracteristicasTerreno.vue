@@ -172,7 +172,7 @@ export default {
   methods: {
     nextStep() {
       this.updateForm();
-      this.setPuntajeSeccion("puntajeAntecedentes", this.puntaje);
+      this.setPuntajeSeccion("puntajeCaracteristicasTerreno", this.puntaje);
       this.$router.push(this.nextPage);
     },
     showNewSuelo() {

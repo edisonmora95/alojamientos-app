@@ -9,7 +9,9 @@ export function form(state) {
  * Retorna la suma de los puntajes de todas las secciones del formulario
  */
 export function puntajeTotal(state) {
-  return (
+  const MAX_TERRENO = 60;
+  const MAX_PUNTAJE = 100;
+  const puntaje = (
     state.form.puntajeAntecedentes +
     state.form.puntajeRiesgos +
     state.form.puntajeViasAcceso +
@@ -17,8 +19,15 @@ export function puntajeTotal(state) {
     state.form.puntajeEspacios +
     state.form.puntajeMedidasSeguridad +
     state.form.puntajeInfraestructura +
-    state.form.puntajeAccesibilidad
+    state.form.puntajeAccesibilidad +
+    state.form.puntajeCaracteristicasTerreno
   );
+
+  if (state.form.tipo === 2) {
+    return Number(((puntaje * MAX_PUNTAJE) / MAX_TERRENO).toFixed(2));
+  } else {
+    return puntaje;
+  }
 }
 
 /**
