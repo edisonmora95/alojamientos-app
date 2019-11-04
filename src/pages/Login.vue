@@ -2,7 +2,7 @@
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md">
       <section class="col-xs-12">
-        <q-input v-model="form.email" label="Correo" outlined />
+        <q-input v-model="form.identity" label="Cédula" outlined />
       </section>
       <section class="col-xs-12">
         <q-input
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       form: {
-        email: "",
+        identity: "",
         password: ""
       },
       isPwd: true,

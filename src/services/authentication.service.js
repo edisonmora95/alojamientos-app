@@ -3,10 +3,10 @@ import { routes, BASE_URL } from "./routes";
 import ApiServcie from "./api.service";
 import StorageService from "./storage.service";
 
-export async function login({ email, password }) {
+export async function login({ identity, password }) {
   const url = BASE_URL + routes.LOGIN;
   const payloadData = {
-    email,
+    identity,
     password
   };
   try {
