@@ -51,7 +51,7 @@ export default {
         this.loadingGuardar = true;
         this.$store.commit("form/setEstado", "ENVIADO");
         this.$store.commit("form/saveForm", this.form); // Guardo el formulario en vuex
-        await this.$store.dispatch("form/guardarFormularios", this.forms); // Guardo el formulario en el dispositivo
+        //await this.$store.dispatch("form/guardarFormularios", this.forms); // Guardo el formulario en el dispositivo
         this.loadingGuardar = false;
         this.dialogContinuar();
       } catch (error) {
@@ -63,7 +63,7 @@ export default {
       this.loadingEnviar = true;
       try {
         await this.$store.dispatch("form/ingresarFormulario", this.form);
-        await this.$store.dispatch("form/guardarFormularios", this.forms);
+        //await this.$store.dispatch("form/guardarFormularios", this.forms);
         this.loadingEnviar = false;
         this.dialogContinuar();
       } catch (error) {

@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <q-item clickable :to="localizacion">
+    <q-item clickable @click.native="ingresarFormulario">
       <q-item-section>
         <q-item-label>Ingresar calificación</q-item-label>
       </q-item-section>
@@ -32,7 +32,28 @@ export default {
       formularios: { name: "formularios" }
     };
   },
+  computed: {
+    form() {
+      return this.$store.getters["form/form"];
+    }
+  },
   methods: {
+    ingresarFormulario() {
+      if (this.form.zona != 0) {
+        this.$q.dialog({
+          message: "Hay un formulario ya iniciado. ¿Desea continuar o ingresar uno nuevo?",
+          persistent: true,
+          ok: "Continuar",
+          cancel: "Nuevo",
+        }).onCancel(() => {
+          this.$store.commit("form/clearForm");
+        }).onDismiss(() => {
+          this.$router.push(this.localizacion);
+        });
+      } else {
+        this.$router.push(this.localizacion);
+      }
+    },
     async sincronizarDatos() {
       this.$q.loading.show({
         message: "Sincronizando datos..."
