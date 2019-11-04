@@ -7,14 +7,15 @@
       <main class="row q-mt-md">
         <!-- RECURSOS -->
         <div v-if="form.tipo === 1">
-          <section class="col-xs-12" v-if="newRecurso">
+          <section class="col-xs-12" v-if="newRecurso && !disableInputs">
             <section class="row">
               <header class="col-xs-12">
                 <label>Nuevo recurso interno</label>
               </header>
               <RecursoInterno
                 class="col-xs-12"
-                :isNewRecurso="true"
+                :disable="disableInputs"
+                :showAddBtn="true"
                 v-on:addRecurso="onAddRecurso"
               ></RecursoInterno>
             </section>
@@ -35,6 +36,8 @@
                 v-for="(recurso, index) in localForm.recursos"
                 :key="'recurso-' + index"
                 :recurso="recurso"
+                :disable="disableInputs"
+                :showAddBtn="false"
                 class="col-xs-12"
               >
                 <template slot="header">
@@ -46,14 +49,15 @@
         </div>
         <!-- ./RECURSOS -->
         <!-- INSTITUCIONES EMERGENCIA -->
-        <section class="col-xs-12" v-if="newInstitucion">
+        <section class="col-xs-12" v-if="newInstitucion && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nueva institución de emergencia</label>
             </header>
             <InstitucionEmergencia
               class="col-xs-12"
-              :isNewInstitucion="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addInstitucion="onAddInstitucion"
             ></InstitucionEmergencia>
           </section>
@@ -76,6 +80,8 @@
               v-for="(institucion, index) in localForm.instituciones"
               :key="'institucion-' + index"
               :institucionEmergencia="institucion"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">
@@ -84,7 +90,6 @@
             </InstitucionEmergencia>
           </section>
         </section>
-
         <!-- ./INSTITUCIONES EMERGENCIA -->
       </main>
       <footer class="col-xs-12">

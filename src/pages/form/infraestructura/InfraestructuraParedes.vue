@@ -1,27 +1,15 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.paredes.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Paredes registradas</label>
-          </header>
-          <Pared
-            v-for="(pared, index) in localForm.paredes"
-            :key="'pared-' + index"
-            :pared="pared"
-            class="col-xs-12"
-          ></Pared>
-        </section>
-      </section>
-      <section class="col-xs-12" v-if="newPared">
+      <section class="col-xs-12" v-if="newPared && !disableInputs">
         <section class="row">
           <header class="col-xs-12">
             <label>Nueva pared</label>
           </header>
           <Pared
             class="col-xs-12"
-            :isNewPared="true"
+            :disable="disableInputs"
+            :showAddBtn="true"
             v-on:addPared="onAddPared"
           ></Pared>
         </section>
@@ -33,6 +21,21 @@
       >
         <q-icon name="add" />Añadir otra pared
       </p>
+      <section class="col-xs-12" v-if="localForm.paredes.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Paredes registradas</label>
+          </header>
+          <Pared
+            v-for="(pared, index) in localForm.paredes"
+            :key="'pared-' + index"
+            :pared="pared"
+            :disable="disableInputs"
+            :showAddBtn="false"
+            class="col-xs-12"
+          ></Pared>
+        </section>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat

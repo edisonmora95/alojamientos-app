@@ -5,14 +5,15 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newServicio">
+        <section class="col-xs-12" v-if="newServicio && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo servicio básico</label>
             </header>
             <ServicioBasico
               class="col-xs-12"
-              :isNewServicio="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addServicio="onAddServicio"
             ></ServicioBasico>
           </section>
@@ -33,6 +34,8 @@
               v-for="(servicio, index) in localForm.servicios"
               :key="'servicio-' + index"
               :servicio="servicio"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">

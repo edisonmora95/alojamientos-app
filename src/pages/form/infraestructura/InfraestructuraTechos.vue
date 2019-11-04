@@ -1,27 +1,15 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.techos.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Techos registrados</label>
-          </header>
-          <Techo
-            v-for="(techo, index) in localForm.techos"
-            :key="'techo-' + index"
-            :techo="techo"
-            class="col-xs-12"
-          ></Techo>
-        </section>
-      </section>
-      <section class="col-xs-12" v-if="newTecho">
+      <section class="col-xs-12" v-if="newTecho && !disableInputs">
         <section class="row">
           <header class="col-xs-12">
             <label>Nuevo techo</label>
           </header>
           <Techo
             class="col-xs-12"
-            :isNewTecho="true"
+            :disable="disableInputs"
+            :showAddBtn="true"
             v-on:addTecho="onAddTecho"
           ></Techo>
         </section>
@@ -33,6 +21,21 @@
       >
         <q-icon name="add" />Añadir otro techo
       </p>
+      <section class="col-xs-12" v-if="localForm.techos.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Techos registrados</label>
+          </header>
+          <Techo
+            v-for="(techo, index) in localForm.techos"
+            :key="'techo-' + index"
+            :techo="techo"
+            :disable="disableInputs"
+            :showAddBtn="false"
+            class="col-xs-12"
+          ></Techo>
+        </section>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat

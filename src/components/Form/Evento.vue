@@ -8,7 +8,7 @@
         label="Tipo de evento"
         v-model="localForm.tipoEvento"
         :options="tiposEventos"
-        :disable="!showAddBtn"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -17,10 +17,10 @@
       <main class="row">
         <section class="col-xs-12 q-my-sm q-px-sm">
           <q-select
-            label="¿La infraestructura fue expuesta a daños?"
+            label="¿La ubicación fue expuesta a daños?"
             v-model="localForm.danos"
             :options="trueFalseOptions"
-            :disable="!showAddBtn"
+            :disable="disable"
             outlined
             emit-value
             map-options
@@ -34,7 +34,7 @@
             label="Tipo de daño"
             v-model="localForm.tipoDano"
             :options="tiposDano"
-            :disable="!showAddBtn"
+            :disable="disable"
             outlined
           ></q-select>
         </section>
@@ -48,12 +48,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    showAddBtn: {
-      type: Boolean,
-      default: false
-    },
     evento: {
       required: false,
       default() {
@@ -112,6 +109,6 @@ export default {
       this.localForm = Object.assign({}, this.evento);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

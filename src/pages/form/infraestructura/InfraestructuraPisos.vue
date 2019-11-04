@@ -1,27 +1,15 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.pisos.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Pisos registrados</label>
-          </header>
-          <Piso
-            v-for="(piso, index) in localForm.pisos"
-            :key="'piso-' + index"
-            :piso="piso"
-            class="col-xs-12"
-          ></Piso>
-        </section>
-      </section>
-      <section class="col-xs-12" v-if="newPiso">
+      <section class="col-xs-12" v-if="newPiso && !disableInputs">
         <section class="row">
           <header class="col-xs-12">
             <label>Nuevo piso</label>
           </header>
           <Piso
             class="col-xs-12"
-            :isNewPiso="true"
+            :disable="disableInputs"
+            :showAddBtn="true"
             v-on:addPiso="onAddPiso"
           ></Piso>
         </section>
@@ -33,6 +21,21 @@
       >
         <q-icon name="add" />Añadir otro piso
       </p>
+      <section class="col-xs-12" v-if="localForm.pisos.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Pisos registrados</label>
+          </header>
+          <Piso
+            v-for="(piso, index) in localForm.pisos"
+            :key="'piso-' + index"
+            :piso="piso"
+            :disable="disableInputs"
+            :showAddBtn="false"
+            class="col-xs-12"
+          ></Piso>
+        </section>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat

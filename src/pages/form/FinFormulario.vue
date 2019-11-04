@@ -9,7 +9,7 @@
           conexión a internet.
         </p>
       </q-card-section>
-      <q-card-actions class="row">
+      <q-card-actions class="row" v-if="!disableInputs">
         <article class="col-xs-6 text-center">
           <q-btn flat color="primary" :loading="loadingGuardar" @click="guardar"
             >Guardar</q-btn
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 /* global require */
 export default {
   data() {
@@ -49,7 +50,7 @@ export default {
     async guardar() {
       try {
         this.loadingGuardar = true;
-        this.$store.commit("form/setEstado", "ENVIADO");
+        this.$store.commit("form/setEstado", "GUARDADO");
         this.$store.commit("form/saveForm", this.form); // Guardo el formulario en vuex
         //await this.$store.dispatch("form/guardarFormularios", this.forms); // Guardo el formulario en el dispositivo
         this.loadingGuardar = false;
@@ -105,7 +106,8 @@ export default {
           this.$router.push({ name: "localizacion" });
         });
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>
 <style scoped>

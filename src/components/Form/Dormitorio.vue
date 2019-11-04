@@ -8,7 +8,7 @@
         label="Tipo de espacio"
         v-model="localForm.tipoEspacio"
         :options="tiposEspacio"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -18,7 +18,7 @@
         label="Cantidad"
         type="number"
         v-model.number="localForm.cantidad"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required, validaciones.numberPositive]"
         outlined
       ></q-input>
@@ -28,7 +28,7 @@
         label="Estado del espacio"
         v-model="localForm.estado"
         :options="estados"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -38,7 +38,7 @@
         label="Accesible para personas con discapacidad"
         v-model="localForm.accesible"
         :options="trueFalseOptions"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required]"
         emit-value
         map-options
@@ -51,7 +51,7 @@
         type="number"
         suffix="[m]"
         v-model.number="localForm.ancho"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required, validaciones.numberPositive]"
         outlined
       ></q-input>
@@ -62,7 +62,7 @@
         type="number"
         suffix="[m]"
         v-model.number="localForm.largo"
-        :disable="!isNewDormitorio"
+        :disable="disable"
         :rules="[validaciones.required, validaciones.numberPositive]"
         outlined
       ></q-input>
@@ -77,7 +77,7 @@
         outlined
       ></q-input>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewDormitorio">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addDormitorio">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -85,14 +85,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewDormitorio: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo dormitorio o para mostrar un dormitorio ingresado"
-    },
     dormitorio: {
       required: false,
       default() {
@@ -162,6 +157,6 @@ export default {
       this.localForm = Object.assign({}, this.dormitorio);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

@@ -9,7 +9,7 @@
         v-model="localForm.areaBano"
         :options="tiposEspacio"
         :rules="[validaciones.required]"
-        :disable="!isNewBano"
+        :disable="disable"
         outlined
       ></q-select>
     </section>
@@ -18,7 +18,7 @@
         label="Cantidad"
         type="number"
         v-model.number="localForm.cantidad"
-        :disable="!isNewBano"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-input>
@@ -29,7 +29,7 @@
         v-model="localForm.estado"
         :options="estados"
         :rules="[validaciones.required]"
-        :disable="!isNewBano"
+        :disable="disable"
         outlined
       ></q-select>
     </section>
@@ -39,13 +39,13 @@
         v-model="localForm.accesible"
         :options="trueFalseOptions"
         :rules="[validaciones.required]"
-        :disable="!isNewBano"
+        :disable="disable"
         emit-value
         map-options
         outlined
       ></q-select>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewBano">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addBano">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -53,14 +53,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewBano: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo bano o para mostrar un bano ingresado"
-    },
     bano: {
       required: false,
       default() {
@@ -122,6 +117,6 @@ export default {
       this.localForm = Object.assign({}, this.bano);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

@@ -8,7 +8,7 @@
         label="Tipo de amenaza"
         v-model="localForm.tipoAmenaza"
         :options="tiposAmenaza"
-        :disable="!isNewAmenaza"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -18,14 +18,14 @@
         label="Nivel de recurrencia"
         v-model="localForm.nivelRecurrencia"
         :options="nivelesRecurrencia"
-        :disable="!isNewAmenaza"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
         emit-value
         map-options
       ></q-select>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewAmenaza">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addAmenaza">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -33,14 +33,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewAmenaza: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar una nueva amenaza o para mostrar una amenaza ya ingresada"
-    },
     amenaza: {
       required: false,
       default() {
@@ -100,6 +95,6 @@ export default {
       this.localForm = Object.assign({}, this.amenaza);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

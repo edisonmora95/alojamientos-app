@@ -5,14 +5,15 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newAmenaza">
+        <section class="col-xs-12" v-if="newAmenaza && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nueva amenaza</label>
             </header>
             <Amenaza
               class="col-xs-12"
-              :isNewAmenaza="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addAmenaza="onAddAmenaza"
             ></Amenaza>
           </section>
@@ -34,6 +35,8 @@
               :key="'amenaza-' + index"
               :amenaza="amenaza"
               class="col-xs-12"
+              :disable="disableInputs"
+              :showAddBtn="false"
             >
               <template slot="header">
                 <label> Amenaza # {{ index + 1 }}</label>

@@ -3,6 +3,7 @@
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
       <section class="col-xs-12 col-sm-6">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.zona"
           :options="zonas"
           option-value="id"
@@ -16,6 +17,7 @@
       </section>
       <section class="col-xs-12 col-sm-6">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.provincia"
           :options="provincias"
           option-value="id"
@@ -29,12 +31,13 @@
       </section>
       <section class="col-xs-12 col-sm-6">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.canton"
           :options="cantones"
           option-value="id"
           option-label="nombre"
           :rules="[validaciones.required]"
-          label="Canton"
+          label="Cantón"
           outlined
           map-options
           emit-value
@@ -42,6 +45,7 @@
       </section>
       <section class="col-xs-12 col-sm-6">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.parroquia"
           :options="parroquias"
           option-value="id"

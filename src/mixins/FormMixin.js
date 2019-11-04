@@ -10,6 +10,9 @@ const FormMixin = {
       } else {
         return { name: "caracteristicasTerreno" };
       }
+    },
+    disableInputs() {
+      return this.form.estado === "ENVIADO";
     }
   },
   methods: {

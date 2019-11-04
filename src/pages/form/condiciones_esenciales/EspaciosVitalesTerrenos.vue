@@ -26,14 +26,15 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newEspacio">
+        <section class="col-xs-12" v-if="newEspacio && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo Espacio</label>
             </header>
             <EspacioTerreno
               class="col-xs-12"
-              :isNewEspacio="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addEspacio="onAddEspacio"
             ></EspacioTerreno>
           </section>
@@ -53,7 +54,8 @@
             <EspacioTerreno
               v-for="(espacio, index) in localForm.espaciosTerreno"
               :key="'espacio-' + index"
-              :espacio="espacio"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">

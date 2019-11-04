@@ -3,6 +3,7 @@
     <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.tipo"
           :options="tipos"
           :rules="[validaciones.required]"
@@ -14,6 +15,7 @@
       </section>
       <section class="col-xs-12 col-md-6">
         <q-input
+          :disable="disableInputs"
           v-model="localForm.fechaInspeccion"
           :rules="[validaciones.required]"
           mask="date"
@@ -37,6 +39,7 @@
       </section>
       <section class="col-xs-12 col-md-6">
         <q-input
+          :disable="disableInputs"
           outlined
           v-model="localForm.horaInspeccion"
           mask="time"

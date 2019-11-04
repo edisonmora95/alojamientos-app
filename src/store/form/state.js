@@ -2,7 +2,7 @@ export default {
   /** Formulario a llenar por el usuario */
   form: {
     id: 0,
-    estado: "",
+    estado: "PENDIENTE",
 
     zona: "",
     provincia: "",
@@ -91,7 +91,7 @@ export default {
     puntajeMedidasSeguridad: 0,
     puntajeInfraestructura: 0,
     puntajeAccesibilidad: 0,
-    puntajeCaracteristicasTerreno: 0,
+    puntajeCaracteristicasTerreno: 0
   },
   /** Array de todos los formularios */
   forms: []

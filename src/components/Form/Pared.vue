@@ -7,7 +7,7 @@
           v-model="localForm.materialPared"
           :rules="[validaciones.required]"
           :options="materiales"
-          :disable="!isNewPared"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
@@ -17,13 +17,13 @@
           v-model="localForm.estado"
           :rules="[validaciones.required]"
           :options="estados"
-          :disable="!isNewPared"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
     </q-form>
     <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewPared">
+      <section class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
         <q-btn color="primary" @click="addPared">Aceptar</q-btn>
       </section>
     </footer>
@@ -32,14 +32,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewPared: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar una nueva pared o para mostrar una pared ya ingresada"
-    },
     pared: {
       required: false,
       default() {
@@ -88,6 +83,6 @@ export default {
       this.localForm = Object.assign({}, this.pared);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

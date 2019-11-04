@@ -11,7 +11,7 @@ export function form(state) {
 export function puntajeTotal(state) {
   const MAX_TERRENO = 60;
   const MAX_PUNTAJE = 100;
-  const puntaje = (
+  const puntaje =
     state.form.puntajeAntecedentes +
     state.form.puntajeRiesgos +
     state.form.puntajeViasAcceso +
@@ -20,8 +20,7 @@ export function puntajeTotal(state) {
     state.form.puntajeMedidasSeguridad +
     state.form.puntajeInfraestructura +
     state.form.puntajeAccesibilidad +
-    state.form.puntajeCaracteristicasTerreno
-  );
+    state.form.puntajeCaracteristicasTerreno;
 
   if (state.form.tipo === 2) {
     return Number(((puntaje * MAX_PUNTAJE) / MAX_TERRENO).toFixed(2));

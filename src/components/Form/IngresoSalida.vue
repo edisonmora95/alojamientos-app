@@ -7,7 +7,7 @@
           v-model="localForm.tipoIngresoSalida"
           :rules="[validaciones.required]"
           :options="tiposIngresosSalidas"
-          :disable="!isNewIngresoSalida"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
@@ -17,7 +17,7 @@
           type="number"
           v-model.number="localForm.cantidad"
           :rules="[validaciones.required, validaciones.numberPositive]"
-          :disable="!isNewIngresoSalida"
+          :disable="disable"
           outlined
         ></q-input>
       </section>
@@ -27,16 +27,13 @@
           v-model="localForm.estado"
           :rules="[validaciones.required]"
           :options="estados"
-          :disable="!isNewIngresoSalida"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
     </q-form>
     <footer class="row">
-      <section
-        class="col-xs-4 offset-xs-4 text-center"
-        v-if="isNewIngresoSalida"
-      >
+      <section class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
         <q-btn color="primary" @click="addIngresoSalida">Aceptar</q-btn>
       </section>
     </footer>
@@ -45,14 +42,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewIngresoSalida: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
-    },
     ingresoSalida: {
       required: false,
       default() {
@@ -121,6 +113,6 @@ export default {
       this.localForm = Object.assign({}, this.ingresoSalida);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

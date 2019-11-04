@@ -23,7 +23,7 @@ export function setPuntajeSeccion(state, payload) {
 export function clearForm(state) {
   state.form = {
     id: 0,
-    estado: "",
+    estado: "PENDIENTE",
 
     zona: "",
     provincia: "",

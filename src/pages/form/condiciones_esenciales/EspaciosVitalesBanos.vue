@@ -5,15 +5,16 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newBano">
+        <section class="col-xs-12" v-if="newBano && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo baño</label>
             </header>
             <Bano
               class="col-xs-12"
-              :isNewBano="true"
               v-on:addBano="onAddBano"
+              :disable="disableInputs"
+              :showAddBtn="true"
             ></Bano>
           </section>
         </section>
@@ -33,6 +34,8 @@
               v-for="(bano, index) in localForm.banos"
               :key="'bano-' + index"
               :bano="bano"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">

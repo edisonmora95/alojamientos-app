@@ -8,7 +8,7 @@
         label="Tipo de servicio"
         v-model="localForm.tipoServicio"
         :options="tiposServicio"
-        :disable="!isNewServicio"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -18,12 +18,12 @@
         label="Estado"
         v-model="localForm.estado"
         :options="estados"
-        :disable="!isNewServicio"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewServicio">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addServicio">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -31,14 +31,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewServicio: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo servicio o para mostrar un servicio ya ingresado"
-    },
     servicio: {
       required: false,
       default() {
@@ -98,6 +93,6 @@ export default {
       this.localForm = Object.assign({}, this.servicio);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

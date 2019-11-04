@@ -5,13 +5,14 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newEvent">
+        <section class="col-xs-12" v-if="newEvent && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo evento</label>
             </header>
             <Evento
               class="col-xs-12"
+              :disable="disableInputs"
               :showAddBtn="true"
               v-on:addEvent="onAddEvent"
             ></Evento>
@@ -33,6 +34,8 @@
               v-for="(evento, index) in localForm.eventos"
               :key="'evento-' + index"
               :evento="evento"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">
@@ -43,6 +46,7 @@
         </section>
         <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
           <q-select
+            :disable="disableInputs"
             label="¿Fue utilizada anteriormente como alojamiento?"
             v-model="localForm.usoPrevio"
             :options="trueFalseOptions"
@@ -56,6 +60,7 @@
           class="col-xs-12 col-sm-6 q-my-sm q-px-sm"
         >
           <q-input
+            :disable="disableInputs"
             type="number"
             outlined
             label="Año de uso"

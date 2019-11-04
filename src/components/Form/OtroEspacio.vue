@@ -7,7 +7,7 @@
           v-model="localForm.espacio"
           :rules="[validaciones.required]"
           :options="tiposEspacios"
-          :disable="!isNewEspacio"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
@@ -17,7 +17,7 @@
           type="number"
           v-model.number="localForm.cantidad"
           :rules="[validaciones.required, validaciones.numberPositive]"
-          :disable="!isNewEspacio"
+          :disable="disable"
           outlined
         ></q-input>
       </section>
@@ -27,7 +27,7 @@
           v-model="localForm.estado"
           :rules="[validaciones.required]"
           :options="estados"
-          :disable="!isNewEspacio"
+          :disable="disable"
           outlined
         ></q-select>
       </section>
@@ -37,7 +37,7 @@
           v-model="localForm.accesible"
           :rules="[validaciones.required]"
           :options="trueFalseOptions"
-          :disable="!isNewEspacio"
+          :disable="disable"
           outlined
           emit-value
           map-options
@@ -45,7 +45,7 @@
       </section>
     </q-form>
     <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewEspacio">
+      <section class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
         <q-btn color="primary" @click="addOtroEspacio">Aceptar</q-btn>
       </section>
     </footer>
@@ -54,14 +54,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewEspacio: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo ingreso/salida o para mostrar un ingreso/salida ya ingresado"
-    },
     otroEspacio: {
       required: false,
       default() {
@@ -117,6 +112,6 @@ export default {
       this.localForm = Object.assign({}, this.otroEspacio);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

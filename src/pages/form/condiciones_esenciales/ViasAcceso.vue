@@ -5,14 +5,15 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newVia">
+        <section class="col-xs-12" v-if="newVia && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nueva vía de acceso</label>
             </header>
             <ViaAcceso
               class="col-xs-12"
-              :isNewVia="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addVia="onAddVia"
             ></ViaAcceso>
           </section>
@@ -33,6 +34,8 @@
               v-for="(via, index) in localForm.vias"
               :key="'via-' + index"
               :via="via"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">

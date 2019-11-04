@@ -8,7 +8,7 @@
         label="Tipo de recurso"
         v-model="localForm.tipoRecurso"
         :options="tiposRecurso"
-        :disable="!isNewRecurso"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -18,12 +18,12 @@
         label="Estado del recurso"
         v-model="localForm.estado"
         :options="estados"
-        :disable="!isNewRecurso"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewRecurso">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addRecurso">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -31,6 +31,7 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
     isNewRecurso: {
@@ -92,6 +93,6 @@ export default {
       this.localForm = Object.assign({}, this.recurso);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

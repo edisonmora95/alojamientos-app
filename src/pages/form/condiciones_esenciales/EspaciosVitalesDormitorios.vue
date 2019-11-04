@@ -1,14 +1,15 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :ref="refForm">
-      <section class="col-xs-12" v-if="newDormitorio">
+      <section class="col-xs-12" v-if="newDormitorio && !disableInputs">
         <section class="row">
           <header class="col-xs-12">
             <label>Nuevo dormitorio</label>
           </header>
           <Dormitorio
             class="col-xs-12"
-            :isNewDormitorio="true"
+            :disable="disableInputs"
+            :showAddBtn="true"
             v-on:addDormitorio="onAddDormitorio"
           ></Dormitorio>
         </section>
@@ -29,6 +30,8 @@
             v-for="(dormitorio, index) in localForm.dormitorios"
             :key="'dormitorio-' + index"
             :dormitorio="dormitorio"
+            :disable="disableInputs"
+            :showAddBtn="false"
             class="col-xs-12"
           >
             <template slot="header">

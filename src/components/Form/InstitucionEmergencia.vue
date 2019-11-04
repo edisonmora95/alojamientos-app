@@ -9,7 +9,7 @@
         v-model="localForm.institucion"
         :rules="[validaciones.required]"
         :options="tiposInsitucion"
-        :disable="!isNewInstitucion"
+        :disable="disable"
         outlined
       ></q-select>
     </section>
@@ -20,11 +20,11 @@
         suffix="[m]"
         v-model.number="localForm.distancia"
         :rules="[validaciones.required, validaciones.numberPositive]"
-        :disable="!isNewInstitucion"
+        :disable="disable"
         outlined
       ></q-input>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewInstitucion">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addInstitucion">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -32,6 +32,7 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
     isNewInstitucion: {
@@ -87,6 +88,6 @@ export default {
       this.localForm = Object.assign({}, this.institucionEmergencia);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

@@ -7,6 +7,7 @@
           v-model="localForm.zonaArriboVehicular"
           :options="zonasArriboVehicular"
           :rules="[validaciones.required]"
+          :disable="disableInputs"
           outlined
         ></q-select>
       </section>
@@ -16,6 +17,7 @@
           v-model="localForm.areaCirculacion"
           :options="areasCirculacion"
           :rules="[validaciones.required]"
+          :disable="disableInputs"
           outlined
           map-options
           emit-value
@@ -27,6 +29,7 @@
           v-model="localForm.comunicacion"
           :options="trueFalseOptions"
           :rules="[validaciones.required]"
+          :disable="disableInputs"
           outlined
           emit-value
           map-options
@@ -38,6 +41,7 @@
           v-model="localForm.caracteristicas"
           :options="caracteristicas"
           :rules="[validaciones.required]"
+          :disable="disableInputs"
           multiple
           outlined
           emit-value

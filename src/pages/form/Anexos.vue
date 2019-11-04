@@ -2,7 +2,12 @@
   <q-page class="q-pt-lg q-px-md">
     <section class="row">
       <article class="col-xs-6 col-sm-3 text-center">
-        <q-btn flat id="btnAdd" @click="openBottomSheet">
+        <q-btn
+          flat
+          id="btnAdd"
+          @click="openBottomSheet"
+          :disable="disableInputs"
+        >
           <q-icon name="camera_alt" style="font-size: 2.5em;" />
         </q-btn>
       </article>

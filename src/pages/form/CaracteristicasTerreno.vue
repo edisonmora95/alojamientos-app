@@ -5,14 +5,15 @@
     </header>
     <q-form class="q-px-md" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="newSuelo">
+        <section class="col-xs-12" v-if="newSuelo && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo suelo</label>
             </header>
             <Suelo
               class="col-xs-12"
-              :isNewSuelo="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addSuelo="onAddSuelo"
             ></Suelo>
           </section>
@@ -33,6 +34,8 @@
               v-for="(suelo, index) in localForm.suelos"
               :key="'suelo-' + index"
               :suelo="suelo"
+              :disable="disableInputs"
+              :showAddBtn="false"
               class="col-xs-12"
             >
               <template slot="header">

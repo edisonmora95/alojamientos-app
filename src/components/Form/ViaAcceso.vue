@@ -8,7 +8,7 @@
         label="Vía de acceso"
         v-model="localForm.viaAcceso"
         :options="viasAcceso"
-        :disable="!isNewVia"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -19,12 +19,12 @@
         type="number"
         suffix="[m]"
         v-model.number="localForm.distancia"
-        :disable="!isNewVia"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-input>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewVia">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addVia">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -32,14 +32,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewVia: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar una nueva via de acceso o para mostrar una via ya ingresada"
-    },
     via: {
       required: false,
       default() {
@@ -87,6 +82,6 @@ export default {
       this.localForm = Object.assign({}, this.via);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

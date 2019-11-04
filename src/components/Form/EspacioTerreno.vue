@@ -8,7 +8,7 @@
         label="Área"
         v-model="localForm.tipoEspacio"
         :options="tiposEspacio"
-        :disable="!isNewEspacio"
+        :disable="disable"
         :rules="[validaciones.required]"
         outlined
       ></q-select>
@@ -19,7 +19,7 @@
         type="number"
         suffix="[m]"
         v-model.number="localForm.ancho"
-        :disable="!isNewEspacio"
+        :disable="disable"
         :rules="[validaciones.required, validaciones.numberPositive]"
         outlined
       ></q-input>
@@ -30,7 +30,7 @@
         type="number"
         suffix="[m]"
         v-model.number="localForm.largo"
-        :disable="!isNewEspacio"
+        :disable="disable"
         :rules="[validaciones.required, validaciones.numberPositive]"
         outlined
       ></q-input>
@@ -45,7 +45,7 @@
         outlined
       ></q-input>
     </section>
-    <footer class="col-xs-4 offset-xs-4 text-center" v-if="isNewEspacio">
+    <footer class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
       <q-btn color="primary" @click="addEspacio">Aceptar</q-btn>
     </footer>
   </q-form>
@@ -53,14 +53,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewEspacio: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo espacio o solo para mostrar un espacio ya creado"
-    },
     espacio: {
       required: false,
       default() {
@@ -120,6 +115,6 @@ export default {
       this.localForm = Object.assign({}, this.espacio);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

@@ -3,6 +3,7 @@
     <q-form class="row q-col-gutter-md" :ref="refForm" :no-error-focus="true">
       <section class="col-xs-12">
         <q-select
+          :disable="disableInputs"
           v-model="localForm.infraestructura"
           :options="ubicaciones"
           :rules="[validaciones.required]"
@@ -21,6 +22,7 @@
         "
       >
         <q-input
+          :disable="disableInputs"
           label="Nombre de la infraestructura"
           v-model="localForm.infraestructura.nombre"
           :rules="[validaciones.required]"
@@ -237,8 +239,9 @@ export default {
     },
     inputsInfraestructuraDisabled() {
       return (
-        this.localForm.infraestructura.id !== 0 &&
-        this.localForm.infraestructura.id != null
+        this.disableInputs ||
+        (this.localForm.infraestructura.id !== 0 &&
+          this.localForm.infraestructura.id != null)
       );
     }
   },

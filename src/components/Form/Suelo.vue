@@ -8,6 +8,7 @@
           :rules="[validaciones.required]"
           :options="tiposSuelo"
           outlined
+          :disable="disable"
         ></q-select>
       </section>
       <section class="col-xs-12 col-sm-6 q-my-sm q-px-sm">
@@ -19,11 +20,12 @@
           type="textarea"
           counter
           maxlength="255"
+          :disable="disable"
         />
       </section>
     </q-form>
     <footer class="row">
-      <section class="col-xs-4 offset-xs-4 text-center" v-if="isNewSuelo">
+      <section class="col-xs-4 offset-xs-4 text-center" v-if="showAddBtn">
         <q-btn color="primary" @click="addSuelo">Aceptar</q-btn>
       </section>
     </footer>
@@ -32,14 +34,9 @@
 
 <script>
 import FormMixin from "../../mixins/FormMixin";
+import FormComponentMixin from "../../mixins/FormComponentMixin";
 export default {
   props: {
-    isNewSuelo: {
-      type: Boolean,
-      default: false,
-      description:
-        "Indica si el componente se esta usando para ingresar un nuevo suelo o para mostrar un suelo ya ingresada"
-    },
     suelo: {
       required: false,
       default() {
@@ -95,6 +92,6 @@ export default {
       this.localForm = Object.assign({}, this.suelo);
     }
   },
-  mixins: [FormMixin]
+  mixins: [FormMixin, FormComponentMixin]
 };
 </script>

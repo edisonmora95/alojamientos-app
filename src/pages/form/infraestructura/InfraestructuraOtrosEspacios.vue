@@ -5,27 +5,15 @@
     </header>
     <q-form class="q-px-md" :no-error-focus="true" :ref="refForm">
       <main class="row q-mt-md">
-        <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
-          <section class="row">
-            <header class="col-xs-12">
-              <label>Espacios registrados</label>
-            </header>
-            <OtroEspacio
-              v-for="(otroEspacio, index) in localForm.otrosEspacios"
-              :key="'otroEspacio-' + index"
-              :otroEspacio="otroEspacio"
-              class="col-xs-12"
-            ></OtroEspacio>
-          </section>
-        </section>
-        <section class="col-xs-12" v-if="newOtroEspacio">
+        <section class="col-xs-12" v-if="newOtroEspacio && !disableInputs">
           <section class="row">
             <header class="col-xs-12">
               <label>Nuevo espacio</label>
             </header>
             <OtroEspacio
               class="col-xs-12"
-              :isNewEspacio="true"
+              :disable="disableInputs"
+              :showAddBtn="true"
               v-on:addOtroEspacio="onAddOtroEspacio"
             ></OtroEspacio>
           </section>
@@ -37,6 +25,21 @@
         >
           <q-icon name="add" />Añadir otro espacio
         </p>
+        <section class="col-xs-12" v-if="localForm.otrosEspacios.length > 0">
+          <section class="row">
+            <header class="col-xs-12">
+              <label>Espacios registrados</label>
+            </header>
+            <OtroEspacio
+              v-for="(otroEspacio, index) in localForm.otrosEspacios"
+              :key="'otroEspacio-' + index"
+              :otroEspacio="otroEspacio"
+              :disable="disableInputs"
+              :showAddBtn="false"
+              class="col-xs-12"
+            ></OtroEspacio>
+          </section>
+        </section>
       </main>
       <footer class="col-xs-12">
         <q-btn

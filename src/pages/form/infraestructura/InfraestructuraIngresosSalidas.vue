@@ -1,27 +1,15 @@
 <template>
   <q-page class="q-pt-lg q-px-md">
     <q-form class="row q-col-gutter-md" :no-error-focus="true" :ref="refForm">
-      <section class="col-xs-12" v-if="localForm.ingresosSalidas.length > 0">
-        <section class="row">
-          <header class="col-xs-12">
-            <label>Ingresos/Salidas registrados</label>
-          </header>
-          <IngresoSalida
-            v-for="(ingresoSalida, index) in localForm.ingresosSalidas"
-            :key="'ingresoSalida-' + index"
-            :ingresoSalida="ingresoSalida"
-            class="col-xs-12"
-          ></IngresoSalida>
-        </section>
-      </section>
-      <section class="col-xs-12" v-if="newIngresoSalida">
+      <section class="col-xs-12" v-if="newIngresoSalida && !disableInputs">
         <section class="row">
           <header class="col-xs-12">
             <label>Nuevo ingreso/salida</label>
           </header>
           <IngresoSalida
             class="col-xs-12"
-            :isNewIngresoSalida="true"
+            :disable="disableInputs"
+            :showAddBtn="true"
             v-on:addIngresoSalida="onAddIngresoSalida"
           ></IngresoSalida>
         </section>
@@ -33,6 +21,21 @@
       >
         <q-icon name="add" />Añadir otro ingreso/salida
       </p>
+      <section class="col-xs-12" v-if="localForm.ingresosSalidas.length > 0">
+        <section class="row">
+          <header class="col-xs-12">
+            <label>Ingresos/Salidas registrados</label>
+          </header>
+          <IngresoSalida
+            v-for="(ingresoSalida, index) in localForm.ingresosSalidas"
+            :key="'ingresoSalida-' + index"
+            :ingresoSalida="ingresoSalida"
+            class="col-xs-12"
+            :disable="disableInputs"
+            :showAddBtn="false"
+          ></IngresoSalida>
+        </section>
+      </section>
       <footer class="col-xs-12">
         <q-btn
           flat

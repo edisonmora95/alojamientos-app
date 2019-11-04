@@ -6,6 +6,7 @@
           outlined
           autogrow
           v-model="localForm.recomendaciones"
+          :disable="disableInputs"
           label="Recomendaciones"
           type="textarea"
           counter
@@ -55,6 +56,7 @@
 </template>
 
 <script>
+import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
@@ -128,7 +130,8 @@ export default {
       this.updateForm();
       this.$router.push(this.prevPage);
     }
-  }
+  },
+  mixins: [FormMixin]
 };
 </script>
 <style scoped>

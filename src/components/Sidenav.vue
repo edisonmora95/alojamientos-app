@@ -40,16 +40,20 @@ export default {
   methods: {
     ingresarFormulario() {
       if (this.form.zona != 0) {
-        this.$q.dialog({
-          message: "Hay un formulario ya iniciado. ¿Desea continuar o ingresar uno nuevo?",
-          persistent: true,
-          ok: "Continuar",
-          cancel: "Nuevo",
-        }).onCancel(() => {
-          this.$store.commit("form/clearForm");
-        }).onDismiss(() => {
-          this.$router.push(this.localizacion);
-        });
+        this.$q
+          .dialog({
+            message:
+              "Hay un formulario ya iniciado. ¿Desea continuar o ingresar uno nuevo?",
+            persistent: true,
+            ok: "Continuar",
+            cancel: "Nuevo"
+          })
+          .onCancel(() => {
+            this.$store.commit("form/clearForm");
+          })
+          .onDismiss(() => {
+            this.$router.push(this.localizacion);
+          });
       } else {
         this.$router.push(this.localizacion);
       }
