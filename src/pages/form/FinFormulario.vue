@@ -16,7 +16,7 @@
           >
         </article>
         <article class="col-xs-6 text-center">
-          <q-btn flat color="positive" :loading="loadingEnviar" @click="enviar"
+          <q-btn flat color="positive" :loading="loadingEnviar" @click="confirmarEnvio"
             >Enviar</q-btn
           >
         </article>
@@ -87,6 +87,19 @@ export default {
           });
         console.error(error);
       }
+    },
+    confirmarEnvio() {
+      this.$q
+        .dialog({
+          message: "Está seguro de que quiere ingresar este formulario?",
+          cancel: "NO",
+          ok: "SI",
+          persistent: true
+        })
+        .onOk(() => {
+          // TERMINAR
+          this.enviar();
+        });
     },
     dialogContinuar() {
       this.$q
