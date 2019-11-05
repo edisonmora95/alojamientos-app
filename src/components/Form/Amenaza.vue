@@ -56,25 +56,15 @@ export default {
         tipoAmenaza: "",
         nivelRecurrencia: ""
       },
-
-      tiposAmenaza: [
-        "Ninguno",
-        "Movimiento en masa",
-        "Inundación",
-        "Incendio Forestal",
-        "Erupción Volcánica",
-        "Tsunami",
-        "Cambio Climático",
-        "Déficit hídrico",
-        "Sequía",
-        "Oleajes"
-      ],
       nivelesRecurrencia: ["Alto", "Medio", "Bajo"]
     };
   },
   computed: {
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    },
+    tiposAmenaza() {
+      return this.$store.getters["app/tiposAmenaza"];
     }
   },
   methods: {

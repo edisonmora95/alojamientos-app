@@ -117,14 +117,7 @@ export default {
       return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
     caracteristicas() {
-      return [
-        { value: 1, label: "Característica 1" },
-        { value: 2, label: "Característica 2" },
-        { value: 3, label: "Característica 3" },
-        { value: 4, label: "Característica 4" },
-        { value: 5, label: "Característica 5" },
-        { value: 6, label: "Característica 6" }
-      ];
+      return this.$store.getters["app/caracteristicasCirculacion"];
     },
     puntaje() {
       const puntajeZonaArribo =

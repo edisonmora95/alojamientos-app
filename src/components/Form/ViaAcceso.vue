@@ -54,14 +54,15 @@ export default {
       localForm: {
         viaAcceso: "",
         distancia: 0.0
-      },
-
-      viasAcceso: ["Terrestre", "Fluvial", "Aérea"]
+      }
     };
   },
   computed: {
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    },
+    viasAcceso() {
+      return this.$store.getters["app/viasAcceso"];
     }
   },
   methods: {

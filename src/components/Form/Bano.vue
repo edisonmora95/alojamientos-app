@@ -80,18 +80,13 @@ export default {
         estado: "",
         accesible: false
       },
-
-      tiposEspacio: [
-        "Aula",
-        "Cuarto",
-        "Salón de uso múltiple",
-        "Cancha cubierta",
-        "Otro"
-      ],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
+    tiposEspacio() {
+      return this.$store.getters["app/tiposEspacioInfraestructura"];
+    },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     },

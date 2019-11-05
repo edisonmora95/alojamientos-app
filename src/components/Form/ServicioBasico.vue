@@ -54,25 +54,15 @@ export default {
         tipoServicio: "",
         estado: ""
       },
-
-      tiposServicio: [
-        "Abastecimiento de agua",
-        "Tanques de agua",
-        "Alcantarillado",
-        "Drenaje de aguas lluvia",
-        "Manejo de residuos sólidos",
-        "Energía eléctrica",
-        "Servicio telefónico",
-        "Señal de televisión",
-        "Señal de celular",
-        "Señal de radio"
-      ],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    },
+    tiposServicio() {
+      return this.$store.getters["app/tiposServicio"];
     }
   },
   methods: {

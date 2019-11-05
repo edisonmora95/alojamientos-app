@@ -16,7 +16,11 @@
           >
         </article>
         <article class="col-xs-6 text-center">
-          <q-btn flat color="positive" :loading="loadingEnviar" @click="confirmarEnvio"
+          <q-btn
+            flat
+            color="positive"
+            :loading="loadingEnviar"
+            @click="confirmarEnvio"
             >Enviar</q-btn
           >
         </article>

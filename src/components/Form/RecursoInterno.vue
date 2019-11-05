@@ -60,17 +60,13 @@ export default {
         tipoRecurso: "",
         estado: ""
       },
-
-      tiposRecurso: [
-        "Sistema de alarma",
-        "Pulsadores de alarma",
-        "Detector de humo",
-        "Hidrantes"
-      ],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
+    tiposRecurso() {
+      return this.$store.getters["app/tiposRecursoInterno"];
+    },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     }

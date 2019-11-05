@@ -56,20 +56,13 @@ export default {
       localForm: {
         tipoSuelo: "",
         observacion: ""
-      },
-
-      tiposSuelo: [
-        "Firme",
-        "Seco",
-        "Inundable",
-        "Ciénaga",
-        "Húmedo",
-        "Blando",
-        "Relleno"
-      ]
+      }
     };
   },
   computed: {
+    tiposSuelo() {
+      return this.$store.getters["app/tiposSuelo"];
+    },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     }

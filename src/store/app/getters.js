@@ -51,3 +51,24 @@ export const ubicacionesTipo = state => tipo =>
 export function instituciones(state) {
   return state.instituciones;
 }*/
+
+export const tiposEvento = state => state.tiposEvento.map(tipo => tipo.nombre);
+export const tiposDano = state => state.tiposDano.map(tipo => tipo.nombre);
+export const tiposAmenaza = state =>
+  state.tiposAmenaza.map(tipo => tipo.nombre);
+export const viasAcceso = state => state.viasAcceso.map(tipo => tipo.nombre);
+export const tiposServicio = state =>
+  state.tiposServicio.map(tipo => tipo.nombre);
+export const tiposEspacioInfraestructura = state =>
+  state.tiposEspacioInfraestructura.map(tipo => tipo.nombre);
+export const tiposRecursoInterno = state =>
+  state.tiposRecursoInterno.map(tipo => tipo.nombre);
+export const tiposInsitucionEmergencia = state =>
+  state.tiposInsitucionEmergencia.map(tipo => tipo.nombre);
+export const tiposSuelo = state => state.tiposSuelo.map(tipo => tipo.nombre);
+export const tiposMaterialInfraestructura = state =>
+  state.tiposMaterialInfraestructura.map(tipo => tipo.nombre);
+export const tiposOtrosEspaciosInfraestructura = state =>
+  state.tiposOtrosEspaciosInfraestructura.map(tipo => tipo.nombre);
+export const caracteristicasCirculacion = state =>
+  state.caracteristicasCirculacion.map(tipo => tipo.nombre);

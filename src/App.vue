@@ -46,6 +46,7 @@ export default {
         this.$store.commit("app/setCantones", datos.cantones);
         this.$store.commit("app/setParroquias", datos.parroquias);
         this.$store.commit("app/setUbicaciones", datos.ubicaciones);
+        this.$store.commit("app/setDatosApp", datos.datos);
       }
     },
     async crearArchivoDatos(datos) {

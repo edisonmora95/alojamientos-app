@@ -81,12 +81,13 @@ export default {
         cantidad: 0,
         accesible: false
       },
-
-      tiposEspacios: ["Espacio 1", "Espacio 2", "Espacio 3"],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
+    tiposEspacios() {
+      return this.$store.getters["app/tiposOtrosEspaciosInfraestructura"];
+    },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     },

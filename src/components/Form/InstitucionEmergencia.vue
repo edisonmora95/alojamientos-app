@@ -60,14 +60,15 @@ export default {
       localForm: {
         institucion: "",
         distancia: 0.0
-      },
-
-      tiposInsitucion: ["Policia UPC", "Cuerpo de bomberos", "Hospital", "Otro"]
+      }
     };
   },
   computed: {
     validaciones() {
       return this.$store.getters["app/validaciones"];
+    },
+    tiposInsitucion() {
+      return this.$store.getters["app/tiposInsitucionEmergencia"];
     }
   },
   methods: {

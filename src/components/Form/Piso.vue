@@ -55,12 +55,13 @@ export default {
         materialPiso: "",
         estado: ""
       },
-
-      materiales: ["Tapial", "Adobe", "Caña", "Otros"],
       estados: ["Bueno", "Malo"]
     };
   },
   computed: {
+    materiales() {
+      return this.$store.getters["app/tiposMaterialInfraestructura"];
+    },
     validaciones() {
       return this.$store.getters["app/validaciones"];
     }

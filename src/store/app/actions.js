@@ -8,6 +8,7 @@ export async function sincronizarDatosApp({ commit }) {
     commit("setCantones", data.cantones);
     commit("setParroquias", data.parroquias);
     commit("setUbicaciones", data.ubicaciones);
+    commit("setDatosApp", data.datos);
     return data;
   }
   return null;

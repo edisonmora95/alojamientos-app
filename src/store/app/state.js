@@ -4,6 +4,19 @@ export default {
   cantones: [],
   parroquias: [],
   ubicaciones: [],
+
+  tiposEvento: [],
+  tiposDano: [],
+  tiposAmenaza: [],
+  viasAcceso: [],
+  tiposServicio: [],
+  tiposEspacioInfraestructura: [],
+  tiposRecursoInterno: [],
+  tiposInsitucionEmergencia: [],
+  tiposSuelo: [],
+  tiposMaterialInfraestructura: [],
+  tiposOtrosEspaciosInfraestructura: [],
+  caracteristicasCirculacion: [],
   instituciones: [
     {
       id: 1,

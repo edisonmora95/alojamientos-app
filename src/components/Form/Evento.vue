@@ -7,7 +7,7 @@
       <q-select
         label="Tipo de evento"
         v-model="localForm.tipoEvento"
-        :options="tiposEventos"
+        :options="tiposEvento"
         :disable="disable"
         :rules="[validaciones.required]"
         outlined
@@ -72,18 +72,16 @@ export default {
         tipoEvento: "",
         danos: false,
         tipoDano: ""
-      },
-
-      tiposEventos: [
-        "Ninguno",
-        "Movimiento en masa",
-        "Inundación",
-        "Terremoto"
-      ],
-      tiposDano: ["Humano", "Infraestructura", "Económico"]
+      }
     };
   },
   computed: {
+    tiposEvento() {
+      return this.$store.getters["app/tiposEvento"];
+    },
+    tiposDano() {
+      return this.$store.getters["app/tiposDano"];
+    },
     trueFalseOptions() {
       return [{ value: true, label: "Si" }, { value: false, label: "No" }];
     },
