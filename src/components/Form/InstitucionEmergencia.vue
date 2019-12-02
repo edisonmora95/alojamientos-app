@@ -13,6 +13,13 @@
         outlined
       ></q-select>
     </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm q-mb-md">
+      <q-input
+        v-if="localForm.institucion == 'Otro'"
+        label="Institución"
+        v-model="nuevaInstitucion"
+      ></q-input>
+    </section>
     <section class="col-xs-12 col-sm-6 q-px-sm">
       <q-input
         label="Distancia"
@@ -60,7 +67,8 @@ export default {
       localForm: {
         institucion: "",
         distancia: 0.0
-      }
+      },
+      nuevaInstitucion: ""
     };
   },
   computed: {
@@ -81,6 +89,9 @@ export default {
       const isFormValid = await this.beforeSubmit(this.refForm);
       if (isFormValid) {
         const payload = Object.assign({}, this.localForm);
+        if (this.localForm.institucion == "Otro") {
+          payload.institucion = this.nuevaInstitucion;
+        }
         this.$emit("addInstitucion", payload);
         this.clearForm(this.localForm);
       }

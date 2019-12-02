@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     materiales() {
-      return this.$store.getters["app/tiposMaterialInfraestructura"];
+      return this.$store.getters["app/tiposTecho"];
     },
     validaciones() {
       return this.$store.getters["app/validaciones"];

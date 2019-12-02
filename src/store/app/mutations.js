@@ -64,4 +64,7 @@ export function setDatosApp(state, datos) {
   state.caracteristicasCirculacion = datos.filter(
     dato => dato.tipo === "CARACTERISTICA_CIRCULACION"
   );
+  state.tiposMaterialInfraestructuraTecho = datos.filter(
+    dato => dato.tipo === "TIPO_MATERIAL_INFRAESTRUCTURA_TECHO"
+  );
 }

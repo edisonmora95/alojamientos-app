@@ -72,3 +72,5 @@ export const tiposOtrosEspaciosInfraestructura = state =>
   state.tiposOtrosEspaciosInfraestructura.map(tipo => tipo.nombre);
 export const caracteristicasCirculacion = state =>
   state.caracteristicasCirculacion.map(tipo => tipo.nombre);
+export const tiposTecho = state =>
+  state.tiposMaterialInfraestructuraTecho.map(tipo => tipo.nombre);

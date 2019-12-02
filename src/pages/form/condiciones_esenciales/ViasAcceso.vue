@@ -74,6 +74,11 @@ import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
+    if (this.form.tipo == 2) {
+      this.$route.meta.subtitle = "3.3 Vías de acceso al terreno";
+    } else {
+      this.$route.meta.subtitle = "3.3 Vías de acceso a la infraestructura";
+    }
   },
   data() {
     return {

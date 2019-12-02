@@ -111,7 +111,7 @@ export default {
       return ["Interior de la edificación", "Exterior de la edificación"];
     },
     areasCirculacion() {
-      return ["Calle", "Acera", "Ambos"];
+      return ["Calle", "Acera", "Camino de herradura", "Sendero", "Otros"];
     },
     trueFalseOptions() {
       return [{ value: true, label: "Si" }, { value: false, label: "No" }];

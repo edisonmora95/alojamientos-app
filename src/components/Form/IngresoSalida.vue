@@ -68,7 +68,13 @@ export default {
         cantidad: 0
       },
 
-      tiposIngresosSalidas: ["Puertas", "Salida de emergencia", "Ventanas"],
+      tiposIngresosSalidas: [
+        "Puertas",
+        "Salida de emergencia",
+        "Ventanas",
+        "Escaleras",
+        "Rampas"
+      ],
       estados: ["Bueno", "Malo"]
     };
   },

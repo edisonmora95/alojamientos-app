@@ -15,6 +15,7 @@ export default {
   tiposInsitucionEmergencia: [],
   tiposSuelo: [],
   tiposMaterialInfraestructura: [],
+  tiposMaterialInfraestructuraTecho: [],
   tiposOtrosEspaciosInfraestructura: [],
   caracteristicasCirculacion: [],
   instituciones: [

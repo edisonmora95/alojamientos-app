@@ -74,6 +74,12 @@ import PuntajeSeccion from "../../../components/Form/PuntajeSeccion";
 export default {
   mounted() {
     this.copyFormValues();
+    if (this.form.tipo == 2) {
+      this.$route.meta.subtitle = "3.2 Análisis de riesgo del terreno";
+    } else {
+      this.$route.meta.subtitle =
+        "3.2 Análisis de riesgo de la infraestructura";
+    }
   },
   data() {
     return {

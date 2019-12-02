@@ -13,6 +13,13 @@
         outlined
       ></q-select>
     </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm q-mb-md">
+      <q-input
+        v-if="localForm.tipoRecurso == 'Otro'"
+        label="Nuevo recurso"
+        v-model="nuevoRecurso"
+      ></q-input>
+    </section>
     <section class="col-xs-12 col-sm-6 q-px-sm">
       <q-select
         label="Estado del recurso"
@@ -60,6 +67,7 @@ export default {
         tipoRecurso: "",
         estado: ""
       },
+      nuevoRecurso: "",
       estados: ["Bueno", "Malo"]
     };
   },
@@ -81,6 +89,9 @@ export default {
       const isFormValid = await this.beforeSubmit(this.refForm);
       if (isFormValid) {
         const payload = Object.assign({}, this.localForm);
+        if (this.localForm.tipoRecurso == "Otro") {
+          payload.tipoRecurso = this.nuevoRecurso;
+        }
         this.$emit("addRecurso", payload);
         this.clearForm(this.localForm);
       }

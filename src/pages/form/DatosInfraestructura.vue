@@ -7,7 +7,7 @@
           v-model="localForm.infraestructura"
           :options="ubicaciones"
           :rules="[validaciones.required]"
-          label="Infraestructura"
+          :label="form.tipo == 1 ? 'Infraestructura' : 'Terreno'"
           :option-value="opt => (opt === null ? null : opt.id)"
           :option-label="opt => (opt.nombre === '' ? 'OTRO' : opt.nombre)"
           outlined
@@ -23,7 +23,11 @@
       >
         <q-input
           :disable="disableInputs"
-          label="Nombre de la infraestructura"
+          :label="
+            form.tipo == 1
+              ? 'Nombre de la infraestructura'
+              : 'Nombre del terreno'
+          "
           v-model="localForm.infraestructura.nombre"
           :rules="[validaciones.required]"
           outlined
@@ -183,6 +187,11 @@ import FormMixin from "../../mixins/FormMixin";
 export default {
   mounted() {
     this.copyFormValues();
+    if (this.form.tipo == 2) {
+      this.$route.meta.subtitle = "2.1 Datos del terreno";
+    } else {
+      this.$route.meta.subtitle = "2.1 Datos de la infraestructura";
+    }
   },
   data() {
     return {

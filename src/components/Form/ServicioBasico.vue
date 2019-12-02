@@ -13,6 +13,13 @@
         outlined
       ></q-select>
     </section>
+    <section class="col-xs-12 col-sm-6 q-px-sm q-mb-md">
+      <q-input
+        v-if="localForm.tipoServicio == 'Otro'"
+        label="Nuevo tipo de servicio"
+        v-model="nuevoServicio"
+      ></q-input>
+    </section>
     <section class="col-xs-12 col-sm-6 q-px-sm">
       <q-select
         label="Estado"
@@ -54,6 +61,7 @@ export default {
         tipoServicio: "",
         estado: ""
       },
+      nuevoServicio: "",
       estados: ["Bueno", "Malo"]
     };
   },
@@ -75,6 +83,9 @@ export default {
       const isFormValid = await this.beforeSubmit(this.refForm);
       if (isFormValid) {
         const payload = Object.assign({}, this.localForm);
+        if (this.localForm.tipoServicio == "Otro") {
+          payload.tipoServicio = this.nuevoServicio;
+        }
         this.$emit("addServicio", payload);
         this.clearForm(this.localForm);
       }
